@@ -20,4 +20,6 @@ ALTER TABLE utilisateur
 ADD FOREIGN KEY (idforfait) 
 REFERENCES utilisateur(idforfait);
 
+select * from utilisateur;
+
 shutdown;
