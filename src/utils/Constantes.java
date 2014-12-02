@@ -7,6 +7,8 @@ public class Constantes {
 	 */
 	public static final String LOGIN = "TPCOO";
 
+	public final String PASSWORD = "";
+
 	public static final String CONNECTION = "jdbc:hsqldb:file:bdd/ReservationSallesDeMusique;shutdown=true";
 
 	/**
