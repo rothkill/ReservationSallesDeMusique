@@ -1,5 +1,11 @@
 package utils;
 
+/**
+ * Classe contenant les constantes de l'application.
+ * 
+ * @author grimonprez
+ *
+ */
 public class Constantes {
 
 	/**
