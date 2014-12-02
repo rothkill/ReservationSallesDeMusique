@@ -1,0 +1,4 @@
+1) télécharger HSQLDB
+2) décompresser (le zip pas toi, toi tu bosses)
+3) ajouter hsqldb.jar au buildpath du projet eclipse (se trouve dans hsqldb-2.3.2/hsqldb/lib)
+4) 
