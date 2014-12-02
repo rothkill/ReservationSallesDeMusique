@@ -15,7 +15,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame(Constantes.APPLICATION_TITLE);
-		frame.getContentPane().add(new MenuPanel(), BorderLayout.CENTER);
+		frame.getContentPane().add(new MenuPanel(frame), BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.setSize(400, 400);

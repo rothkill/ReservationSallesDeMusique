@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import utils.Constantes;
@@ -22,6 +24,9 @@ public class MenuPanel extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = -1608075661453345640L;
 
+	private JFrame frame;
+	private JDialog dialog;
+
 	private JButton visualiserReservations = new JButton(
 			Constantes.VISUALISER_RESERVATION);
 	private JButton reservationAuto = new JButton(
@@ -34,7 +39,11 @@ public class MenuPanel extends JPanel implements ActionListener {
 	private JButton annulationReservation = new JButton(
 			Constantes.ANNULATION_RESERVATION);
 
-	public MenuPanel() {
+	public MenuPanel(final JFrame frame) {
+		super();
+		this.frame = frame;
+		this.dialog = new JDialog(this.frame);
+
 		this.setLayout(new GridLayout(3, 3));
 
 		this.add(visualiserReservations);

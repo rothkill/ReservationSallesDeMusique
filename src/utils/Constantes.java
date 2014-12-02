@@ -16,6 +16,9 @@ public class Constantes {
 	 */
 	public static final String APPLICATION_TITLE = "Réservation de salle de musique";
 
+	/*
+	 * Titres des cas d'utilisation
+	 */
 	public static final String VISUALISER_RESERVATION = "Visualiser les réservations";
 
 	public static final String EFFECTUER_RESERVATION_AUTOMATIQUE = "Effectuer une réservation automatique d'une salle";
@@ -27,4 +30,11 @@ public class Constantes {
 	public static final String EFECTUER_RESERVATION_MEME_JOUR_SEMAINE = "Effectuer une réservation pour une période";
 
 	public static final String ANNULATION_RESERVATION = "Annulation s'une réservation";
+
+	/*
+	 * Boutons
+	 */
+	public static final String VALIDER = "Valider";
+
+	public static final String ANNULER = "Annuler";
 }
