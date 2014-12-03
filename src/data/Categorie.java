@@ -1,34 +1,33 @@
 package data;
 
-/**
- * Represente une categorie de salle.
- * 
- * @author grimonprez
- *
- */
 public class Categorie {
-	private Integer idCategorie;
+
+	private int idCategory;
+	
 	private String nom;
+	
 	private int tarifUneHeure;
+	
 	private int tarifDeuxHeures;
+	
 	private int nbPersonne;
 
-	public Categorie(Integer idCategorie, String nom, int tarifUneHeure,
+	public Categorie(int idCategory, String nom, int tarifUneHeure,
 			int tarifDeuxHeures, int nbPersonne) {
 		super();
-		this.idCategorie = idCategorie;
+		this.idCategory = idCategory;
 		this.nom = nom;
 		this.tarifUneHeure = tarifUneHeure;
 		this.tarifDeuxHeures = tarifDeuxHeures;
 		this.nbPersonne = nbPersonne;
 	}
 
-	public Integer getIdCategorie() {
-		return idCategorie;
+	public int getIdCategory() {
+		return idCategory;
 	}
 
-	public void setIdCategorie(Integer idCategorie) {
-		this.idCategorie = idCategorie;
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	public String getNom() {
@@ -63,7 +62,14 @@ public class Categorie {
 		this.nbPersonne = nbPersonne;
 	}
 
+	@Override
 	public String toString() {
-		return nom;
+		return "Category [idCategory=" + idCategory + ", nom=" + nom
+				+ ", tarifUneHeure=" + tarifUneHeure + ", tarifDeuxHeures="
+				+ tarifDeuxHeures + ", nbPersonne=" + nbPersonne + "]";
 	}
+	
+	
+	
+	
 }

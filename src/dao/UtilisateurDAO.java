@@ -60,7 +60,7 @@ public class UtilisateurDAO {
 		try {
 			PreparedStatement st = con.prepareStatement("delete from utilisateur where idutilisateur = ?");
 			st.setInt(1, idUtilisateur);
-			st.executeQuery();
+			st.execute();
 			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
