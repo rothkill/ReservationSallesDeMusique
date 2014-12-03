@@ -1,5 +1,7 @@
 package ihm;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,4 +26,7 @@ public class ChronologiePanel extends JPanel implements ActionListener {
 
 	}
 
+	// public void paint (Graphics g){
+	// g.setColor(Color.RED);
+	// }
 }

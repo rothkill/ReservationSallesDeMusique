@@ -1,5 +1,6 @@
 package ihm;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,8 @@ import utils.Constantes;
  */
 public class AnnulerReservationPanel extends JPanel implements ActionListener {
 
+	private JPanel center = new JPanel();
+
 	private JButton annulerReservation = new JButton(
 			Constantes.ANNULER_RESERVATION);
 	private JButton annulerToutesReservation = new JButton(
@@ -31,17 +34,24 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 
 		annulerReservation.addActionListener(this);
 		annulerToutesReservation.addActionListener(this);
+
+		
+		
+		this.setLayout(new BorderLayout());
+		this.add(informationLabel, BorderLayout.SOUTH);
+		this.add(center, BorderLayout.CENTER);
+		this.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource() == annulerReservation){
-			//TODO JBG
-		}else if (actionEvent.getSource() == annulerToutesReservation){
-			//TODO JBG
+		if (actionEvent.getSource() == annulerReservation) {
+			// TODO JBG
+		} else if (actionEvent.getSource() == annulerToutesReservation) {
+			// TODO JBG
 		}
 
-		//TODO JBG
+		// TODO JBG
 	}
 
 }
