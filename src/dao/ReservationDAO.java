@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 
+import data.Reservation;
 import main.ConnectionDB;
 
 public class ReservationDAO {
@@ -23,24 +24,38 @@ public class ReservationDAO {
 		return SINGLETON;
 	}
 
-	public boolean creer(int idBureau, String description) {
+	public Reservation creer(int idReservation, Date dateReservation, Date dateFinReservation, Boolean Confirmation, int idSalle,int idUtilisateur) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("insert into bureau values(?,?)");
-			st.setInt(1, idBureau);
-			st.setString(2, description);
+					.prepareStatement("insert into reservation values(?,?,?,?,?,?)");
+			st.setInt(1, idReservation);
+			st.setDate(2, (java.sql.Date) dateReservation);
+			st.setDate(3, (java.sql.Date) dateFinReservation);
+			st.setBoolean(4, Confirmation);
+			st.setInt(5, idSalle);
+			st.setInt(6, idUtilisateur);
 			st.executeUpdate();
+			return new Reservation(idReservation,dateReservation,dateFinReservation,Confirmation,SalleDAO.getInstance().rechercher(idSalle),UtilisateurDAO.getInstance().rechercher(idUtilisateur));
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+	}
+	
+	
+
+	public boolean deleteFromIdUtilisateurDate(Integer idUtilisateur, Date date) {
+		try {
+			PreparedStatement st = con.prepareStatement("delete from reservation where idutilisateur = ? and datereservation = ?");
+			st.setInt(1, idUtilisateur);
+			st.setDate(2,(java.sql.Date) date);
+			st.execute();
 			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
-
-	}
-
-	public boolean deleteFromIdUtilisateurDate(Integer idUtilisateur, Date date) {
-		// TODO JBG RDK
-		return false;
 	}
 
 	/**
@@ -50,12 +65,15 @@ public class ReservationDAO {
 	 * @return
 	 */
 	public boolean deleteAllReservationNonConfirmees() {
-		// TODO JBG RDK
-		/*
-		 * requete : delete from reservation where confirme="dateDepassee" and
-		 * date debut < curr
-		 */
-		return false;
+		try {
+			PreparedStatement st = con.prepareStatement("delete from reservation where confirmation = ?");
+			st.setBoolean(1, false);
+			st.execute();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 
 }
