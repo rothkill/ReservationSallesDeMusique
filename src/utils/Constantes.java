@@ -58,18 +58,29 @@ public class Constantes {
 	public static final String NOM_UTILISATEUR_LABEL = "Nom Utilisateur : ";
 
 	public static final String PRENOM_UTILISATEUR_LABEL = "Prenom Utilisateur : ";
-	
+
 	public static final String UTILISATEUR_LABEL = "Utilisateur : ";
 
 	public static final String DATE_LABEL = "Date : ";
+
+	public static final String SLASH_LABEL = " / ";
 
 	/*
 	 * Labels d'information
 	 */
 	public static final String INFO_LABEL = "Information";
 
-	public static final String INFO_RESERVATION_ANNULEE = "<html><font color='green'>Reservation annulée</font></html>";
+	public static final String INFO_RESERVATION_ANNULEE = "<html><font color='red'>Reservation annulée</font></html>";
 
 	public static final String INFO_RESERVATION_NON_ANNULEE = "<html><font color='green'>Reservation non annulée</font></html>";
+
+	public static final String INFO_ERREUR = "<html><font color='red'>?</font></html>";
+
+	public static final String INFO_REUSSITE = "<html><font color='green'>?</font></html>";
+
+	/*
+	 * Exceptions
+	 */
+	public static final String DATE_INCORRECTE_EXCEPTION = "La date entrée n'est pas valide";
 
 }

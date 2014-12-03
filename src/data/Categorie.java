@@ -3,13 +3,13 @@ package data;
 public class Categorie {
 
 	private int idCategory;
-	
+
 	private String nom;
-	
+
 	private int tarifUneHeure;
-	
+
 	private int tarifDeuxHeures;
-	
+
 	private int nbPersonne;
 
 	public Categorie(int idCategory, String nom, int tarifUneHeure,
@@ -64,12 +64,7 @@ public class Categorie {
 
 	@Override
 	public String toString() {
-		return "Category [idCategory=" + idCategory + ", nom=" + nom
-				+ ", tarifUneHeure=" + tarifUneHeure + ", tarifDeuxHeures="
-				+ tarifDeuxHeures + ", nbPersonne=" + nbPersonne + "]";
+		return nom;
 	}
-	
-	
-	
-	
+
 }

@@ -70,6 +70,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 			dialog.getContentPane().add(new VisualiserReservationPanel());
 			dialog.setLocationRelativeTo(null);
 			dialog.setTitle(Constantes.VISUALISER_RESERVATION);
+			dialog.pack();
 			dialog.setVisible(true);
 		} else if (actionEvent.getSource() == reservationAuto) {
 			// TODO JBG
@@ -84,6 +85,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 			dialog.getContentPane().add(new AnnulerReservationPanel());
 			dialog.setLocationRelativeTo(null);
 			dialog.setTitle(Constantes.ANNULATION_RESERVATION);
+			dialog.pack();
 			dialog.setVisible(true);
 		}
 
