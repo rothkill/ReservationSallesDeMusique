@@ -33,7 +33,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 			Constantes.EFFECTUER_RESERVATION_AUTOMATIQUE);
 	private JButton reservationManuelle = new JButton(
 			Constantes.EFFECTUER_RESERVATION_MANUELLE);
-	private JButton editerCLient = new JButton(Constantes.EDITER_INFO_CLIENT);
+	private JButton editerClient = new JButton(Constantes.EDITER_INFO_CLIENT);
 	private JButton reservationPeriode = new JButton(
 			Constantes.EFECTUER_RESERVATION_MEME_JOUR_SEMAINE);
 	private JButton annulationReservation = new JButton(
@@ -46,10 +46,17 @@ public class MenuPanel extends JPanel implements ActionListener {
 
 		this.setLayout(new GridLayout(3, 3));
 
+		visualiserReservations.addActionListener(this);
+		reservationAuto.addActionListener(this);
+		reservationManuelle.addActionListener(this);
+		editerClient.addActionListener(this);
+		reservationPeriode.addActionListener(this);
+		annulationReservation.addActionListener(this);
+
 		this.add(visualiserReservations);
 		this.add(reservationAuto);
 		this.add(reservationManuelle);
-		this.add(editerCLient);
+		this.add(editerClient);
 		this.add(reservationPeriode);
 		this.add(annulationReservation);
 
@@ -59,17 +66,25 @@ public class MenuPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == visualiserReservations) {
-			// TODO JBG
+			dialog.getContentPane().removeAll();
+			dialog.getContentPane().add(new VisualiserReservationPanel());
+			dialog.setLocationRelativeTo(null);
+			dialog.setTitle(Constantes.VISUALISER_RESERVATION);
+			dialog.setVisible(true);
 		} else if (actionEvent.getSource() == reservationAuto) {
 			// TODO JBG
 		} else if (actionEvent.getSource() == reservationManuelle) {
 			// TODO JBG
-		} else if (actionEvent.getSource() == editerCLient) {
+		} else if (actionEvent.getSource() == editerClient) {
 			// TODO JBG
 		} else if (actionEvent.getSource() == reservationPeriode) {
 			// TODO JBG
 		} else if (actionEvent.getSource() == annulationReservation) {
-			// TODO JBG
+			dialog.getContentPane().removeAll();
+			dialog.getContentPane().add(new AnnulerReservationPanel());
+			dialog.setLocationRelativeTo(null);
+			dialog.setTitle(Constantes.ANNULATION_RESERVATION);
+			dialog.setVisible(true);
 		}
 
 	}
