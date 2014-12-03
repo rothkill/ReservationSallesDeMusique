@@ -11,9 +11,9 @@ public class Constantes {
 	/**
 	 * Constantes de connexion a la BDD
 	 */
-	public static final String LOGIN = "TPCOO";
+	public static final String LOGIN = "SA";
 
-	public final String PASSWORD = "";
+	public final static String PASSWORD = "";
 
 	public static final String CONNECTION = "jdbc:hsqldb:file:bdd/ReservationSallesDeMusique;shutdown=true";
 

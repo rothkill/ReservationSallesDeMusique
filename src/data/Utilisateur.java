@@ -12,16 +12,16 @@ import java.util.List;
 public class Utilisateur {
 	private Integer idUtilisateur;
 	private String nomUtilisateur;
-	private String prenomUtilisateur;
+	private String telephone;
 	private int pointFidelite;
 	private List<Forfait> listForfaitsUtilisateur;
 
 	public Utilisateur(Integer idUtilisateur, String nomUtilisateur,
-			String prenomUtilisateur, int pointFidelite) {
+			String telephone, int pointFidelite) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.nomUtilisateur = nomUtilisateur;
-		this.prenomUtilisateur = prenomUtilisateur;
+		this.telephone = telephone;
 		this.pointFidelite = pointFidelite;
 		this.listForfaitsUtilisateur = new ArrayList<Forfait>();
 	}
@@ -42,12 +42,13 @@ public class Utilisateur {
 		this.nomUtilisateur = nomUtilisateur;
 	}
 
-	public String getPrenomUtilisateur() {
-		return prenomUtilisateur;
+
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setPrenomUtilisateur(String prenomUtilisateur) {
-		this.prenomUtilisateur = prenomUtilisateur;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public int getPointFidelite() {
@@ -64,6 +65,14 @@ public class Utilisateur {
 
 	public void setListForfaitsUtilisateur(List<Forfait> listForfaitsUtilisateur) {
 		this.listForfaitsUtilisateur = listForfaitsUtilisateur;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur
+				+ ", nomUtilisateur=" + nomUtilisateur + ", telephone="
+				+ telephone + ", pointFidelite=" + pointFidelite
+				+ ", listForfaitsUtilisateur=" + listForfaitsUtilisateur + "]";
 	}
 
 }
