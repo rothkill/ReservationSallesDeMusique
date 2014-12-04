@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import data.Utilisateur;
@@ -83,7 +84,21 @@ public class UtilisateurDAO {
 	 */
 	public List<Utilisateur> listerUtilisateursEtResNonConfirmees() {
 
-		// TODO
-		return null;
+		// TODO verifier la requete et finir le mapping de la liste
+		// d'utilisateurs avec leurs reservations non confirmees rensignees
+
+		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
+
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select utilisateur.idUtilisateur utilisateur.nom, reservation.idReservation, reservation.dateReservation, reservation.dateFinReservation, reservation.confirmation from utilisateur join reservation on reservation.idUtilisateur = utilisateur.idtilisateur and confirmation='non'");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listUtilisateurs;
 	}
 }
