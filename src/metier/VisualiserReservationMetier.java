@@ -54,10 +54,6 @@ public class VisualiserReservationMetier {
 
 	public List<Categorie> getListeCategorie() {
 		// TODO JBG
-		// return CategorieDAO.getInstance().listerCategories();
-		List<Categorie> c = new ArrayList<Categorie>();
-		c.add(new Categorie(1, "fr", 2, 3, 4));
-		c.add(new Categorie(2, "fver", 2, 3, 4));
-		return c;
+		return CategorieDAO.getInstance().listerCategories();
 	}
 }

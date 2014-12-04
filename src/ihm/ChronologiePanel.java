@@ -1,11 +1,12 @@
 package ihm;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JPanel;
+
+import data.Salle;
 
 /**
  * Panel correspondant a la chronologie des reservations.
@@ -16,6 +17,10 @@ import javax.swing.JPanel;
 public class ChronologiePanel extends JPanel implements ActionListener {
 
 	public ChronologiePanel() {
+		super();
+	}
+
+	public ChronologiePanel(List<Salle> listSalles) {
 		super();
 		// TODO JBG
 	}

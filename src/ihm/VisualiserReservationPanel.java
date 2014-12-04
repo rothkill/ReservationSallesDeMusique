@@ -29,7 +29,7 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JPanel north = new JPanel();
 	private ChronologiePanel center = new ChronologiePanel();
 
-	private JComboBox<Categorie> jComboBoxCategorie;
+	private JComboBox jComboBoxCategorie;
 
 	private JTextField jour = new JTextField("JJ");
 	private JTextField mois = new JTextField("MM");
@@ -37,6 +37,7 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
+	private JLabel slash2 = new JLabel(Constantes.SLASH_LABEL);
 
 	private JButton valider = new JButton(Constantes.VALIDER);
 
@@ -52,7 +53,7 @@ public class VisualiserReservationPanel extends JPanel implements
 		north.add(jour);
 		north.add(slash);
 		north.add(mois);
-		north.add(slash);
+		north.add(slash2);
 		north.add(annee);
 		north.add(valider);
 
@@ -68,7 +69,7 @@ public class VisualiserReservationPanel extends JPanel implements
 	}
 
 	private void creerComboCategorie() {
-		jComboBoxCategorie = new JComboBox<Categorie>();
+		jComboBoxCategorie = new JComboBox();
 		List<Categorie> listCategories = VisualiserReservationMetier
 				.getInstance().getListeCategorie();
 		for (Categorie categorie : listCategories) {
@@ -85,7 +86,14 @@ public class VisualiserReservationPanel extends JPanel implements
 		} else if (actionEvent.getSource() == jComboBoxCategorie) {
 			// TODO JBG
 			System.out.println(jComboBoxCategorie.getSelectedItem());
+			rechargerChronologie();
 		}
+	}
+
+	private void rechargerChronologie() {
+		// TODO JBG
+
+		this.add(center, BorderLayout.CENTER);
 	}
 
 }
