@@ -56,14 +56,15 @@ public class UtilisateurReservationNonConfirmeePanel extends JPanel implements
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == annulerReservation) {
 			try {
-				AnnulerReservationMetier.getInstance()
+				if (AnnulerReservationMetier.getInstance()
 						.annulerReservationNonConfirmee(
 								(Reservation) jComboBoxReservations
-										.getSelectedItem());
+										.getSelectedItem())){
+					jComboBoxReservations.removeItemAt(jComboBoxReservations.getSelectedIndex());
+				}
 			} catch (ReservationNonSelectionneeException exception) {
 				// TODO gerer le message d'exception
 			}
 		}
 	}
-
 }
