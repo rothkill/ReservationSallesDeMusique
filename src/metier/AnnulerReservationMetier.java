@@ -1,9 +1,12 @@
 package metier;
 
 import java.util.Date;
+import java.util.List;
 
 import dao.ReservationDAO;
+import dao.UtilisateurDAO;
 import data.Utilisateur;
+import exception.AucuneReservationNonConfirmeeException;
 
 /**
  * Metier cas d'utilisation 6 : annulation d'une reservation.
@@ -21,6 +24,22 @@ public class AnnulerReservationMetier {
 
 	public static AnnulerReservationMetier getInstance() {
 		return ANNULER_RESERVATION_METIER;
+	}
+
+	/**
+	 * Retourne la liste de tous les utilisateurs ayant des reservations non
+	 * confirmees.
+	 * 
+	 * @return
+	 * @throws AucuneReservationNonConfirmeeException
+	 */
+	public List<Utilisateur> listerUtilisateursEtResNonConfirmees() throws AucuneReservationNonConfirmeeException {
+		List<Utilisateur> listUtilisateurs = UtilisateurDAO.getInstance()
+				.listerUtilisateursEtResNonConfirmees();
+		if (listUtilisateurs == null || listUtilisateurs.size() <= 0) {
+			throw new AucuneReservationNonConfirmeeException();
+		}
+		return listUtilisateurs;
 	}
 
 	/**

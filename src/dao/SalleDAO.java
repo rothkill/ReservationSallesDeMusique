@@ -50,13 +50,13 @@ public class SalleDAO {
 	 * Recherche les reservation d'une certaine categorie de salle a une
 	 * certaine date.
 	 * 
-	 * @param categorie
+	 * @param idCategorie
 	 * @param jour
 	 * @param mois
 	 * @param annee
 	 * @return
 	 */
-	public List<Salle> rechercherParCategorieEtDate(Categorie categorie,
+	public List<Salle> rechercherParCategorieEtDate(Integer idCategorie,
 			int jour, int mois, int annee) {
 		// TODO
 		return null;

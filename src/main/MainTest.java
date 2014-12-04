@@ -16,27 +16,27 @@ public class MainTest {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-//		System.out.println("Entrez les informations utilisateurs :  ");
-//		System.out.println("idUtilisateur :  ");
-//		int idUtilisateur = sc.nextInt();
-//		System.out.println("nom :  ");
-//		String nom = sc.next();
-//		System.out.println("telephone  ");
-//		String telephone = sc.next();
-//		System.out.println("points Fidelite:  ");
-//		int pointsFidelite = sc.nextInt();
-//		
-//		UtilisateurDAO.getInstance().creer(idUtilisateur, nom, telephone, pointsFidelite);
-//		
-//		System.out.println("Rechercher utilisateur : idUtilisateur ");
-//		int idUtilisateurRecherche = sc.nextInt();
-//		
-//		System.out.println(UtilisateurDAO.getInstance().rechercher(idUtilisateurRecherche));
-//		
-//		System.out.println("Supprimer utilisateur : idUtilisateur ");
-//		int idUtilisateurSup = sc.nextInt();
-//		System.out.println(UtilisateurDAO.getInstance().supprimer(idUtilisateurSup));
-//		ConnectionDB.getInstance().deconnection();
+		System.out.println("Entrez les informations utilisateurs :  ");
+		System.out.println("idUtilisateur :  ");
+		int idUtilisateur = sc.nextInt();
+		System.out.println("nom :  ");
+		String nom = sc.next();
+		System.out.println("telephone  ");
+		String telephone = sc.next();
+		System.out.println("points Fidelite:  ");
+		int pointsFidelite = sc.nextInt();
+		
+		UtilisateurDAO.getInstance().creer(idUtilisateur, nom, telephone, pointsFidelite);
+		
+		System.out.println("Rechercher utilisateur : idUtilisateur ");
+		int idUtilisateurRecherche = sc.nextInt();
+		
+		System.out.println(UtilisateurDAO.getInstance().rechercher(idUtilisateurRecherche));
+		
+		System.out.println("Supprimer utilisateur : idUtilisateur ");
+		int idUtilisateurSup = sc.nextInt();
+		System.out.println(UtilisateurDAO.getInstance().supprimer(idUtilisateurSup));
+		ConnectionDB.getInstance().deconnection();
 //		
 //		System.out.println("Entrez les informations categorie :  ");
 //		System.out.println("idcategorie :  ");
@@ -61,40 +61,40 @@ public class MainTest {
 //		int idCategorieSup = sc.nextInt();
 //		System.out.println(CategorieDAO.getInstance().supprimer(idCategorieSup));
 		
-		System.out.println("Entrez les informations categorie :  ");
-		System.out.println("idReservation :  ");
-		int idCategorie = sc.nextInt();
-		System.out.println("DateReservation :  ");
-		String resultDateReserv = sc.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
-		Date dateReservation = null;
-		try {
-		    dateReservation = new SimpleDateFormat("dd.MM.yyyy").parse(resultDateReserv);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		} catch (java.text.ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("DateFinReservation  ");
-		String resultDateFinReserv = sc.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
-		Date dateFinReservation = null;
-		try {
-		    dateFinReservation = new SimpleDateFormat("dd.MM.yyyy").parse(resultDateFinReserv);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		} catch (java.text.ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("idUtilisateur :  ");
-		int idUtilisateur = sc.nextInt();
-		System.out.println("idSalle :  ");
-		int idSalle = sc.nextInt();
-		
-		ReservationDAO.getInstance().creer(idCategorie,dateReservation, dateFinReservation,false, idUtilisateur, idSalle);
-		
-		System.out.println("Rechercher Reservation : Reservation ");
-		int idReservationRech = sc.nextInt();
+//		System.out.println("Entrez les informations categorie :  ");
+//		System.out.println("idReservation :  ");
+//		int idCategorie = sc.nextInt();
+//		System.out.println("DateReservation :  ");
+//		String resultDateReserv = sc.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
+//		Date dateReservation = null;
+//		try {
+//		    dateReservation = new SimpleDateFormat("dd.MM.yyyy").parse(resultDateReserv);
+//		} catch (ParseException e) {
+//		    e.printStackTrace();
+//		} catch (java.text.ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println("DateFinReservation  ");
+//		String resultDateFinReserv = sc.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
+//		Date dateFinReservation = null;
+//		try {
+//		    dateFinReservation = new SimpleDateFormat("dd.MM.yyyy").parse(resultDateFinReserv);
+//		} catch (ParseException e) {
+//		    e.printStackTrace();
+//		} catch (java.text.ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println("idUtilisateur :  ");
+//		int idUtilisateur = sc.nextInt();
+//		System.out.println("idSalle :  ");
+//		int idSalle = sc.nextInt();
+//		
+//		ReservationDAO.getInstance().creer(idCategorie,dateReservation, dateFinReservation,false, idUtilisateur, idSalle);
+//		
+//		System.out.println("Rechercher Reservation : Reservation ");
+//		int idReservationRech = sc.nextInt();
 		
 //		System.out.println(ReservationDAO.getInstance().rechercher(idReservationRech));
 //		

@@ -1,5 +1,8 @@
 package ihm;
 
+import ihm.annulation.AnnulerReservationPanel;
+import ihm.visualisation.VisualiserReservationPanel;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

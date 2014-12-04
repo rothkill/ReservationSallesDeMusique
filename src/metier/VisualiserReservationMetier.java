@@ -1,14 +1,15 @@
 package metier;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import dao.CategorieDAO;
+import dao.SalleDAO;
 import data.Categorie;
 import data.Salle;
+import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
 
 /**
@@ -29,9 +30,26 @@ public class VisualiserReservationMetier {
 		return VISUALISER_RESERVATION_METIER;
 	}
 
+	/**
+	 * Retourne la liste des salles correspondant a la categorie recherchee,
+	 * ainsi que les reservation a la date demandee.
+	 * 
+	 * @param categorie
+	 * @param jourString
+	 * @param moisString
+	 * @param anneeString
+	 * @return
+	 * @throws DateIncorrecteException
+	 * @throws CategorieNonSelectionneeException
+	 */
 	public List<Salle> getListeSalleByCategory(Categorie categorie,
 			String jourString, String moisString, String anneeString)
-			throws DateIncorrecteException {
+			throws DateIncorrecteException, CategorieNonSelectionneeException {
+
+		if (categorie == null) {
+			throw new CategorieNonSelectionneeException();
+		}
+
 		// TODO JBG rajouter les intervalles de date
 
 		try {
@@ -43,17 +61,21 @@ public class VisualiserReservationMetier {
 				throw new DateIncorrecteException();
 			}
 
-			Date date = new Date(annee, mois, jour);
+			Date date = new Date();
+			// TODO JBG
 
-		} catch (ParseException exception) {
+			return SalleDAO.getInstance().rechercherParCategorieEtDate(
+					categorie.getIdCategory(), jour, mois, annee);
+
+		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();
 		}
-
-		return null;
 	}
 
+	/**
+	 * @return la liste de toutes les categories de salle existantes.
+	 */
 	public List<Categorie> getListeCategorie() {
-		// TODO JBG
 		return CategorieDAO.getInstance().listerCategories();
 	}
 }
