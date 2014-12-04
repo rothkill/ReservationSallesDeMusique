@@ -15,6 +15,7 @@ public class Utilisateur {
 	private String telephone;
 	private int pointFidelite;
 	private List<Forfait> listForfaitsUtilisateur;
+	private List<Reservation> listReservationsUtilisateur;
 
 	public Utilisateur(Integer idUtilisateur, String nomUtilisateur,
 			String telephone, int pointFidelite) {
@@ -24,6 +25,7 @@ public class Utilisateur {
 		this.telephone = telephone;
 		this.pointFidelite = pointFidelite;
 		this.listForfaitsUtilisateur = new ArrayList<Forfait>();
+		this.setListReservationsUtilisateur(new ArrayList<Reservation>());
 	}
 
 	public Integer getIdUtilisateur() {
@@ -41,7 +43,6 @@ public class Utilisateur {
 	public void setNomUtilisateur(String nomUtilisateur) {
 		this.nomUtilisateur = nomUtilisateur;
 	}
-
 
 	public String getTelephone() {
 		return telephone;
@@ -67,12 +68,18 @@ public class Utilisateur {
 		this.listForfaitsUtilisateur = listForfaitsUtilisateur;
 	}
 
-	@Override
-	public String toString() {
-		return "Utilisateur [idUtilisateur=" + idUtilisateur
-				+ ", nomUtilisateur=" + nomUtilisateur + ", telephone="
-				+ telephone + ", pointFidelite=" + pointFidelite
-				+ ", listForfaitsUtilisateur=" + listForfaitsUtilisateur + "]";
+
+	public List<Reservation> getListReservationsUtilisateur() {
+		return listReservationsUtilisateur;
 	}
 
+	public void setListReservationsUtilisateur(
+			List<Reservation> listReservationsUtilisateur) {
+		this.listReservationsUtilisateur = listReservationsUtilisateur;
+	}
+
+	@Override
+	public String toString() {
+		return nomUtilisateur;
+	}
 }
