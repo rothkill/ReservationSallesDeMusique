@@ -1,12 +1,19 @@
 package ihm.annulation;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import metier.AnnulerReservationMetier;
+
+import data.Utilisateur;
+import exception.AucuneReservationNonConfirmeeException;
 
 import utils.Constantes;
 
@@ -35,12 +42,31 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 		annulerReservation.addActionListener(this);
 		annulerToutesReservation.addActionListener(this);
 
-		
-		
+		creationPanelCenter();
+
 		this.setLayout(new BorderLayout());
 		this.add(informationLabel, BorderLayout.SOUTH);
 		this.add(center, BorderLayout.CENTER);
 		this.setVisible(true);
+	}
+
+	private void creationPanelCenter() {
+		try {
+			List<Utilisateur> listUtilisateurs = AnnulerReservationMetier
+					.getInstance().listerUtilisateursEtResNonConfirmees();
+
+			center.setLayout(new GridLayout(1, 1));
+			for (Utilisateur utilisateur : listUtilisateurs) {
+				center.add(new UtilisateurReservationNonConfirmeePanel(
+						utilisateur));
+			}
+
+		} catch (AucuneReservationNonConfirmeeException exception) {
+			String erreur = Constantes.INFO_ERREUR;
+			erreur = String.format(erreur.replace("?", "%s"),
+					exception.getMessage());
+			informationLabel.setText(erreur);
+		}
 	}
 
 	@Override

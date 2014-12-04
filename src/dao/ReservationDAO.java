@@ -24,7 +24,9 @@ public class ReservationDAO {
 		return SINGLETON;
 	}
 
-	public Reservation creer(int idReservation, Date dateReservation, Date dateFinReservation, Boolean Confirmation, int idSalle,int idUtilisateur) {
+	public Reservation creer(int idReservation, Date dateReservation,
+			Date dateFinReservation, Boolean Confirmation, int idSalle,
+			int idUtilisateur) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation values(?,?,?,?,?,?)");
@@ -35,21 +37,37 @@ public class ReservationDAO {
 			st.setInt(5, idSalle);
 			st.setInt(6, idUtilisateur);
 			st.executeUpdate();
-			return new Reservation(idReservation,dateReservation,dateFinReservation,Confirmation,SalleDAO.getInstance().rechercher(idSalle),UtilisateurDAO.getInstance().rechercher(idUtilisateur));
+			return new Reservation(idReservation, dateReservation,
+					dateFinReservation, Confirmation, SalleDAO.getInstance()
+							.rechercher(idSalle), UtilisateurDAO.getInstance()
+							.rechercher(idUtilisateur));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
 
 	}
-	
-	
 
+	public boolean deleteReservation(Integer idReservation) {
+		try {
+			PreparedStatement st = con
+					.prepareStatement("delete from reservation where idreservation = ?");
+			st.setInt(1, idReservation);
+			st.execute();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	// TODO modifier en methode de recherche
 	public boolean deleteFromIdUtilisateurDate(Integer idUtilisateur, Date date) {
 		try {
-			PreparedStatement st = con.prepareStatement("delete from reservation where idutilisateur = ? and datereservation = ?");
+			PreparedStatement st = con
+					.prepareStatement("delete from reservation where idutilisateur = ? and datereservation = ?");
 			st.setInt(1, idUtilisateur);
-			st.setDate(2,(java.sql.Date) date);
+			st.setDate(2, (java.sql.Date) date);
 			st.execute();
 			return true;
 		} catch (SQLException e) {
@@ -66,7 +84,8 @@ public class ReservationDAO {
 	 */
 	public boolean deleteAllReservationNonConfirmees() {
 		try {
-			PreparedStatement st = con.prepareStatement("delete from reservation where confirmation = ?");
+			PreparedStatement st = con
+					.prepareStatement("delete from reservation where confirmation = ?");
 			st.setBoolean(1, false);
 			st.execute();
 			return true;

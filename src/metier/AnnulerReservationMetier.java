@@ -5,8 +5,10 @@ import java.util.List;
 
 import dao.ReservationDAO;
 import dao.UtilisateurDAO;
+import data.Reservation;
 import data.Utilisateur;
 import exception.AucuneReservationNonConfirmeeException;
+import exception.ReservationNonSelectionneeException;
 
 /**
  * Metier cas d'utilisation 6 : annulation d'une reservation.
@@ -33,7 +35,8 @@ public class AnnulerReservationMetier {
 	 * @return
 	 * @throws AucuneReservationNonConfirmeeException
 	 */
-	public List<Utilisateur> listerUtilisateursEtResNonConfirmees() throws AucuneReservationNonConfirmeeException {
+	public List<Utilisateur> listerUtilisateursEtResNonConfirmees()
+			throws AucuneReservationNonConfirmeeException {
 		List<Utilisateur> listUtilisateurs = UtilisateurDAO.getInstance()
 				.listerUtilisateursEtResNonConfirmees();
 		if (listUtilisateurs == null || listUtilisateurs.size() <= 0) {
@@ -45,15 +48,19 @@ public class AnnulerReservationMetier {
 	/**
 	 * Supprime une reservation effectue par un utilisateur a une date donnee.
 	 * 
-	 * @param utilisateur
-	 * @param date
+	 * @param reservation
 	 * @return <code>true</code> si la suppression a ete effectuee,
 	 *         <code>false</code> sinon.
+	 * @throws ReservationNonSelectionneeException
 	 */
-	public boolean annulerReservationNonConfirmee(Utilisateur utilisateur,
-			Date date) {
-		return ReservationDAO.getInstance().deleteFromIdUtilisateurDate(
-				utilisateur.getIdUtilisateur(), date);
+	public boolean annulerReservationNonConfirmee(Reservation reservation) throws ReservationNonSelectionneeException {
+
+		if (reservation == null) {
+			throw new ReservationNonSelectionneeException();
+		}
+
+		return ReservationDAO.getInstance().deleteReservation(
+				reservation.getIdReservation());
 	}
 
 	/**

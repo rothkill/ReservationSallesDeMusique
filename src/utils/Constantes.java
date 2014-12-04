@@ -24,7 +24,7 @@ public class Constantes {
 	 */
 	public static final String APPLICATION_TITLE = "Réservation de salle de musique";
 
-	/*
+	/**
 	 * Titres des cas d'utilisation
 	 */
 	public static final String VISUALISER_RESERVATION = "Visualiser les réservations";
@@ -39,7 +39,7 @@ public class Constantes {
 
 	public static final String ANNULATION_RESERVATION = "Annulation d'une réservation";
 
-	/*
+	/**
 	 * Boutons
 	 */
 	public static final String VALIDER = "Valider";
@@ -50,14 +50,12 @@ public class Constantes {
 
 	public static final String ANNULER_LES_RESERVATIONS = "Annuler les réservations";
 
-	/*
+	/**
 	 * Labels
 	 */
 	public static final String ANNULER_TOUTES_RESERVATION_LABEL = "Annuler toutes le réservations non confirmées pour lesquelles la date de début est dépassée";
 
 	public static final String NOM_UTILISATEUR_LABEL = "Nom Utilisateur : ";
-
-	public static final String PRENOM_UTILISATEUR_LABEL = "Prenom Utilisateur : ";
 
 	public static final String UTILISATEUR_LABEL = "Utilisateur : ";
 
@@ -65,7 +63,7 @@ public class Constantes {
 
 	public static final String SLASH_LABEL = " / ";
 
-	/*
+	/**
 	 * Labels d'information
 	 */
 	public static final String INFO_LABEL = "Information";
@@ -78,12 +76,14 @@ public class Constantes {
 
 	public static final String INFO_REUSSITE = "<html><font color='green'>?</font></html>";
 
-	/*
+	/**
 	 * Exceptions
 	 */
 	public static final String DATE_INCORRECTE_EXCEPTION = "La date entrée n'est pas valide";
 
 	public static final String CATEGORIE_NON_SELECTIONNEE_EXCEPTION = "Aucune catégorie sélectionnée";
+
+	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sélectionnée";
 
 	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmées";
 
