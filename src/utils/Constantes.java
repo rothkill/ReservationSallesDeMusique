@@ -85,6 +85,12 @@ public class Constantes {
 
 	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sélectionnée";
 
+	public static final String UTILISATEUR_NON_SELECTIONNEE_EXCEPTION = "Aucun client sélectionnée";
+
 	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmées";
+
+	public static final String AUCUN_UTILISATEUR_EXCEPTION = "Aucun client n'est renseigné";
+
+	public static final String AUCUNE_RESERVATION_UTILISATEUR_EXCEPTION = "Aucune reservation n'a été effeectuée par cet utilisateur";
 
 }

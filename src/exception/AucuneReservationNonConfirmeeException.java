@@ -10,6 +10,6 @@ public class AucuneReservationNonConfirmeeException extends Exception {
 	private static final long serialVersionUID = 4588956801882374731L;
 
 	public AucuneReservationNonConfirmeeException() {
-		super(Constantes.AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION);
+		super(Constantes.AUCUN_UTILISATEUR_EXCEPTION);
 	}
 }
