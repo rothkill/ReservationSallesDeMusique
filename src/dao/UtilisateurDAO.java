@@ -101,4 +101,28 @@ public class UtilisateurDAO {
 		}
 		return listUtilisateurs;
 	}
+
+	/**
+	 * Retourne la liste de tous les utilisateurs.
+	 * 
+	 * @return
+	 */
+	public List<Utilisateur> listerUtilisateurs() {
+		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
+		Utilisateur utilisateur = null;
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idutilisateur,nom,telephone,pointsfidelite from utilisateur");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				utilisateur = new Utilisateur(rs.getInt(1), rs.getString(2),
+						rs.getString(3), rs.getInt(4));
+				listUtilisateurs.add(utilisateur);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listUtilisateurs;
+	}
 }

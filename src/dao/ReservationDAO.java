@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import data.Reservation;
 import main.ConnectionDB;
@@ -93,6 +94,30 @@ public class ReservationDAO {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+
+	/**
+	 * Retourne la liste de toutes les reservations d'un utilisateur.
+	 * 
+	 * @param idUtilisateur
+	 * @return
+	 */
+	public List<Reservation> listerReservationParUtilisateur(
+			Integer idUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Passe la {@link Reservation} a l'etat confirme.
+	 * 
+	 * 
+	 * @param idReservation
+	 * @return
+	 */
+	public boolean confirmerReservation(Integer idReservation) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
