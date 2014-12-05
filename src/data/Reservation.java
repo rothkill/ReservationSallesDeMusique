@@ -6,20 +6,20 @@ import java.util.Date;
  * Classe correspondant a la reservation d'une salle.
  * 
  * @author grimonprez
- *
+ * 
  */
 public class Reservation {
-	
+
 	private Integer idReservation;
-	
+
 	private Date DateReservation;
-	
+
 	private Date DateFinReservation;
-	
+
 	private boolean confirmation;
-	
+
 	private Salle salle;
-	
+
 	private Utilisateur utilisateur;
 
 	public Reservation(Integer idReservation, Date dateReservation,
@@ -84,13 +84,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [idReservation=" + idReservation
-				+ ", DateReservation=" + DateReservation
-				+ ", DateFinReservation=" + DateFinReservation
-				+ ", confirmation=" + confirmation + ", salle=" + salle
-				+ ", utilisateur=" + utilisateur + "]";
+		return DateReservation.toString() + " " + salle.toString();
 	}
-
-	
 
 }

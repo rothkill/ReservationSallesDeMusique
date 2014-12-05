@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import metier.AnnulerReservationMetier;
 
@@ -25,28 +26,32 @@ import utils.Constantes;
  */
 public class AnnulerReservationPanel extends JPanel implements ActionListener {
 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -6499200575552265318L;
+
 	private JPanel center = new JPanel();
 
-	private JButton annulerReservation = new JButton(
-			Constantes.ANNULER_RESERVATION);
+	private JScrollPane jScrollPane = new JScrollPane();
+
 	private JButton annulerToutesReservation = new JButton(
 			Constantes.ANNULER_LES_RESERVATIONS);
 
-	private JLabel annulerToutesReservationLabel = new JLabel(
-			Constantes.ANNULER_TOUTES_RESERVATION_LABEL);
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
 	public AnnulerReservationPanel() {
 		// TODO JBG
 
-		annulerReservation.addActionListener(this);
 		annulerToutesReservation.addActionListener(this);
 
 		creationPanelCenter();
 
 		this.setLayout(new BorderLayout());
+		this.add(annulerToutesReservation, BorderLayout.NORTH);
 		this.add(informationLabel, BorderLayout.SOUTH);
-		this.add(center, BorderLayout.CENTER);
+		jScrollPane.getViewport().add(center);
+		this.add(jScrollPane, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
 
@@ -71,13 +76,15 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource() == annulerReservation) {
-			// TODO JBG
-		} else if (actionEvent.getSource() == annulerToutesReservation) {
-			// TODO JBG
+		if (actionEvent.getSource() == annulerToutesReservation) {
+			if (AnnulerReservationMetier.getInstance()
+					.annulerToutesReservationsNonConfirmeesDebutees()) {
+				this.remove(jScrollPane);
+				this.repaint();
+			}
 		}
 
-		// TODO JBG
+		// TODO JBG messages erreur/reussite
 	}
 
 }

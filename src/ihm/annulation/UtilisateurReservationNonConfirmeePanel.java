@@ -25,13 +25,17 @@ import exception.ReservationNonSelectionneeException;
 public class UtilisateurReservationNonConfirmeePanel extends JPanel implements
 		ActionListener {
 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -6892855325550386434L;
+
 	private JLabel nomUtilisateur = new JLabel();
 	private JComboBox jComboBoxReservations = new JComboBox();
 	private JButton annulerReservation = new JButton(
 			Constantes.ANNULER_RESERVATION);
 
 	public UtilisateurReservationNonConfirmeePanel(Utilisateur utilisateur) {
-		// TODO
 		nomUtilisateur.setText(utilisateur.toString());
 		creerComboBoxReservation(utilisateur);
 		annulerReservation.addActionListener(this);
@@ -59,8 +63,9 @@ public class UtilisateurReservationNonConfirmeePanel extends JPanel implements
 				if (AnnulerReservationMetier.getInstance()
 						.annulerReservationNonConfirmee(
 								(Reservation) jComboBoxReservations
-										.getSelectedItem())){
-					jComboBoxReservations.removeItemAt(jComboBoxReservations.getSelectedIndex());
+										.getSelectedItem())) {
+					jComboBoxReservations.removeItemAt(jComboBoxReservations
+							.getSelectedIndex());
 				}
 			} catch (ReservationNonSelectionneeException exception) {
 				// TODO gerer le message d'exception
