@@ -83,23 +83,31 @@ public class EditerInfosClientMetier {
 		if (reservation == null) {
 			throw new ReservationNonSelectionneeException();
 		}
-		
-
 
 		if (confirmerReservation(reservation)) {
-			if(utiliserPointsFidelite){
-				return modifierPointsFidelite(utilisateur, reservation.getDuree());
+			if (utiliserPointsFidelite) {
+				return modifierPointsFidelite(utilisateur,
+						reservation.getDuree());
 			}
 			return ajouterPointsFidelite(utilisateur, reservation.getDuree());
 		}
 		return false;
 	}
-	
-	
 
+	/**
+	 * Modifie les points fidelites d'un client selon la duree de la
+	 * reservation.
+	 * 
+	 * @param utilisateur
+	 * @param duree
+	 * @return
+	 */
 	private boolean modifierPointsFidelite(Utilisateur utilisateur, int duree) {
-		// TODO Auto-generated method stub
-		return false;
+		int modificateurPointFidelite = duree
+				* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE - duree
+				* Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE;
+		return UtilisateurDAO.getInstance().modifierFidelite(
+				utilisateur.getIdUtilisateur(), modificateurPointFidelite);
 	}
 
 	/**

@@ -98,4 +98,6 @@ public class Constantes {
 	 */
 
 	public static final int CORRESPONDANCE_HEURE_POINTS_FIDELITE = 5;
+
+	public static final int CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE = 75;
 }
