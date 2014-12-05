@@ -26,22 +26,23 @@ public class ReservationDAO {
 	}
 
 	public Reservation creer(int idReservation, Date dateReservation,
-			Date dateFinReservation, Boolean Confirmation, int idSalle,
-			int idUtilisateur) {
+			Date dateDebutSceance, int duree, Boolean confirmation,
+			int idSalle, int idUtilisateur) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("insert into reservation values(?,?,?,?,?,?)");
+					.prepareStatement("insert into reservation values(?,?,?,?,?,?,?)");
 			st.setInt(1, idReservation);
 			st.setDate(2, (java.sql.Date) dateReservation);
-			st.setDate(3, (java.sql.Date) dateFinReservation);
-			st.setBoolean(4, Confirmation);
-			st.setInt(5, idSalle);
-			st.setInt(6, idUtilisateur);
+			st.setDate(3, (java.sql.Date) dateDebutSceance);
+			st.setInt(4, duree);
+			st.setBoolean(5, confirmation);
+			st.setInt(6, idSalle);
+			st.setInt(7, idUtilisateur);
 			st.executeUpdate();
 			return new Reservation(idReservation, dateReservation,
-					dateFinReservation, Confirmation, SalleDAO.getInstance()
-							.rechercher(idSalle), UtilisateurDAO.getInstance()
-							.rechercher(idUtilisateur));
+					dateDebutSceance, duree, confirmation, SalleDAO
+							.getInstance().rechercher(idSalle), UtilisateurDAO
+							.getInstance().rechercher(idUtilisateur));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return null;

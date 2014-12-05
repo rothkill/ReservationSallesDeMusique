@@ -12,9 +12,11 @@ public class Reservation {
 
 	private Integer idReservation;
 
-	private Date DateReservation;
+	private Date dateReservation;
 
-	private Date DateFinReservation;
+	private Date dateDebutSceance;
+
+	private int duree;
 
 	private boolean confirmation;
 
@@ -23,12 +25,13 @@ public class Reservation {
 	private Utilisateur utilisateur;
 
 	public Reservation(Integer idReservation, Date dateReservation,
-			Date dateFinReservation, boolean confirmation, Salle salle,
-			Utilisateur utilisateur) {
+			Date dateDebutSceance, int duree, boolean confirmation,
+			Salle salle, Utilisateur utilisateur) {
 		super();
 		this.idReservation = idReservation;
-		DateReservation = dateReservation;
-		DateFinReservation = dateFinReservation;
+		this.dateReservation = dateReservation;
+		this.setDateDebutSceance(dateDebutSceance);
+		this.setDuree(duree);
 		this.confirmation = confirmation;
 		this.salle = salle;
 		this.utilisateur = utilisateur;
@@ -43,19 +46,11 @@ public class Reservation {
 	}
 
 	public Date getDateReservation() {
-		return DateReservation;
+		return dateReservation;
 	}
 
 	public void setDateReservation(Date dateReservation) {
-		DateReservation = dateReservation;
-	}
-
-	public Date getDateFinReservation() {
-		return DateFinReservation;
-	}
-
-	public void setDateFinReservation(Date dateFinReservation) {
-		DateFinReservation = dateFinReservation;
+		this.dateReservation = dateReservation;
 	}
 
 	public boolean isConfirmation() {
@@ -84,7 +79,23 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return DateReservation.toString() + " " + salle.toString();
+		return dateReservation.toString() + " " + salle.toString();
+	}
+
+	public int getDuree() {
+		return duree;
+	}
+
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
+
+	public Date getDateDebutSceance() {
+		return dateDebutSceance;
+	}
+
+	public void setDateDebutSceance(Date dateDebutSceance) {
+		this.dateDebutSceance = dateDebutSceance;
 	}
 
 }
