@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import utils.ConnectionDB;
+
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import dao.CategorieDAO;

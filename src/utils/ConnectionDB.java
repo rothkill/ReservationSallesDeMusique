@@ -1,10 +1,9 @@
-package main;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import utils.Constantes;
 
 public class ConnectionDB {
 

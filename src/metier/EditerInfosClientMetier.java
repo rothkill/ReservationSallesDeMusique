@@ -2,7 +2,10 @@ package metier;
 
 import java.util.List;
 
+import utils.Constantes;
+
 import dao.ReservationDAO;
+import dao.UtilisateurDAO;
 import data.Reservation;
 import data.Utilisateur;
 import exception.AucuneReservationUtilisateurException;
@@ -52,15 +55,63 @@ public class EditerInfosClientMetier {
 	 * 
 	 * @param reservation
 	 * @return
-	 * @throws ReservationNonSelectionneeException
 	 */
-	public boolean confirmerReservation(Reservation reservation)
-			throws ReservationNonSelectionneeException {
-		if (reservation == null) {
-			throw new ReservationNonSelectionneeException();
-		}
+	public boolean confirmerReservation(Reservation reservation) {
 
 		return ReservationDAO.getInstance().confirmerReservation(
 				reservation.getIdReservation());
+	}
+
+	/**
+	 * Confirme une reservatnio et ajoute les points fidelites au compte de
+	 * l'utilisateur;
+	 * 
+	 * @param utilisateur
+	 * @param reservation
+	 * @param utiliserPointsFidelite
+	 * @return
+	 * @throws ReservationNonSelectionneeException
+	 * @throws UtilisateurNonSelectionneException
+	 */
+	public boolean reservation(Utilisateur utilisateur,
+			Reservation reservation, boolean utiliserPointsFidelite)
+			throws ReservationNonSelectionneeException,
+			UtilisateurNonSelectionneException {
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		if (reservation == null) {
+			throw new ReservationNonSelectionneeException();
+		}
+		
+
+
+		if (confirmerReservation(reservation)) {
+			if(utiliserPointsFidelite){
+				return modifierPointsFidelite(utilisateur, reservation.getDuree());
+			}
+			return ajouterPointsFidelite(utilisateur, reservation.getDuree());
+		}
+		return false;
+	}
+	
+	
+
+	private boolean modifierPointsFidelite(Utilisateur utilisateur, int duree) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Ajoute des points fidelites a un utilisateur.
+	 * 
+	 * @param utilisateur
+	 * @param duree
+	 * @return
+	 */
+	private boolean ajouterPointsFidelite(Utilisateur utilisateur, int duree) {
+		return UtilisateurDAO.getInstance().modifierFidelite(
+				utilisateur.getIdUtilisateur(),
+				duree * Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE);
 	}
 }

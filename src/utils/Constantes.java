@@ -93,4 +93,9 @@ public class Constantes {
 
 	public static final String AUCUNE_RESERVATION_UTILISATEUR_EXCEPTION = "Aucune reservation n'a été effeectuée par cet utilisateur";
 
+	/**
+	 * Constantes liees au fonctionnement de l'application
+	 */
+
+	public static final int CORRESPONDANCE_HEURE_POINTS_FIDELITE = 5;
 }
