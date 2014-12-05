@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.annulation.AnnulerReservationPanel;
+import ihm.editerclient.EditerInfosClientPanel;
 import ihm.visualisation.VisualiserReservationPanel;
 
 import java.awt.GridLayout;
@@ -80,7 +81,12 @@ public class MenuPanel extends JPanel implements ActionListener {
 		} else if (actionEvent.getSource() == reservationManuelle) {
 			// TODO JBG
 		} else if (actionEvent.getSource() == editerClient) {
-			// TODO JBG
+			dialog.getContentPane().removeAll();
+			dialog.getContentPane().add(new EditerInfosClientPanel());
+			dialog.setLocationRelativeTo(null);
+			dialog.setTitle(Constantes.EDITER_INFO_CLIENT);
+			dialog.pack();
+			dialog.setVisible(true);
 		} else if (actionEvent.getSource() == reservationPeriode) {
 			// TODO JBG
 		} else if (actionEvent.getSource() == annulationReservation) {
