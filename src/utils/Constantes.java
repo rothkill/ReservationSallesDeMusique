@@ -22,22 +22,22 @@ public class Constantes {
 	/**
 	 * Constantes de l'IHM
 	 */
-	public static final String APPLICATION_TITLE = "RÃ©servation de salle de musique";
+	public static final String APPLICATION_TITLE = "Réservation de salle de musique";
 
 	/**
 	 * Titres des cas d'utilisation
 	 */
-	public static final String VISUALISER_RESERVATION = "Visualiser les rÃ©servations";
+	public static final String VISUALISER_RESERVATION = "Visualiser les réservations";
 
-	public static final String EFFECTUER_RESERVATION_AUTOMATIQUE = "Effectuer une rÃ©servation automatique d'une salle";
+	public static final String EFFECTUER_RESERVATION_AUTOMATIQUE = "Effectuer une réservation automatique d'une salle";
 
-	public static final String EFFECTUER_RESERVATION_MANUELLE = "Effectuer une rÃ©servation Ã  la main d'une salle";
+	public static final String EFFECTUER_RESERVATION_MANUELLE = "Effectuer une réservation à la main d'une salle";
 
 	public static final String EDITER_INFO_CLIENT = "Editer les informations d'un client";
 
-	public static final String EFECTUER_RESERVATION_MEME_JOUR_SEMAINE = "Effectuer une rÃ©servation pour une pÃ©riode";
+	public static final String EFECTUER_RESERVATION_MEME_JOUR_SEMAINE = "Effectuer une réservation pour une période";
 
-	public static final String ANNULATION_RESERVATION = "Annulation d'une rÃ©servation";
+	public static final String ANNULATION_RESERVATION = "Annulation d'une réservation";
 
 	/**
 	 * Boutons
@@ -46,14 +46,14 @@ public class Constantes {
 
 	public static final String ANNULER = "Annuler";
 
-	public static final String ANNULER_RESERVATION = "Annuler la rÃ©servation";
+	public static final String ANNULER_RESERVATION = "Annuler la réservation";
 
-	public static final String ANNULER_LES_RESERVATIONS = "Annuler les rÃ©servations";
+	public static final String ANNULER_LES_RESERVATIONS = "Annuler les réservations";
 
 	/**
 	 * Labels
 	 */
-	public static final String ANNULER_TOUTES_RESERVATION_LABEL = "Annuler toutes le rÃ©servations non confirmÃ©es pour lesquelles la date de dÃ©but est dÃ©passÃ©e";
+	public static final String ANNULER_TOUTES_RESERVATION_LABEL = "Annuler toutes le réservations non confirmées pour lesquelles la date de début est dépassée";
 
 	public static final String NOM_UTILISATEUR_LABEL = "Nom Utilisateur : ";
 
@@ -68,9 +68,9 @@ public class Constantes {
 	 */
 	public static final String INFO_LABEL = "Information";
 
-	public static final String INFO_RESERVATION_ANNULEE = "<html><font color='red'>Reservation annulÃ©e</font></html>";
+	public static final String INFO_RESERVATION_ANNULEE = "<html><font color='red'>Reservation annulée</font></html>";
 
-	public static final String INFO_RESERVATION_NON_ANNULEE = "<html><font color='green'>Reservation non annulÃ©e</font></html>";
+	public static final String INFO_RESERVATION_NON_ANNULEE = "<html><font color='green'>Reservation non annulée</font></html>";
 
 	public static final String INFO_ERREUR = "<html><font color='red'>?</font></html>";
 
@@ -79,19 +79,23 @@ public class Constantes {
 	/**
 	 * Exceptions
 	 */
-	public static final String DATE_INCORRECTE_EXCEPTION = "La date entrÃ©e n'est pas valide";
+	public static final String DATE_INCORRECTE_EXCEPTION = "La date entrée n'est pas valide";
 
-	public static final String CATEGORIE_NON_SELECTIONNEE_EXCEPTION = "Aucune catÃ©gorie sÃ©lectionnÃ©e";
+	public static final String CATEGORIE_NON_SELECTIONNEE_EXCEPTION = "Aucune catégorie sélectionnée";
 
-	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sÃ©lectionnÃ©e";
+	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sélectionnée";
 
-	public static final String UTILISATEUR_NON_SELECTIONNEE_EXCEPTION = "Aucun client sÃ©lectionnÃ©e";
+	public static final String UTILISATEUR_NON_SELECTIONNEE_EXCEPTION = "Aucun client sélectionnée";
 
-	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmÃ©es";
+	public static final String FORFAIT_NON_SELECTIONNEE_EXCEPTION = "Aucun forfait sélectionnée";
 
-	public static final String AUCUN_UTILISATEUR_EXCEPTION = "Aucun client n'est renseignÃ©";
+	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmées";
 
-	public static final String AUCUNE_RESERVATION_UTILISATEUR_EXCEPTION = "Aucune reservation n'a Ã©tÃ© effeectuÃ©e par cet utilisateur";
+	public static final String AUCUN_UTILISATEUR_EXCEPTION = "Aucun client n'est renseigné";
+
+	public static final String AUCUNE_RESERVATION_UTILISATEUR_EXCEPTION = "Aucune reservation n'a été effeectuée par cet utilisateur";
+
+	public static final String AUCUN_FORFAIT_EXISTANT = "Aucun forfait existant";
 
 	/**
 	 * Constantes liees au fonctionnement de l'application

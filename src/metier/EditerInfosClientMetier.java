@@ -3,12 +3,15 @@ package metier;
 import java.util.List;
 
 import utils.Constantes;
-
+import dao.ForfaitDAO;
 import dao.ReservationDAO;
 import dao.UtilisateurDAO;
+import data.Forfait;
 import data.Reservation;
 import data.Utilisateur;
+import exception.AucunForfaitExistantException;
 import exception.AucuneReservationUtilisateurException;
+import exception.ForfaitNonSelectionneException;
 import exception.ReservationNonSelectionneeException;
 import exception.UtilisateurNonSelectionneException;
 
@@ -63,7 +66,7 @@ public class EditerInfosClientMetier {
 	}
 
 	/**
-	 * Confirme une reservatnio et ajoute les points fidelites au compte de
+	 * Confirme une reservation et ajoute les points fidelites au compte de
 	 * l'utilisateur;
 	 * 
 	 * @param utilisateur
@@ -121,5 +124,64 @@ public class EditerInfosClientMetier {
 		return UtilisateurDAO.getInstance().modifierFidelite(
 				utilisateur.getIdUtilisateur(),
 				duree * Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE);
+	}
+
+	/**
+	 * Retourne la liste de tous les forfaits existants.
+	 * 
+	 * @return
+	 * @throws AucunForfaitExistantException
+	 */
+	public List<Forfait> listerForfait() throws AucunForfaitExistantException {
+		List<Forfait> listForfaits = ForfaitDAO.getInstance().listerForfait();
+		if (listForfaits.size() <= 0) {
+			throw new AucunForfaitExistantException();
+		}
+		return listForfaits;
+	}
+
+	/**
+	 * Lie un forfait a un utilisateur.
+	 * 
+	 * @param utilisateur
+	 * @param forfait
+	 * @return
+	 * @throws UtilisateurNonSelectionneException
+	 * @throws ForfaitNonSelectionneException
+	 */
+	public boolean attacherForfaitUtilisateur(Utilisateur utilisateur,
+			Forfait forfait) throws UtilisateurNonSelectionneException,
+			ForfaitNonSelectionneException {
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		if (forfait == null) {
+			throw new ForfaitNonSelectionneException();
+		}
+		return ForfaitDAO.getInstance().lier(utilisateur.getIdUtilisateur(),
+				forfait.getIdForfait());
+	}
+
+	/**
+	 * Creation d'un utilisateur.
+	 * 
+	 * @param nom
+	 * @param telephone
+	 * @param forfait
+	 * @return
+	 */
+	public boolean creerUtilisateur(String nom, String telephone,
+			Forfait forfait) {
+		// TODO
+
+		// UtilisateurDAO.getInstance().creer(idUtilisateur, nom, telephone,
+		// pointsFidelite)
+		if (forfait == null) {
+
+		} else {
+
+		}
+
+		return false;
 	}
 }
