@@ -82,6 +82,12 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 		// TODO JBG
 		if (actionEvent.getSource() == retourMenu) {
 			this.dialog.dispose();
+		} else if (actionEvent.getSource() == acheterForfait) {
+			this.add(
+					new AchatForfaitPanel((Utilisateur) jComboBoxUtilisateur
+							.getSelectedItem()), BorderLayout.CENTER);
+			this.repaint();
+			dialog.pack();
 		}
 	}
 

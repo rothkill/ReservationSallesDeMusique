@@ -71,6 +71,8 @@ public class Constantes {
 
 	public static final String SLASH_LABEL = " / ";
 
+	public static final String TYPE_FORFAIT = "Type de forfait : ";
+
 	/**
 	 * Labels d'information
 	 */
