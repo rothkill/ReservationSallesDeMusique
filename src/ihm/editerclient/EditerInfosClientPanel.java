@@ -1,5 +1,7 @@
 package ihm.editerclient;
 
+import ihm.visualisation.NouvelUtilisateurPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -83,12 +85,23 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 		if (actionEvent.getSource() == retourMenu) {
 			this.dialog.dispose();
 		} else if (actionEvent.getSource() == acheterForfait) {
+			rafraichissement();
 			this.add(
 					new AchatForfaitPanel((Utilisateur) jComboBoxUtilisateur
 							.getSelectedItem()), BorderLayout.CENTER);
 			this.repaint();
 			dialog.pack();
+		} else if (actionEvent.getSource() == nouveau) {
+			rafraichissement();
+			this.add(new NouvelUtilisateurPanel());
+			this.repaint();
+			dialog.pack();
 		}
 	}
 
+	private void rafraichissement() {
+		this.removeAll();
+		this.add(north, BorderLayout.NORTH);
+		this.add(informationLabel, BorderLayout.SOUTH);
+	}
 }
