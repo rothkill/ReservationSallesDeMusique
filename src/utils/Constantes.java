@@ -46,9 +46,17 @@ public class Constantes {
 
 	public static final String ANNULER = "Annuler";
 
+	public static final String RETOUR_MENU = "Retour au menu";
+
 	public static final String ANNULER_RESERVATION = "Annuler la réservation";
 
 	public static final String ANNULER_LES_RESERVATIONS = "Annuler les réservations";
+
+	public static final String CONFIRMER_RESERVATION = "Confirmer une reservation";
+
+	public static final String ACHETER_FORFAIT = "Acheter un forfait";
+
+	public static final String NOUVEL_UTILISATEUR = "Nouvel utilisateur";
 
 	/**
 	 * Labels
