@@ -58,6 +58,12 @@ public class Constantes {
 
 	public static final String NOUVEL_UTILISATEUR = "Nouvel utilisateur";
 
+	public static final String CONFIRMER_RESERVATION_BUTTON = "Confirmer";
+
+	public static final String CONFIRMER_RESERVATION_FORFAIT_BUTTON = "Utiliser Forfait";
+
+	public static final String CONFIRMER_RESERVATION_FIDELITE_BUTTON = "Utiliser Points Fidelite";
+
 	/**
 	 * Labels
 	 */
