@@ -1,21 +1,21 @@
 package ihm.annulation;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import metier.AnnulerReservationMetier;
-
 import data.Utilisateur;
 import exception.AucuneReservationNonConfirmeeException;
-
 import utils.Constantes;
 
 /**
@@ -31,24 +31,34 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = -6499200575552265318L;
 
+	private JDialog dialog;
+
 	private JPanel center = new JPanel();
+	private JPanel north = new JPanel();
 
 	private JScrollPane jScrollPane = new JScrollPane();
 
 	private JButton annulerToutesReservation = new JButton(
 			Constantes.ANNULER_LES_RESERVATIONS);
+	private JButton retourMenu = new JButton(Constantes.RETOUR_MENU);
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
-	public AnnulerReservationPanel() {
+	public AnnulerReservationPanel(JDialog dialog) {
 		// TODO JBG
 
-		annulerToutesReservation.addActionListener(this);
+		this.dialog = dialog;
 
+		annulerToutesReservation.addActionListener(this);
+		retourMenu.addActionListener(this);
 		creationPanelCenter();
 
+		north.setLayout(new FlowLayout());
+		north.add(annulerToutesReservation);
+		north.add(retourMenu);
+
 		this.setLayout(new BorderLayout());
-		this.add(annulerToutesReservation, BorderLayout.NORTH);
+		this.add(north, BorderLayout.NORTH);
 		this.add(informationLabel, BorderLayout.SOUTH);
 		jScrollPane.getViewport().add(center);
 		this.add(jScrollPane, BorderLayout.CENTER);
@@ -82,6 +92,8 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 				this.remove(jScrollPane);
 				this.repaint();
 			}
+		} else if (actionEvent.getSource() == retourMenu) {
+			dialog.dispose();
 		}
 
 		// TODO JBG messages erreur/reussite
