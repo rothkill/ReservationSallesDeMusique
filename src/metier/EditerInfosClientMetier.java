@@ -2,7 +2,10 @@ package metier;
 
 import java.util.List;
 
+import utils.Constantes;
+
 import dao.ReservationDAO;
+import dao.UtilisateurDAO;
 import data.Reservation;
 import data.Utilisateur;
 import exception.AucuneReservationUtilisateurException;
@@ -52,15 +55,42 @@ public class EditerInfosClientMetier {
 	 * 
 	 * @param reservation
 	 * @return
-	 * @throws ReservationNonSelectionneeException
 	 */
-	public boolean confirmerReservation(Reservation reservation)
-			throws ReservationNonSelectionneeException {
+	public boolean confirmerReservation(Reservation reservation) {
+
+		return ReservationDAO.getInstance().confirmerReservation(
+				reservation.getIdReservation());
+	}
+
+	/**
+	 * Confirme une reservatnio et ajoute les points fidelites au compte de
+	 * l'utilisateur;
+	 * 
+	 * @param utilisateur
+	 * @param reservation
+	 * @return
+	 * @throws ReservationNonSelectionneeException
+	 * @throws UtilisateurNonSelectionneException
+	 */
+	public boolean reservation(Utilisateur utilisateur, Reservation reservation)
+			throws ReservationNonSelectionneeException,
+			UtilisateurNonSelectionneException {
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
 		if (reservation == null) {
 			throw new ReservationNonSelectionneeException();
 		}
 
-		return ReservationDAO.getInstance().confirmerReservation(
-				reservation.getIdReservation());
+		if (confirmerReservation(reservation)) {
+			return ajouterPointsFidelite(utilisateur, reservation.getDuree());
+		}
+		return false;
+	}
+
+	private boolean ajouterPointsFidelite(Utilisateur utilisateur, int duree) {
+		return UtilisateurDAO.getInstance().modifierFidelite(
+				utilisateur.getIdUtilisateur(),
+				duree * Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE);
 	}
 }

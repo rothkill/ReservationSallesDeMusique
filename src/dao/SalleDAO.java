@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.ConnectionDB;
+import utils.ConnectionDB;
+
 import data.Categorie;
 import data.Salle;
 

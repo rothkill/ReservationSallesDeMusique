@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.ConnectionDB;
+
 import data.Utilisateur;
-import main.ConnectionDB;
 
 public class UtilisateurDAO {
 	private Connection con = ConnectionDB.getInstance().getConnection();

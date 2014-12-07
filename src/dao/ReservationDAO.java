@@ -6,8 +6,9 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import utils.ConnectionDB;
+
 import data.Reservation;
-import main.ConnectionDB;
 
 public class ReservationDAO {
 
