@@ -1,6 +1,5 @@
 package ihm.visualisation;
 
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -31,6 +31,7 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private JPanel north = new JPanel();
 	private ChronologiePanel center = new ChronologiePanel();
+	private JDialog dialog;
 
 	private JComboBox jComboBoxCategorie;
 
@@ -43,8 +44,10 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JLabel slash2 = new JLabel(Constantes.SLASH_LABEL);
 
 	private JButton valider = new JButton(Constantes.VALIDER);
+	private JButton retourMenu = new JButton(Constantes.RETOUR_MENU);
 
-	public VisualiserReservationPanel() {
+	public VisualiserReservationPanel(JDialog dialog) {
+		this.dialog = dialog;
 
 		String message = Constantes.INFO_ERREUR;
 		System.out.println(String.format(message.replace("?", "%s"),
@@ -59,12 +62,14 @@ public class VisualiserReservationPanel extends JPanel implements
 		north.add(slash2);
 		north.add(annee);
 		north.add(valider);
+		north.add(retourMenu);
 
 		this.setLayout(new BorderLayout());
 		this.add(north, BorderLayout.NORTH);
 		this.add(center, BorderLayout.CENTER);
 		this.add(informationLabel, BorderLayout.SOUTH);
 
+		retourMenu.addActionListener(this);
 		valider.addActionListener(this);
 		jComboBoxCategorie.addActionListener(this);
 
@@ -73,8 +78,8 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private void creerComboCategorie() {
 		jComboBoxCategorie = new JComboBox();
-		List<Categorie> listCategories = ReservationMetier
-				.getInstance().getListeCategorie();
+		List<Categorie> listCategories = ReservationMetier.getInstance()
+				.getListeCategorie();
 		for (Categorie categorie : listCategories) {
 			jComboBoxCategorie.addItem(categorie);
 		}
@@ -84,7 +89,9 @@ public class VisualiserReservationPanel extends JPanel implements
 	public void actionPerformed(ActionEvent actionEvent) {
 		// TODO JBG
 
-		if (actionEvent.getSource() == valider) {
+		if (actionEvent.getSource() == retourMenu) {
+			dialog.dispose();
+		} else if (actionEvent.getSource() == valider) {
 			// TODO JBG
 			rechargerChronologie();
 		} else if (actionEvent.getSource() == jComboBoxCategorie) {

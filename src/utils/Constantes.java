@@ -31,6 +31,8 @@ public class Constantes {
 	 */
 	public static final String VISUALISER_RESERVATION = "Visualiser les réservations";
 
+	public static final String VISUALISER_RESERVATION_ET_RESERVER = "Visualiser les réservations / Reserver";
+
 	public static final String EFFECTUER_RESERVATION_AUTOMATIQUE = "Effectuer une réservation automatique d'une salle";
 
 	public static final String EFFECTUER_RESERVATION_MANUELLE = "Effectuer une réservation à la main d'une salle";
@@ -108,7 +110,7 @@ public class Constantes {
 	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sélectionnée";
 
 	public static final String UTILISATEUR_NON_SELECTIONNEE_EXCEPTION = "Aucun client sélectionnée";
-	
+
 	public static final String SALLE_NON_SELECTIONNEE_EXCEPTION = "Aucune salle sélectionnée";
 
 	public static final String FORFAIT_NON_SELECTIONNEE_EXCEPTION = "Aucun forfait sélectionnée";
@@ -126,7 +128,6 @@ public class Constantes {
 	 */
 
 	public static final int CORRESPONDANCE_HEURE_POINTS_FIDELITE = 5;
-
 
 	public static final int CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE = 75;
 
