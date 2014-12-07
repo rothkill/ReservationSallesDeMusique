@@ -41,7 +41,7 @@ public class ReservationDAO {
 	 * @param tarif
 	 * @return
 	 */
-	public Reservation reserver(int idReservation, Date dateReservation,
+	public Reservation creer(int idReservation, Date dateReservation,
 			Date dateDebutSceance, int duree, Boolean confirmation,
 			int idSalle, int idUtilisateur, float tarif) {
 		try {
@@ -179,4 +179,11 @@ public class ReservationDAO {
 		}
 		return false;
 	}
+
+	public boolean reserver(Integer idUtilisateur, Integer idSalle, Date date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
 }
