@@ -1,0 +1,2 @@
+/*C2*/SET SCHEMA PUBLIC
+alter table reservation\u000d\u000aadd tarif float
