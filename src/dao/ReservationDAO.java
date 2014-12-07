@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import utils.ConnectionDB;
-
 import data.Reservation;
 
 public class ReservationDAO {
@@ -118,6 +117,31 @@ public class ReservationDAO {
 	 * @return
 	 */
 	public boolean confirmerReservation(Integer idReservation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Verifie si la salle est reservee.
+	 * 
+	 * @param idSalle
+	 * @param date
+	 * @return
+	 */
+	public boolean isSalleReservee(Integer idSalle, Date date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Reserve une salle.
+	 * 
+	 * @param idUtilisateur
+	 * @param idSalle
+	 * @param date
+	 * @return
+	 */
+	public boolean reserver(Integer idUtilisateur, Integer idSalle, Date date) {
 		// TODO Auto-generated method stub
 		return false;
 	}

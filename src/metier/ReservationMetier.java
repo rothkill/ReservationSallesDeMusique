@@ -3,14 +3,16 @@ package metier;
 import java.util.Date;
 import java.util.List;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
 import dao.CategorieDAO;
+import dao.ReservationDAO;
 import dao.SalleDAO;
 import data.Categorie;
 import data.Salle;
+import data.Utilisateur;
+import exception.AucuneSalleSelectionneeException;
 import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
+import exception.UtilisateurNonSelectionneException;
 
 /**
  * Metier de visualisation du planning et reservations.
@@ -77,5 +79,51 @@ public class ReservationMetier {
 	 */
 	public List<Categorie> getListeCategorie() {
 		return CategorieDAO.getInstance().listerCategories();
+	}
+
+	/**
+	 * Verifie si la salle est reservee.
+	 * 
+	 * @param salle
+	 * @param date
+	 * @return
+	 * @throws AucuneSalleSelectionneeException
+	 */
+	public boolean salleReservee(Salle salle, Date date)
+			throws AucuneSalleSelectionneeException {
+		if (salle == null) {
+			throw new AucuneSalleSelectionneeException();
+		}
+		return ReservationDAO.getInstance().isSalleReservee(salle.getIdSalle(),
+				date);
+	}
+
+	public boolean reserverSalle(Utilisateur utilisateur, Salle salle, Date date)
+			throws AucuneSalleSelectionneeException,
+			UtilisateurNonSelectionneException {
+		if (salle == null) {
+			throw new AucuneSalleSelectionneeException();
+		}
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		return ReservationDAO.getInstance().reserver(
+				utilisateur.getIdUtilisateur(), salle.getIdSalle(), date);
+	}
+
+	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
+			Date date, int nbSemaines) throws AucuneSalleSelectionneeException,
+			UtilisateurNonSelectionneException {
+		if (salle == null) {
+			throw new AucuneSalleSelectionneeException();
+		}
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		// TODO
+		for (int i = 0; i < nbSemaines; i++) {
+			reserverSalle(utilisateur, salle, date);
+		}
+		return true;
 	}
 }

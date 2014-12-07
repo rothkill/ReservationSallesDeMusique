@@ -108,6 +108,8 @@ public class Constantes {
 	public static final String RESERVATION_NON_SELECTIONNEE_EXCEPTION = "Aucune reservation sélectionnée";
 
 	public static final String UTILISATEUR_NON_SELECTIONNEE_EXCEPTION = "Aucun client sélectionnée";
+	
+	public static final String SALLE_NON_SELECTIONNEE_EXCEPTION = "Aucune salle sélectionnée";
 
 	public static final String FORFAIT_NON_SELECTIONNEE_EXCEPTION = "Aucun forfait sélectionnée";
 
