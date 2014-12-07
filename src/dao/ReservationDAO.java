@@ -143,4 +143,29 @@ public class ReservationDAO {
 		}
 	}
 
+	/**
+	 * Verifie si la salle est reservee.
+	 * 
+	 * @param idSalle
+	 * @param date
+	 * @return
+	 */
+	public boolean isSalleReservee(Integer idSalle, Date date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Reserve une salle.
+	 * 
+	 * @param idUtilisateur
+	 * @param idSalle
+	 * @param date
+	 * @return
+	 */
+	public boolean reserver(Integer idUtilisateur, Integer idSalle, Date date) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
