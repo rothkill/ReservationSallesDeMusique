@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import metier.VisualiserReservationMetier;
+import metier.ReservationMetier;
 import utils.Constantes;
 import data.Categorie;
 import data.Salle;
@@ -73,7 +73,7 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private void creerComboCategorie() {
 		jComboBoxCategorie = new JComboBox();
-		List<Categorie> listCategories = VisualiserReservationMetier
+		List<Categorie> listCategories = ReservationMetier
 				.getInstance().getListeCategorie();
 		for (Categorie categorie : listCategories) {
 			jComboBoxCategorie.addItem(categorie);
@@ -97,7 +97,7 @@ public class VisualiserReservationPanel extends JPanel implements
 	private void rechargerChronologie() {
 		// TODO JBG
 		try {
-			List<Salle> listSalles = VisualiserReservationMetier.getInstance()
+			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(
 							(Categorie) jComboBoxCategorie.getSelectedItem(),
 							jour.getText(), mois.getText(), annee.getText());

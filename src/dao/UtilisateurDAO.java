@@ -126,4 +126,17 @@ public class UtilisateurDAO {
 		}
 		return listUtilisateurs;
 	}
+
+	/**
+	 * Modifie les points fidelites d'un utilisateur.
+	 * 
+	 * @param idUtilisateur
+	 * @param points
+	 * @return
+	 */
+	public boolean modifierFidelite(Integer idUtilisateur, int points) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

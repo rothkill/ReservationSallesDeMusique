@@ -82,7 +82,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 			// TODO JBG
 		} else if (actionEvent.getSource() == editerClient) {
 			dialog.getContentPane().removeAll();
-			dialog.getContentPane().add(new EditerInfosClientPanel());
+			dialog.getContentPane().add(new EditerInfosClientPanel(dialog));
 			dialog.setLocationRelativeTo(null);
 			dialog.setTitle(Constantes.EDITER_INFO_CLIENT);
 			dialog.pack();
@@ -91,7 +91,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 			// TODO JBG
 		} else if (actionEvent.getSource() == annulationReservation) {
 			dialog.getContentPane().removeAll();
-			dialog.getContentPane().add(new AnnulerReservationPanel());
+			dialog.getContentPane().add(new AnnulerReservationPanel(dialog));
 			dialog.setLocationRelativeTo(null);
 			dialog.setTitle(Constantes.ANNULATION_RESERVATION);
 			dialog.pack();
