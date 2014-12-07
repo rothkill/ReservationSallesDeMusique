@@ -3,6 +3,7 @@ package ihm.editerclient;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -63,7 +64,7 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 	 * @param dureeForfait
 	 */
 	private void verifieButtons(int dureeForfait) {
-		if (dureeForfait <= this.reservation.getDuree()) {
+		if (dureeForfait <= (this.reservation.getDuree())) {
 			forfait.setEnabled(false);
 		}
 		if (utilisateur.getPointFidelite() >= Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE) {

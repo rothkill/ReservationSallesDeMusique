@@ -3,6 +3,8 @@ package metier;
 import java.util.Date;
 import java.util.List;
 
+import com.sun.org.apache.xerces.internal.impl.dv.xs.DateDV;
+
 import dao.CategorieDAO;
 import dao.ReservationDAO;
 import dao.SalleDAO;
@@ -98,7 +100,9 @@ public class ReservationMetier {
 				date);
 	}
 
-	public boolean reserverSalle(Utilisateur utilisateur, Salle salle, Date date)
+	
+	//TODO : Ajout des gestions de dateReservation et dateFinReservation
+	public boolean reserverSalle(Utilisateur utilisateur, Salle salle, Date dateReservation,Date dateDebutReservation,Date dateFinReservation)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
@@ -108,11 +112,12 @@ public class ReservationMetier {
 			throw new UtilisateurNonSelectionneException();
 		}
 		return ReservationDAO.getInstance().reserver(
-				utilisateur.getIdUtilisateur(), salle.getIdSalle(), date);
+				utilisateur.getIdUtilisateur(), salle.getIdSalle(), dateDebutReservation, dateFinReservation);
 	}
 
+	//TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			Date date, int nbSemaines) throws AucuneSalleSelectionneeException,
+			Date dateReservation,Date dateDebutReservation,Date dateFinReservation, int nbSemaines) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
@@ -120,9 +125,8 @@ public class ReservationMetier {
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
-		// TODO
 		for (int i = 0; i < nbSemaines; i++) {
-			reserverSalle(utilisateur, salle, date);
+			reserverSalle(utilisateur, salle,dateReservation,dateDebutReservation,dateFinReservation);
 		}
 		return true;
 	}

@@ -16,10 +16,10 @@ public class Reservation {
 
 	private Date dateReservation;
 
-	private Date dateDebutSceance;
+	private Date dateDebutReservation;
 
-	private int duree;
-
+	private Date dateFinReservation;
+	
 	private boolean confirmation;
 
 	private Salle salle;
@@ -29,17 +29,18 @@ public class Reservation {
 	private float tarif;
 
 	public Reservation(Integer idReservation, Date dateReservation,
-			Date dateDebutSceance, int duree, boolean confirmation,
-			Salle salle, Utilisateur utilisateur, float tarif) {
+			Date dateDebutReservation, Date dateFinReservation,
+			boolean confirmation, Salle salle, Utilisateur utilisateur,
+			float tarif) {
 		super();
 		this.idReservation = idReservation;
 		this.dateReservation = dateReservation;
-		this.setDateDebutSceance(dateDebutSceance);
-		this.setDuree(duree);
+		this.dateDebutReservation = dateDebutReservation;
+		this.dateFinReservation = dateFinReservation;
 		this.confirmation = confirmation;
 		this.salle = salle;
 		this.utilisateur = utilisateur;
-		this.setTarif(tarif);
+		this.tarif = tarif;
 	}
 
 	public Integer getIdReservation() {
@@ -56,6 +57,22 @@ public class Reservation {
 
 	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
+	}
+
+	public Date getDateDebutReservation() {
+		return dateDebutReservation;
+	}
+
+	public void setDateDebutReservation(Date dateDebutReservation) {
+		this.dateDebutReservation = dateDebutReservation;
+	}
+
+	public Date getDateFinReservation() {
+		return dateFinReservation;
+	}
+
+	public void setDateFinReservation(Date dateFinReservation) {
+		this.dateFinReservation = dateFinReservation;
 	}
 
 	public boolean isConfirmation() {
@@ -82,33 +99,16 @@ public class Reservation {
 		this.utilisateur = utilisateur;
 	}
 
-	@Override
-	public String toString() {
-		return dateReservation.toString() + " " + salle.toString();
-	}
-
-	public int getDuree() {
-		return duree;
-	}
-
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
-
-	public Date getDateDebutSceance() {
-		return dateDebutSceance;
-	}
-
-	public void setDateDebutSceance(Date dateDebutSceance) {
-		this.dateDebutSceance = dateDebutSceance;
-	}
-
 	public float getTarif() {
-		return this.tarif;
+		return tarif;
 	}
 
 	public void setTarif(float tarif) {
 		this.tarif = tarif;
+	}
+
+	public int getDuree(){
+		return getDateFinReservation().getHours() - getDateDebutReservation().getHours();
 	}
 
 }
