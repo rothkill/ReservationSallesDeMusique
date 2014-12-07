@@ -27,7 +27,21 @@ public class ReservationDAO {
 		return SINGLETON;
 	}
 
-	public Reservation creer(int idReservation, Date dateReservation,
+	/**
+	 * /**
+	 * Reserve une salle.
+	 * 
+	 * @param idReservation
+	 * @param dateReservation
+	 * @param dateDebutSceance
+	 * @param duree
+	 * @param confirmation
+	 * @param idSalle
+	 * @param idUtilisateur
+	 * @param tarif
+	 * @return
+	 */
+	public Reservation reserver(int idReservation, Date dateReservation,
 			Date dateDebutSceance, int duree, Boolean confirmation,
 			int idSalle, int idUtilisateur, float tarif) {
 		try {
@@ -133,8 +147,9 @@ public class ReservationDAO {
 	public boolean confirmerReservation(Integer idReservation) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("update reservation set confirmation = true where idreservation = ?");
-			st.setInt(1, idReservation);
+					.prepareStatement("update reservation set confirmation = ? where idreservation = ?");
+			st.setBoolean(1, true);
+			st.setInt(2, idReservation);
 			st.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -151,21 +166,17 @@ public class ReservationDAO {
 	 * @return
 	 */
 	public boolean isSalleReservee(Integer idSalle, Date date) {
-		// TODO Auto-generated method stub
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select confirmation from reservation where idsalle = ? and date = ?");
+			st.setInt(1, idSalle);
+			st.setDate(2,(java.sql.Date) date);
+			ResultSet rs = st.executeQuery();
+			if(rs.next())
+				return rs.getBoolean(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
 	}
-
-	/**
-	 * Reserve une salle.
-	 * 
-	 * @param idUtilisateur
-	 * @param idSalle
-	 * @param date
-	 * @return
-	 */
-	public boolean reserver(Integer idUtilisateur, Integer idSalle, Date date) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
