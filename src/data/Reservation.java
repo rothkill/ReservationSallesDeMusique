@@ -2,6 +2,8 @@ package data;
 
 import java.util.Date;
 
+import javax.swing.JLabel;
+
 /**
  * Classe correspondant a la reservation d'une salle.
  * 
@@ -24,9 +26,11 @@ public class Reservation {
 
 	private Utilisateur utilisateur;
 
+	private float tarif;
+
 	public Reservation(Integer idReservation, Date dateReservation,
 			Date dateDebutSceance, int duree, boolean confirmation,
-			Salle salle, Utilisateur utilisateur) {
+			Salle salle, Utilisateur utilisateur, float tarif) {
 		super();
 		this.idReservation = idReservation;
 		this.dateReservation = dateReservation;
@@ -35,6 +39,7 @@ public class Reservation {
 		this.confirmation = confirmation;
 		this.salle = salle;
 		this.utilisateur = utilisateur;
+		this.setTarif(tarif);
 	}
 
 	public Integer getIdReservation() {
@@ -96,6 +101,14 @@ public class Reservation {
 
 	public void setDateDebutSceance(Date dateDebutSceance) {
 		this.dateDebutSceance = dateDebutSceance;
+	}
+
+	public float getTarif() {
+		return this.tarif;
+	}
+
+	public void setTarif(float tarif) {
+		this.tarif = tarif;
 	}
 
 }

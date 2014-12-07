@@ -28,7 +28,7 @@ public class ReservationDAO {
 
 	public Reservation creer(int idReservation, Date dateReservation,
 			Date dateDebutSceance, int duree, Boolean confirmation,
-			int idSalle, int idUtilisateur) {
+			int idSalle, int idUtilisateur, float tarif) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation values(?,?,?,?,?,?,?)");
@@ -43,7 +43,7 @@ public class ReservationDAO {
 			return new Reservation(idReservation, dateReservation,
 					dateDebutSceance, duree, confirmation, SalleDAO
 							.getInstance().rechercher(idSalle), UtilisateurDAO
-							.getInstance().rechercher(idUtilisateur));
+							.getInstance().rechercher(idUtilisateur), tarif);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return null;

@@ -24,6 +24,8 @@ public class Constantes {
 	 */
 	public static final String APPLICATION_TITLE = "Réservation de salle de musique";
 
+	public static final String MONNAIE_UTILISEE = " €";
+
 	/**
 	 * Titres des cas d'utilisation
 	 */
@@ -93,6 +95,8 @@ public class Constantes {
 	public static final String INFO_ERREUR = "<html><font color='red'>?</font></html>";
 
 	public static final String INFO_REUSSITE = "<html><font color='green'>?</font></html>";
+
+	public static final String AUCUNE_RESERVATION_INFO = "Aucune reservation";
 
 	/**
 	 * Exceptions

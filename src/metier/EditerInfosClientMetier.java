@@ -199,4 +199,12 @@ public class EditerInfosClientMetier {
 
 		return false;
 	}
+
+	/**
+	 * Confirme une reservation en utilisant le forfait de l'utilisateur.
+	 */
+	public void utiliserForfait() {
+		// TODO Auto-generated method stub
+
+	}
 }

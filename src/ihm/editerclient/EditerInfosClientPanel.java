@@ -96,6 +96,12 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 			this.add(new NouvelUtilisateurPanel());
 			this.repaint();
 			dialog.pack();
+		} else if (actionEvent.getSource() == confirmerReservation) {
+			rafraichissement();
+			this.add(new ConfirmerReservationPanel(this,
+					(Utilisateur) jComboBoxUtilisateur.getSelectedItem()));
+			this.repaint();
+			dialog.pack();
 		}
 	}
 
@@ -103,5 +109,9 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 		this.removeAll();
 		this.add(north, BorderLayout.NORTH);
 		this.add(informationLabel, BorderLayout.SOUTH);
+	}
+
+	public void changerLabelInfo(String s) {
+		informationLabel.setText(s);
 	}
 }
