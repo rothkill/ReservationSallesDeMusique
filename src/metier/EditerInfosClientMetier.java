@@ -106,9 +106,24 @@ public class EditerInfosClientMetier {
 	 * @return
 	 */
 	private boolean modifierPointsFidelite(Utilisateur utilisateur, int duree) {
-		int modificateurPointFidelite = duree
-				* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE - duree
-				* Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE;
+
+		int modificateurPointFidelite;
+
+		// TODO modifier pour utiliser un modulo sur les pf en fonction de la
+		// duree et des pf
+		// return le prix restant ?
+		if (utilisateur.getPointFidelite()
+				/ Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE >= duree) {
+			// on retire les points de fidelité necessaires
+			modificateurPointFidelite = duree
+					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE - duree
+					* Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE;
+		} else {
+			// on retire tous les points disponibles
+			modificateurPointFidelite = duree
+					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE
+					+ (utilisateur.getPointFidelite() % Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE);
+		}
 		return UtilisateurDAO.getInstance().modifierFidelite(
 				utilisateur.getIdUtilisateur(), modificateurPointFidelite);
 	}
