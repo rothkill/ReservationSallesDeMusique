@@ -31,7 +31,7 @@ public class ForfaitDAO {
 	 */
 	public List<Forfait> listerForfait() {
 		List<Forfait> listeForfaits = new ArrayList<Forfait>();
-		// TODO
+		
 		return listeForfaits;
 	}
 

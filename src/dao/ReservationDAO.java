@@ -2,12 +2,13 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import utils.ConnectionDB;
-
 import data.Reservation;
 
 public class ReservationDAO {
@@ -64,19 +65,20 @@ public class ReservationDAO {
 		}
 	}
 
-	// TODO modifier en methode de recherche
-	public boolean deleteFromIdUtilisateurDate(Integer idUtilisateur, Date date) {
+	// 
+	public Reservation rechercherFromIdUtilisateurDate(Integer idUtilisateur, Date date) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("delete from reservation where idutilisateur = ? and datereservation = ?");
+					.prepareStatement("select idreservation,datedebutsceance,duree,confirmation,idSalle,tarif from reservation where idutilisateur = ? and datereservation = ?");
 			st.setInt(1, idUtilisateur);
 			st.setDate(2, (java.sql.Date) date);
-			st.execute();
-			return true;
+			ResultSet rs = st.executeQuery();
+			if(rs.next())
+				return new Reservation(rs.getInt(1),date,rs.getDate(2),rs.getInt(3),rs.getBoolean(4),SalleDAO.getInstance().rechercher(rs.getInt(5)),UtilisateurDAO.getInstance().rechercher(idUtilisateur),rs.getFloat(6));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			return false;
 		}
+		return null;
 	}
 
 	/**
@@ -106,8 +108,19 @@ public class ReservationDAO {
 	 */
 	public List<Reservation> listerReservationParUtilisateur(
 			Integer idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reservation> lesReservations = new ArrayList<Reservation>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idreservation,datereservation,datedebutsceance,duree,confirmation,idSalle,tarif from reservation where idutilisateur = ?");
+			st.setInt(1, idUtilisateur);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				lesReservations.add(new Reservation(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getInt(4),rs.getBoolean(5),SalleDAO.getInstance().rechercher(rs.getInt(6)),UtilisateurDAO.getInstance().rechercher(idUtilisateur),rs.getFloat(7)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return lesReservations;
 	}
 
 	/**
@@ -118,8 +131,16 @@ public class ReservationDAO {
 	 * @return
 	 */
 	public boolean confirmerReservation(Integer idReservation) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			PreparedStatement st = con
+					.prepareStatement("update reservation set confirmation = true where idreservation = ?");
+			st.setInt(1, idReservation);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 
 }
