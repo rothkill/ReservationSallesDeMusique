@@ -13,20 +13,20 @@ import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
 
 /**
- * Metier du cas d'utilisation 1 : visualisation des reservations.
+ * Metier de visualisation du planning et reservations.
  * 
  * @author grimonprez
  * 
  */
-public class VisualiserReservationMetier {
+public class ReservationMetier {
 
-	private static final VisualiserReservationMetier VISUALISER_RESERVATION_METIER = new VisualiserReservationMetier();
+	private static final ReservationMetier VISUALISER_RESERVATION_METIER = new ReservationMetier();
 
-	private VisualiserReservationMetier() {
+	private ReservationMetier() {
 		super();
 	}
 
-	public static VisualiserReservationMetier getInstance() {
+	public static ReservationMetier getInstance() {
 		return VISUALISER_RESERVATION_METIER;
 	}
 

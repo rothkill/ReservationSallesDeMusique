@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import metier.EditerInfosClientMetier;
 import metier.UtilisateurMetier;
-import metier.VisualiserReservationMetier;
+import metier.ReservationMetier;
 import data.Categorie;
 import data.Utilisateur;
 import exception.AucunUtilisateurException;
