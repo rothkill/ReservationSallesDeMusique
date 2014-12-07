@@ -1,5 +1,7 @@
 package ihm.visualisation;
 
+import ihm.visualisation.formulaire.ReservationManuellePanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -29,15 +31,18 @@ import exception.DateIncorrecteException;
 public class VisualiserReservationPanel extends JPanel implements
 		ActionListener {
 
+	private JPanel northNorth = new JPanel();
+	private JPanel northSouth = new JPanel();
 	private JPanel north = new JPanel();
 	private ChronologiePanel center = new ChronologiePanel();
 	private JDialog dialog;
+	private JDialog dialogReservation = new JDialog();
 
 	private JComboBox jComboBoxCategorie;
 
-	private JTextField jour = new JTextField("JJ");
-	private JTextField mois = new JTextField("MM");
-	private JTextField annee = new JTextField("AAAA");
+	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
+	private JTextField mois = new JTextField(Constantes.MM_LABEL);
+	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
@@ -45,6 +50,10 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private JButton valider = new JButton(Constantes.VALIDER);
 	private JButton retourMenu = new JButton(Constantes.RETOUR_MENU);
+	private JButton reserverManuellement = new JButton(
+			Constantes.RESERVER_MANUELLEMENT);
+	private JButton reserverAutomatiquement = new JButton(
+			Constantes.RESERVER_AUTOMATIQUEMENT);
 
 	public VisualiserReservationPanel(JDialog dialog) {
 		this.dialog = dialog;
@@ -53,16 +62,25 @@ public class VisualiserReservationPanel extends JPanel implements
 		System.out.println(String.format(message.replace("?", "%s"),
 				Constantes.DATE_INCORRECTE_EXCEPTION));
 
+		north.setLayout(new BorderLayout());
+
 		creerComboCategorie();
-		north.setLayout(new FlowLayout());
-		north.add(jComboBoxCategorie);
-		north.add(jour);
-		north.add(slash);
-		north.add(mois);
-		north.add(slash2);
-		north.add(annee);
-		north.add(valider);
-		north.add(retourMenu);
+		northNorth.setLayout(new FlowLayout());
+		northNorth.add(jComboBoxCategorie);
+		northNorth.add(jour);
+		northNorth.add(slash);
+		northNorth.add(mois);
+		northNorth.add(slash2);
+		northNorth.add(annee);
+		northNorth.add(valider);
+		northNorth.add(retourMenu);
+
+		northSouth.setLayout(new FlowLayout());
+		northSouth.add(reserverManuellement);
+		northSouth.add(reserverAutomatiquement);
+
+		north.add(northNorth, BorderLayout.NORTH);
+		north.add(northSouth, BorderLayout.SOUTH);
 
 		this.setLayout(new BorderLayout());
 		this.add(north, BorderLayout.NORTH);
@@ -71,6 +89,8 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		retourMenu.addActionListener(this);
 		valider.addActionListener(this);
+		reserverManuellement.addActionListener(this);
+		reserverAutomatiquement.addActionListener(this);
 		jComboBoxCategorie.addActionListener(this);
 
 		this.setVisible(true);
@@ -97,6 +117,16 @@ public class VisualiserReservationPanel extends JPanel implements
 		} else if (actionEvent.getSource() == jComboBoxCategorie) {
 			// TODO JBG
 			System.out.println(jComboBoxCategorie.getSelectedItem());
+
+		} else if (actionEvent.getSource() == reserverManuellement) {
+			dialogReservation.getContentPane().add(
+					new ReservationManuellePanel());
+			dialogReservation.pack();
+			dialogReservation.setLocationRelativeTo(null);
+			dialogReservation.setVisible(true);
+
+		} else if (actionEvent.getSource() == reserverAutomatiquement) {
+			// TODO JBG
 
 		}
 	}

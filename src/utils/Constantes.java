@@ -68,6 +68,10 @@ public class Constantes {
 
 	public static final String CONFIRMER_RESERVATION_FIDELITE_BUTTON = "Utiliser Points Fidelite";
 
+	public static final String RESERVER_MANUELLEMENT = "Reservation manuelle";
+
+	public static final String RESERVER_AUTOMATIQUEMENT = "Reservation automatique";
+
 	/**
 	 * Labels
 	 */
@@ -81,9 +85,17 @@ public class Constantes {
 
 	public static final String SLASH_LABEL = " / ";
 
+	public static final String JJ_LABEL = "JJ";
+
+	public static final String MM_LABEL = "MM";
+
+	public static final String AAAA_LABEL = "AAAA";
+
 	public static final String TELEPHONE_LABEL = "Telephone : ";
 
 	public static final String TYPE_FORFAIT = "Type de forfait : ";
+
+	public static final String MULTIPLE_RESERVATION_LABEL = "Reserver sur une durée : ";
 
 	/**
 	 * Labels d'information
