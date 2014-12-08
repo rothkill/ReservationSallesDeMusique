@@ -75,4 +75,14 @@ public class SalleDAO {
 			return false;
 		}
 	}
+
+	/**
+	 * Retourne la liste de toutes les salles.
+	 * 
+	 * @return
+	 */
+	public List<Salle> lister() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

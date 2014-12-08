@@ -39,6 +39,7 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JDialog dialogReservation = new JDialog();
 
 	private JComboBox jComboBoxCategorie;
+	private JComboBox jComboBoxSalle = new JComboBox();
 
 	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
 	private JTextField mois = new JTextField(Constantes.MM_LABEL);

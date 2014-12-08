@@ -100,10 +100,10 @@ public class ReservationMetier {
 				date);
 	}
 
-	
-	//TODO : Ajout des gestions de dateReservation et dateFinReservation
-	public boolean reserverSalle(Utilisateur utilisateur, Salle salle, Date dateReservation,Date dateDebutReservation,Date dateFinReservation)
-			throws AucuneSalleSelectionneeException,
+	// TODO : Ajout des gestions de dateReservation et dateFinReservation
+	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
+			Date dateReservation, Date dateDebutReservation,
+			Date dateFinReservation) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
@@ -112,12 +112,15 @@ public class ReservationMetier {
 			throw new UtilisateurNonSelectionneException();
 		}
 		return ReservationDAO.getInstance().reserver(
-				utilisateur.getIdUtilisateur(), salle.getIdSalle(), dateDebutReservation, dateFinReservation);
+				utilisateur.getIdUtilisateur(), salle.getIdSalle(),
+				dateDebutReservation, dateFinReservation);
 	}
 
-	//TODO : Ajout des gestions de dateReservation et dateFinReservation
+	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			Date dateReservation,Date dateDebutReservation,Date dateFinReservation, int nbSemaines) throws AucuneSalleSelectionneeException,
+			Date dateReservation, Date dateDebutReservation,
+			Date dateFinReservation, int nbSemaines)
+			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
@@ -126,8 +129,23 @@ public class ReservationMetier {
 			throw new UtilisateurNonSelectionneException();
 		}
 		for (int i = 0; i < nbSemaines; i++) {
-			reserverSalle(utilisateur, salle,dateReservation,dateDebutReservation,dateFinReservation);
+			reserverSalle(utilisateur, salle, dateReservation,
+					dateDebutReservation, dateFinReservation);
 		}
 		return true;
+	}
+
+	/**
+	 * Liste les salles existantes.
+	 * 
+	 * @return
+	 * @throws AucuneSalleSelectionneeException
+	 */
+	public List<Salle> getListeSalle() throws AucuneSalleSelectionneeException {
+		List<Salle> listSalles = SalleDAO.getInstance().lister();
+		if (listSalles == null || listSalles.size() <= 0) {
+			throw new AucuneSalleSelectionneeException();
+		}
+		return listSalles;
 	}
 }
