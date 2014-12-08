@@ -26,18 +26,18 @@ public class CategorieDAO {
 		return SINGLETON;
 	}
 
-	public Categorie creer(int idCategory, String nom, int tarifUneHeure,
+	public Categorie creer(String nom, int tarifUneHeure,
 			int tarifDeuxHeures, int nbPersonne) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("insert into categorie values(?,?,?,?,?)");
-			st.setInt(1, idCategory);
-			st.setString(2, nom);
-			st.setInt(3, tarifUneHeure);
-			st.setInt(4, tarifDeuxHeures);
-			st.setInt(5, nbPersonne);
+					.prepareStatement("insert into categorie(nom,tarifuneheure,tarifdeuxheures,nbpersonne) values(?,?,?,?)");
+			st.setString(1, nom);
+			st.setInt(2, tarifUneHeure);
+			st.setInt(3, tarifDeuxHeures);
+			st.setInt(4, nbPersonne);
 			st.executeUpdate();
-			return new Categorie(idCategory, nom, tarifUneHeure,
+			ResultSet rs = st.getGeneratedKeys();
+			return new Categorie(rs.getInt(1), nom, tarifUneHeure,
 					tarifDeuxHeures, nbPersonne);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

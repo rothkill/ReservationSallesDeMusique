@@ -1,9 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Categorie;
 import data.Forfait;
 import utils.ConnectionDB;
 
@@ -30,9 +34,22 @@ public class ForfaitDAO {
 	 * @return
 	 */
 	public List<Forfait> listerForfait() {
-		List<Forfait> listeForfaits = new ArrayList<Forfait>();
-		
-		return listeForfaits;
+		Forfait forfait = null;
+		List<Forfait> listForfait = new ArrayList<Forfait>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idforfait,forfait,validite,idcategorie,prix from forfait");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				forfait = new Forfait(rs.getInt(1), rs.getInt(2),
+						rs.getInt(3), CategorieDAO.getInstance().rechercher(rs.getInt(4)), rs.getInt(5));
+				listForfait.add(forfait);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listForfait;
 	}
 
 	public boolean lier(Integer idUtilisateur, Integer idForfait) {
