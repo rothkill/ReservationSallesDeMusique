@@ -38,6 +38,8 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 		this.add(jComboBoxForfait);
 		this.add(valider);
 
+		valider.addActionListener(this);
+
 		this.setVisible(true);
 	}
 
