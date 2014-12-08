@@ -66,16 +66,12 @@ public class EditerInfosClientMetier {
 	}
 
 	/**
-	 * <<<<<<< HEAD Confirme une reservatnio et ajoute les points fidelites au
-	 * compte de ======= Confirme une reservation et ajoute les points fidelites
-	 * au compte de >>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
+	 * Confirme une reservation et ajoute les points fidelites au compte de
 	 * l'utilisateur;
 	 * 
 	 * @param utilisateur
 	 * @param reservation
-	 *            <<<<<<< HEAD =======
 	 * @param utiliserPointsFidelite
-	 *            >>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
 	 * @return
 	 * @throws ReservationNonSelectionneeException
 	 * @throws UtilisateurNonSelectionneException

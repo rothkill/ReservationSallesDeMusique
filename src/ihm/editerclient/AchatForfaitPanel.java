@@ -30,6 +30,7 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 
 	public AchatForfaitPanel(Utilisateur utilisateur) {
 		// TODO Auto-generated constructor stub
+		this.utilisater = utilisateur;
 
 		creerComboForfait();
 
@@ -46,6 +47,7 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
+			System.out.println("gné");
 			try {
 				if (EditerInfosClientMetier.getInstance()
 						.attacherForfaitUtilisateur(utilisateur,
