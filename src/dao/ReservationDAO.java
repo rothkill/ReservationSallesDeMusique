@@ -56,11 +56,13 @@ public class ReservationDAO {
 			st.setDate(7, (java.sql.Date) dateDebutReservation);
 			st.executeUpdate();
 			ResultSet rs = st.getGeneratedKeys();
-			if (rs.next()){
+			if (rs.next()) {
 				return new Reservation(rs.getInt(1), dateReservation,
-						dateDebutReservation,dateFinReservation, confirmation, SalleDAO.getInstance()
-								.rechercher(idSalle), UtilisateurDAO
-								.getInstance().rechercher(idUtilisateur), tarif);}
+						dateDebutReservation, dateFinReservation, confirmation,
+						SalleDAO.getInstance().rechercher(idSalle),
+						UtilisateurDAO.getInstance().rechercher(idUtilisateur),
+						tarif);
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -90,10 +92,11 @@ public class ReservationDAO {
 			st.setDate(2, (java.sql.Date) date);
 			ResultSet rs = st.executeQuery();
 			if (rs.next())
-				return new Reservation(rs.getInt(1), date, rs.getDate(2),rs.getDate(3),
-						rs.getBoolean(4), SalleDAO.getInstance().rechercher(
-								rs.getInt(5)), UtilisateurDAO.getInstance()
-								.rechercher(idUtilisateur), rs.getFloat(6));
+				return new Reservation(rs.getInt(1), date, rs.getDate(2),
+						rs.getDate(3), rs.getBoolean(4), SalleDAO.getInstance()
+								.rechercher(rs.getInt(5)), UtilisateurDAO
+								.getInstance().rechercher(idUtilisateur),
+						rs.getFloat(6));
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -135,10 +138,11 @@ public class ReservationDAO {
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				lesReservations.add(new Reservation(rs.getInt(1),
-						rs.getDate(2), rs.getDate(3),rs.getDate(4), rs.getBoolean(5),
-						SalleDAO.getInstance().rechercher(rs.getInt(6)),
-						UtilisateurDAO.getInstance().rechercher(idUtilisateur),
-						rs.getFloat(7)));
+						rs.getDate(2), rs.getDate(3), rs.getDate(4), rs
+								.getBoolean(5), SalleDAO.getInstance()
+								.rechercher(rs.getInt(6)), UtilisateurDAO
+								.getInstance().rechercher(idUtilisateur), rs
+								.getFloat(7)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -197,8 +201,8 @@ public class ReservationDAO {
 	 * @param date
 	 * @return
 	 */
-	public boolean reserver(Integer idUtilisateur, Integer idSalle, Date dateDebutReservation,
-			Date dateFinReservation) {
+	public boolean reserver(Integer idUtilisateur, Integer idSalle,
+			Date dateDebutReservation, Date dateFinReservation) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle) values(?,?,?,?,?,?)");
@@ -222,6 +226,16 @@ public class ReservationDAO {
 		return null;
 	}
 
-
+	/**
+	 * Retourne la liste des reservations non confirmees pour un utilisateur.
+	 * 
+	 * @param idUtilisateur
+	 * @return
+	 */
+	public List<Reservation> listerReservationNonConfirmeesParUtilisateur(
+			Integer idUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

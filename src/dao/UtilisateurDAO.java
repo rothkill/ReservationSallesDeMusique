@@ -26,8 +26,7 @@ public class UtilisateurDAO {
 		return SINGLETON;
 	}
 
-	public Utilisateur creer(String nom, String telephone,
-			int pointsFidelite) {
+	public Utilisateur creer(String nom, String telephone, int pointsFidelite) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("insert into utilisateur(nom,telephone,pointsfidelite) values(?,?,?)");
@@ -36,8 +35,7 @@ public class UtilisateurDAO {
 			st.setInt(3, pointsFidelite);
 			st.executeUpdate();
 			ResultSet rs = st.getGeneratedKeys();
-			return new Utilisateur(rs.getInt(1), nom, telephone,
-					pointsFidelite);
+			return new Utilisateur(rs.getInt(1), nom, telephone, pointsFidelite);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -96,7 +94,13 @@ public class UtilisateurDAO {
 			st.setBoolean(1, false);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				listUtilisateurs.add(UtilisateurDAO.getInstance().rechercher(rs.getInt(1)));
+				Utilisateur utilisateur = UtilisateurDAO.getInstance()
+						.rechercher(rs.getInt(1));
+				utilisateur.setListReservationsUtilisateur(ReservationDAO
+						.getInstance()
+						.listerReservationNonConfirmeesParUtilisateur(
+								utilisateur.getIdUtilisateur()));
+				listUtilisateurs.add(utilisateur);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
