@@ -93,6 +93,8 @@ public class Constantes {
 
 	public static final String DUREE_LABEL = "durée";
 
+	public static final String SEMAINES_LABEL = "nb semaines";
+
 	public static final String TELEPHONE_LABEL = "Telephone : ";
 
 	public static final String TYPE_FORFAIT = "Type de forfait : ";
