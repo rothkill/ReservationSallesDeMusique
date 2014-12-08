@@ -42,7 +42,7 @@ public class ForfaitDAO {
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				forfait = new Forfait(rs.getInt(1), rs.getInt(2),
-						rs.getInt(3), rs.getInt(4), rs.getInt(5));
+						rs.getInt(3), CategorieDAO.getInstance().rechercher(rs.getInt(4)), rs.getInt(5));
 				listForfait.add(forfait);
 			}
 
