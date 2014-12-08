@@ -30,7 +30,7 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 
 	public AchatForfaitPanel(Utilisateur utilisateur) {
 		// TODO Auto-generated constructor stub
-		this.utilisater = utilisateur;
+		this.utilisateur = utilisateur;
 
 		creerComboForfait();
 
