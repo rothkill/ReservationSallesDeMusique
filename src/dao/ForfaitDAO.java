@@ -9,9 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import data.Categorie;
-import data.Forfait;
 import utils.ConnectionDB;
+import data.Forfait;
 
 public class ForfaitDAO {
 

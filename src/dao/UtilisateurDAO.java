@@ -92,10 +92,11 @@ public class UtilisateurDAO {
 
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select utilisateur.idUtilisateur utilisateur.nom, reservation.idReservation, reservation.dateReservation, reservation.dateFinReservation, reservation.confirmation from utilisateur join reservation on reservation.idUtilisateur = utilisateur.idtilisateur and confirmation='non'");
+					.prepareStatement("select idutilisateur from reservation where confirmation = ?");
+			st.setBoolean(1, false);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-
+				listUtilisateurs.add(UtilisateurDAO.getInstance().rechercher(rs.getInt(1)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
