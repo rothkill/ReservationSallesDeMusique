@@ -38,7 +38,7 @@ public class ForfaitDAO {
 		List<Forfait> listForfait = new ArrayList<Forfait>();
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select idforfait,forfait,validite,categorie,prix from forfait");
+					.prepareStatement("select idforfait,forfait,validite,idcategorie,prix from forfait");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				forfait = new Forfait(rs.getInt(1), rs.getInt(2),
