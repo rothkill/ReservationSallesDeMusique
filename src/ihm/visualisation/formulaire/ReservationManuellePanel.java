@@ -29,7 +29,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
 	private JTextField mois = new JTextField(Constantes.MM_LABEL);
 	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
-	private JTextField duree = new JTextField();
+	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
 
 	private JCheckBox plusieursReservations = new JCheckBox();
 	private JLabel reserverSurDuree = new JLabel(
@@ -42,6 +42,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	public ReservationManuellePanel() {
 		creerComboSalle();
 		creerComboUtilisateur();
+		duree.setEditable(false);
 
 		this.setLayout(new FlowLayout());
 		this.add(jComboBoxUtilisateur);
@@ -74,13 +75,13 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	}
 
 	private void creerComboUtilisateur() {
-		jComboBoxSalles = new JComboBox();
+		jComboBoxUtilisateur = new JComboBox();
 		List<Utilisateur> listUtilisateur;
 		try {
 			listUtilisateur = UtilisateurMetier.getInstance()
 					.listerUtilisateurs();
 			for (Utilisateur utilisateur : listUtilisateur) {
-				jComboBoxSalles.addItem(utilisateur);
+				jComboBoxUtilisateur.addItem(utilisateur);
 			}
 		} catch (AucunUtilisateurException e) {
 			// TODO gerer exception
@@ -96,9 +97,9 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 			// dateDebutReservation, dateFinReservation)
 		} else if (actionEvent.getSource() == plusieursReservations) {
 			if (plusieursReservations.isSelected()) {
-				duree.setEnabled(true);
+				duree.setEditable(true);
 			} else {
-				duree.setEnabled(false);
+				duree.setEditable(false);
 			}
 		}
 	}

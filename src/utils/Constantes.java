@@ -91,6 +91,8 @@ public class Constantes {
 
 	public static final String AAAA_LABEL = "AAAA";
 
+	public static final String DUREE_LABEL = "durée";
+
 	public static final String TELEPHONE_LABEL = "Telephone : ";
 
 	public static final String TYPE_FORFAIT = "Type de forfait : ";
@@ -134,7 +136,7 @@ public class Constantes {
 	public static final String AUCUNE_RESERVATION_UTILISATEUR_EXCEPTION = "Aucune reservation n'a été effeectuée par cet utilisateur";
 
 	public static final String AUCUN_FORFAIT_EXISTANT = "Aucun forfait existant";
-	
+
 	public static final String AUCUNE_SALLE_EXISTANTE = "Aucune salle existant";
 
 	/**
