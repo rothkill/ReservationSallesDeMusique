@@ -10,6 +10,7 @@ import java.util.List;
 
 import utils.ConnectionDB;
 import data.Reservation;
+import data.Salle;
 
 public class ReservationDAO {
 
@@ -55,11 +56,11 @@ public class ReservationDAO {
 			st.setDate(7, (java.sql.Date) dateDebutReservation);
 			st.executeUpdate();
 			ResultSet rs = st.getGeneratedKeys();
-			if (rs.next())
+			if (rs.next()){
 				return new Reservation(rs.getInt(1), dateReservation,
 						dateDebutReservation,dateFinReservation, confirmation, SalleDAO.getInstance()
 								.rechercher(idSalle), UtilisateurDAO
-								.getInstance().rechercher(idUtilisateur), tarif);
+								.getInstance().rechercher(idUtilisateur), tarif);}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -214,5 +215,13 @@ public class ReservationDAO {
 		}
 		return false;
 	}
+
+	public List<Salle> rechercherReservationParCategorieEtDate(int idCategory,
+			int jour, int mois, int annee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

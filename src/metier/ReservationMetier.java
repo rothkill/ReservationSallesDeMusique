@@ -68,8 +68,8 @@ public class ReservationMetier {
 			Date date = new Date();
 			// TODO JBG
 
-			return SalleDAO.getInstance().rechercherParCategorieEtDate(
-					categorie.getIdCategory(), jour, mois, annee);
+			return ReservationDAO.getInstance().rechercherReservationParCategorieEtDate(
+					categorie.getIdCategory(), jour,mois,annee);
 
 		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();

@@ -1,7 +1,7 @@
 package data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Classe correspondant a une Salle.
@@ -11,18 +11,16 @@ import java.util.List;
  */
 public class Salle {
 	private Integer idSalle;
-	private int categorie;
+	private Categorie categorie;
 	private String nom;
 	private String etat;
-	private List<Reservation> listReservationSalle;
-
-	public Salle(Integer idSalle, int categorie, String nom, String etat) {
+	
+	public Salle(Integer idSalle, Categorie categorie, String nom, String etat) {
 		super();
 		this.idSalle = idSalle;
 		this.categorie = categorie;
 		this.nom = nom;
 		this.etat = etat;
-		this.listReservationSalle = new ArrayList<Reservation>();
 	}
 
 	public Integer getIdSalle() {
@@ -33,11 +31,11 @@ public class Salle {
 		this.idSalle = idSalle;
 	}
 
-	public int getCategorie() {
+	public Categorie getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(int categorie) {
+	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 
@@ -57,16 +55,5 @@ public class Salle {
 		this.etat = etat;
 	}
 
-	public List<Reservation> getListReservationSalle() {
-		return listReservationSalle;
-	}
-
-	public void setListReservationSalle(List<Reservation> listReservationSalle) {
-		this.listReservationSalle = listReservationSalle;
-	}
-
-	public String toString() {
-		return nom;
-	}
-
+	
 }
