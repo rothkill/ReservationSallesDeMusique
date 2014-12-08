@@ -83,9 +83,6 @@ public class UtilisateurDAO {
 	 */
 	public List<Utilisateur> listerUtilisateursEtResNonConfirmees() {
 
-		// TODO verifier la requete et finir le mapping de la liste
-		// d'utilisateurs avec leurs reservations non confirmees rensignees
-
 		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
 
 		try {

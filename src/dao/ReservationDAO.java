@@ -11,6 +11,7 @@ import java.util.List;
 import utils.ConnectionDB;
 import data.Reservation;
 import data.Salle;
+import data.Utilisateur;
 
 public class ReservationDAO {
 
@@ -234,8 +235,22 @@ public class ReservationDAO {
 	 */
 	public List<Reservation> listerReservationNonConfirmeesParUtilisateur(
 			Integer idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Reservation> listReservations = new ArrayList<Reservation>();
+
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idreservation,datedebutreservation,datefinreservation,confirmation,idSalle,tarif from reservation where confirmation = ? and idutilisateur = ?");
+			st.setBoolean(1, false);
+			st.setInt(2, idUtilisateur);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				listReservations.add(new Reservation(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getDate(4),rs.getBoolean(5),SalleDAO.getInstance().rechercher(rs.getInt(6)),UtilisateurDAO.getInstance().rechercher(idUtilisateur),rs.getFloat(7)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listReservations;
 	}
 
 }
