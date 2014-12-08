@@ -10,17 +10,19 @@ import java.util.Date;
  */
 public class Forfait {
 	private Integer idForfait;
-	private Date dateAchat;
-	private Date dateFinValidite;
-	private int nbHeures;
-
-	public Forfait(Integer idForfait, Date dateAchat, Date dateFinValidite,
-			int nbHeures) {
+	private Integer forfait;
+	private Integer validite;
+	private Integer categorie;
+	private Integer prix;
+	
+	public Forfait(Integer idForfait, Integer forfait, Integer validite,
+			Integer categorie, Integer prix) {
 		super();
 		this.idForfait = idForfait;
-		this.dateAchat = dateAchat;
-		this.dateFinValidite = dateFinValidite;
-		this.nbHeures = nbHeures;
+		this.forfait = forfait;
+		this.validite = validite;
+		this.categorie = categorie;
+		this.prix = prix;
 	}
 
 	public Integer getIdForfait() {
@@ -31,28 +33,37 @@ public class Forfait {
 		this.idForfait = idForfait;
 	}
 
-	public Date getDateAchat() {
-		return dateAchat;
+	public Integer getForfait() {
+		return forfait;
 	}
 
-	public void setDateAchat(Date dateAchat) {
-		this.dateAchat = dateAchat;
+	public void setForfait(Integer forfait) {
+		this.forfait = forfait;
 	}
 
-	public Date getDateFinValidite() {
-		return dateFinValidite;
+	public Integer getValidite() {
+		return validite;
 	}
 
-	public void setDateFinValidite(Date dateFinValidite) {
-		this.dateFinValidite = dateFinValidite;
+	public void setValidite(Integer validite) {
+		this.validite = validite;
 	}
 
-	public int getNbHeures() {
-		return nbHeures;
+	public Integer getCategorie() {
+		return categorie;
 	}
 
-	public void setNbHeures(int nbHeures) {
-		this.nbHeures = nbHeures;
+	public void setCategorie(Integer categorie) {
+		this.categorie = categorie;
 	}
 
+	public Integer getPrix() {
+		return prix;
+	}
+
+	public void setPrix(Integer prix) {
+		this.prix = prix;
+	}
+
+	
 }
