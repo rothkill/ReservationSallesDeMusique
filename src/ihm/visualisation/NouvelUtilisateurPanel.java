@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import metier.EditerInfosClientMetier;
 import data.Forfait;
 import exception.AucunForfaitExistantException;
+import exception.ForfaitNonSelectionneException;
+import exception.UtilisateurNonSelectionneException;
 import utils.Constantes;
 
 public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
@@ -66,12 +68,20 @@ public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
-			if (EditerInfosClientMetier.getInstance().creerUtilisateur(
-					nomTextField.getText(), telTextField.getText(),
-					(Forfait) jComboBoxForfait.getSelectedItem())) {
-				// TODO gerer
-			} else {
-				// TODO gerer
+			try {
+				if (EditerInfosClientMetier.getInstance().creerUtilisateur(
+						nomTextField.getText(), telTextField.getText(),
+						(Forfait) jComboBoxForfait.getSelectedItem())) {
+					// TODO gerer
+				} else {
+					// TODO gerer
+				}
+			} catch (UtilisateurNonSelectionneException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ForfaitNonSelectionneException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

@@ -66,19 +66,16 @@ public class EditerInfosClientMetier {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Confirme une reservatnio et ajoute les points fidelites au compte de
-=======
-	 * Confirme une reservation et ajoute les points fidelites au compte de
->>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
+	 * <<<<<<< HEAD Confirme une reservatnio et ajoute les points fidelites au
+	 * compte de ======= Confirme une reservation et ajoute les points fidelites
+	 * au compte de >>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
 	 * l'utilisateur;
 	 * 
 	 * @param utilisateur
 	 * @param reservation
-<<<<<<< HEAD
-=======
+	 *            <<<<<<< HEAD =======
 	 * @param utiliserPointsFidelite
->>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
+	 *            >>>>>>> 55599c7a6474f1b729301e9dcb5521239c548906
 	 * @return
 	 * @throws ReservationNonSelectionneeException
 	 * @throws UtilisateurNonSelectionneException
@@ -193,20 +190,25 @@ public class EditerInfosClientMetier {
 	 * @param telephone
 	 * @param forfait
 	 * @return
+	 * @throws ForfaitNonSelectionneException
+	 * @throws UtilisateurNonSelectionneException
 	 */
 	public boolean creerUtilisateur(String nom, String telephone,
-			Forfait forfait) {
+			Forfait forfait) throws UtilisateurNonSelectionneException,
+			ForfaitNonSelectionneException {
 		// TODO
 
-		// UtilisateurDAO.getInstance().creer(idUtilisateur, nom, telephone,
-		// pointsFidelite)
-		if (forfait == null) {
+		Utilisateur utilisateur = UtilisateurDAO.getInstance().creer(nom,
+				telephone, 0);
 
-		} else {
-
+		if (utilisateur == null) {
+			return false;
 		}
 
-		return false;
+		if (forfait != null) {
+			attacherForfaitUtilisateur(utilisateur, forfait);
+		}
+		return true;
 	}
 
 	/**
