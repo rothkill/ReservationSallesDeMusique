@@ -26,17 +26,17 @@ public class UtilisateurDAO {
 		return SINGLETON;
 	}
 
-	public Utilisateur creer(int idUtilisateur, String nom, String telephone,
+	public Utilisateur creer(String nom, String telephone,
 			int pointsFidelite) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("insert into utilisateur values(?,?,?,?)");
-			st.setInt(1, idUtilisateur);
-			st.setString(2, nom);
-			st.setString(3, telephone);
-			st.setInt(4, pointsFidelite);
+					.prepareStatement("insert into utilisateur(nom,telephone,pointsfidelite) values(?,?,?)");
+			st.setString(1, nom);
+			st.setString(2, telephone);
+			st.setInt(3, pointsFidelite);
 			st.executeUpdate();
-			return new Utilisateur(idUtilisateur, nom, telephone,
+			ResultSet rs = st.getGeneratedKeys();
+			return new Utilisateur(rs.getInt(1), nom, telephone,
 					pointsFidelite);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
