@@ -103,6 +103,8 @@ public class Constantes {
 
 	public static final String MULTIPLE_RESERVATION_LABEL = "Reserver sur une période : ";
 
+	public static final String CONFIRMER_ANNULATION_RESERVATION_LABEL = "Une réservation existe déjà, confirmer la suppression ?";
+
 	/**
 	 * Labels d'information
 	 */

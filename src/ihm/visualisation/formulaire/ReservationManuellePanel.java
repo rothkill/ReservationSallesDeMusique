@@ -115,7 +115,9 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				// TODO gerer salleReservee
 				JDialog dialog = new JDialog();
 				dialog.getContentPane().add(
-						new ConfirmationReserverSalleDejaReserveePanel());
+						new ConfirmationReserverSalleDejaReserveePanel(
+								(Salle) jComboBoxSalles.getSelectedItem(),
+								this, dialog));
 				dialog.setLocationRelativeTo(null);
 				dialog.setVisible(true);
 			} catch (DateIncorrecteException e) {
@@ -135,5 +137,21 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				nombreSemaines.setEnabled(false);
 			}
 		}
+	}
+
+	public String getJour() {
+		return jour.getText();
+	}
+
+	public String getHeure() {
+		return heure.getText();
+	}
+
+	public String getMois() {
+		return mois.getText();
+	}
+
+	public String getAnnee() {
+		return annee.getText();
 	}
 }
