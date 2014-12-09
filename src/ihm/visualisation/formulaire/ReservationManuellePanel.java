@@ -14,12 +14,13 @@ import javax.swing.JTextField;
 
 import metier.ReservationMetier;
 import metier.UtilisateurMetier;
-import data.Categorie;
+import utils.Constantes;
 import data.Salle;
 import data.Utilisateur;
 import exception.AucunUtilisateurException;
 import exception.AucuneSalleSelectionneeException;
-import utils.Constantes;
+import exception.DateIncorrecteException;
+import exception.UtilisateurNonSelectionneException;
 
 public class ReservationManuellePanel extends JPanel implements ActionListener {
 
@@ -29,6 +30,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
 	private JTextField mois = new JTextField(Constantes.MM_LABEL);
 	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
+	private JTextField heure = new JTextField(Constantes.HH_LABEL);
 	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
 	private JTextField nombreSemaines = new JTextField(
 			Constantes.SEMAINES_LABEL);
@@ -57,6 +59,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		this.add(mois);
 		this.add(slash2);
 		this.add(annee);
+		this.add(heure);
 		this.add(duree);
 		this.add(reserverSurDuree);
 		this.add(plusieursReservations);
@@ -98,9 +101,23 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
 			// TODO gerer les dates
-			// ReservationMetier.getInstance().reserverSalleManuellement(utilisateur,
-			// jComboBoxSalles.getSelectedItem(), dateReservation,
-			// dateDebutReservation, dateFinReservation)
+			try {
+
+				ReservationMetier.getInstance().reserverSalle(
+						(Utilisateur) jComboBoxUtilisateur.getSelectedItem(),
+						(Salle) jComboBoxSalles.getSelectedItem(),
+						jour.getText(), mois.getText(), annee.getText(),
+						heure.getText(), duree.getText());
+			} catch (DateIncorrecteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AucuneSalleSelectionneeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UtilisateurNonSelectionneException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (actionEvent.getSource() == plusieursReservations) {
 			if (plusieursReservations.isSelected()) {
 				nombreSemaines.setEnabled(true);

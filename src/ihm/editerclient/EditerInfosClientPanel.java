@@ -86,9 +86,7 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 			this.dialog.dispose();
 		} else if (actionEvent.getSource() == acheterForfait) {
 			rafraichissement();
-			this.add(
-					new AchatForfaitPanel((Utilisateur) jComboBoxUtilisateur
-							.getSelectedItem()), BorderLayout.CENTER);
+			this.add(new AchatForfaitPanel(this), BorderLayout.CENTER);
 			this.repaint();
 			dialog.pack();
 		} else if (actionEvent.getSource() == nouveau) {
@@ -113,5 +111,9 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 
 	public void changerLabelInfo(String s) {
 		informationLabel.setText(s);
+	}
+
+	public Utilisateur getCurrentUtilisateur() {
+		return (Utilisateur) jComboBoxUtilisateur.getSelectedItem();
 	}
 }
