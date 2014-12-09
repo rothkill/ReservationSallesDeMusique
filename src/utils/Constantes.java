@@ -91,6 +91,8 @@ public class Constantes {
 
 	public static final String AAAA_LABEL = "AAAA";
 
+	public static final String HH_LABEL = "AAAA";
+
 	public static final String DUREE_LABEL = "durée";
 
 	public static final String SEMAINES_LABEL = "nb semaines";
@@ -99,7 +101,7 @@ public class Constantes {
 
 	public static final String TYPE_FORFAIT = "Type de forfait : ";
 
-	public static final String MULTIPLE_RESERVATION_LABEL = "Reserver sur une durée : ";
+	public static final String MULTIPLE_RESERVATION_LABEL = "Reserver sur une période : ";
 
 	/**
 	 * Labels d'information

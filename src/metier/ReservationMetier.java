@@ -1,9 +1,9 @@
 package metier;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DateDV;
 
 import dao.CategorieDAO;
 import dao.ReservationDAO;
@@ -68,8 +68,9 @@ public class ReservationMetier {
 			Date date = new Date();
 			// TODO JBG
 
-			return ReservationDAO.getInstance().rechercherReservationParCategorieEtDate(
-					categorie.getIdCategory(), jour,mois,annee);
+			return ReservationDAO.getInstance()
+					.rechercherReservationParCategorieEtDate(
+							categorie.getIdCategory(), jour, mois, annee);
 
 		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();
@@ -101,26 +102,41 @@ public class ReservationMetier {
 	}
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
+	// gerer jours feries et week-ends
 	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
-			Date dateReservation, Date dateDebutReservation,
-			Date dateFinReservation) throws AucuneSalleSelectionneeException,
-			UtilisateurNonSelectionneException {
+			String jour, String mois, String annee, String heure, String duree)
+			throws AucuneSalleSelectionneeException,
+			UtilisateurNonSelectionneException, DateIncorrecteException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
-		return ReservationDAO.getInstance().reserver(
-				utilisateur.getIdUtilisateur(), salle.getIdSalle(),
-				dateDebutReservation, dateFinReservation);
+
+		int heureInt = Integer.parseInt(heure);
+		int dureeInt = Integer.parseInt(duree);
+
+		String dateDebut = jour + mois + annee + heure;
+		String dateFin = jour + mois + annee + (heureInt + dureeInt);
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
+
+		try {
+			Date dateDebutReservation = sdf.parse(dateDebut);
+			Date dateFinReservation = sdf.parse(dateFin);
+
+			return ReservationDAO.getInstance().reserver(
+					utilisateur.getIdUtilisateur(), salle.getIdSalle(),
+					dateDebutReservation, dateFinReservation);
+		} catch (ParseException e) {
+			throw new DateIncorrecteException();
+		}
 	}
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			Date dateReservation, Date dateDebutReservation,
-			Date dateFinReservation, int nbSemaines)
-			throws AucuneSalleSelectionneeException,
+			String jour, String mois, String annee, String duree,
+			String nbSemaines) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
@@ -128,10 +144,10 @@ public class ReservationMetier {
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
-		for (int i = 0; i < nbSemaines; i++) {
-			reserverSalle(utilisateur, salle, dateReservation,
-					dateDebutReservation, dateFinReservation);
-		}
+		// for (int i = 0; i < nbSemaines; i++) {
+		// reserverSalle(utilisateur, salle, dateReservation,
+		// dateDebutReservation, dateFinReservation);
+		// }
 		return true;
 	}
 
