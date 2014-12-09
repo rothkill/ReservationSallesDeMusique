@@ -14,6 +14,7 @@ import data.Utilisateur;
 import exception.AucuneSalleSelectionneeException;
 import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
+import exception.SalleReserveeException;
 import exception.UtilisateurNonSelectionneException;
 
 /**
@@ -101,12 +102,32 @@ public class ReservationMetier {
 				date);
 	}
 
+	public boolean supprimerReservationParDateEtSalle(Salle salle, String jour,
+			String mois, String annee, String heure)
+			throws AucuneSalleSelectionneeException,
+			UtilisateurNonSelectionneException, DateIncorrecteException {
+		if (salle == null) {
+			throw new AucuneSalleSelectionneeException();
+		}
+		try {
+			String dateDebut = jour + mois + annee + heure;
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
+			Date dateDebutReservation = sdf.parse(dateDebut);
+
+			return ReservationDAO.getInstance().supprimerReservation(
+					salle.getIdSalle(), dateDebutReservation);
+		} catch (ParseException e) {
+			throw new DateIncorrecteException();
+		}
+	}
+
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	// gerer jours feries et week-ends
 	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
 			String jour, String mois, String annee, String heure, String duree)
 			throws AucuneSalleSelectionneeException,
-			UtilisateurNonSelectionneException, DateIncorrecteException {
+			UtilisateurNonSelectionneException, DateIncorrecteException,
+			SalleReserveeException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
@@ -124,6 +145,10 @@ public class ReservationMetier {
 		try {
 			Date dateDebutReservation = sdf.parse(dateDebut);
 			Date dateFinReservation = sdf.parse(dateFin);
+
+			if (salleReservee(salle, dateDebutReservation)) {
+				throw new SalleReserveeException();
+			}
 
 			return ReservationDAO.getInstance().reserver(
 					utilisateur.getIdUtilisateur(), salle.getIdSalle(),

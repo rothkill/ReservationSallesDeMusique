@@ -234,7 +234,7 @@ public class ReservationDAO {
 	 */
 	public List<Reservation> listerReservationNonConfirmeesParUtilisateur(
 			Integer idUtilisateur) {
-		
+
 		List<Reservation> listReservations = new ArrayList<Reservation>();
 
 		try {
@@ -244,12 +244,29 @@ public class ReservationDAO {
 			st.setInt(2, idUtilisateur);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				listReservations.add(new Reservation(rs.getInt(1),rs.getDate(7),rs.getDate(2),rs.getDate(3),rs.getBoolean(4),SalleDAO.getInstance().rechercher(rs.getInt(5)),UtilisateurDAO.getInstance().rechercher(idUtilisateur),rs.getFloat(6)));
+				listReservations.add(new Reservation(rs.getInt(1), rs
+						.getDate(7), rs.getDate(2), rs.getDate(3), rs
+						.getBoolean(4), SalleDAO.getInstance().rechercher(
+						rs.getInt(5)), UtilisateurDAO.getInstance().rechercher(
+						idUtilisateur), rs.getFloat(6)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return listReservations;
+	}
+
+	/**
+	 * Supprime une reservation selon la salle et la date.
+	 * 
+	 * @param idSalle
+	 * @param dateDebutReservation
+	 * @return
+	 */
+	public boolean supprimerReservation(Integer idSalle,
+			Date dateDebutReservation) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

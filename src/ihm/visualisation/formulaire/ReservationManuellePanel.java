@@ -1,5 +1,7 @@
 package ihm.visualisation.formulaire;
 
+import ihm.visualisation.formulaire.confirmation.ConfirmationReserverSalleDejaReserveePanel;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,6 +23,7 @@ import data.Utilisateur;
 import exception.AucunUtilisateurException;
 import exception.AucuneSalleSelectionneeException;
 import exception.DateIncorrecteException;
+import exception.SalleReserveeException;
 import exception.UtilisateurNonSelectionneException;
 
 public class ReservationManuellePanel extends JPanel implements ActionListener {
@@ -102,12 +106,20 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		if (actionEvent.getSource() == valider) {
 			// TODO gerer les dates
 			try {
-
 				ReservationMetier.getInstance().reserverSalle(
 						(Utilisateur) jComboBoxUtilisateur.getSelectedItem(),
 						(Salle) jComboBoxSalles.getSelectedItem(),
 						jour.getText(), mois.getText(), annee.getText(),
 						heure.getText(), duree.getText());
+			} catch (SalleReserveeException exception) {
+				// TODO gerer salleReservee
+				JDialog dialog = new JDialog();
+				dialog.getContentPane().add(
+						new ConfirmationReserverSalleDejaReserveePanel(
+								(Salle) jComboBoxSalles.getSelectedItem(),
+								this, dialog));
+				dialog.setLocationRelativeTo(null);
+				dialog.setVisible(true);
 			} catch (DateIncorrecteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -125,5 +137,21 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				nombreSemaines.setEnabled(false);
 			}
 		}
+	}
+
+	public String getJour() {
+		return jour.getText();
+	}
+
+	public String getHeure() {
+		return heure.getText();
+	}
+
+	public String getMois() {
+		return mois.getText();
+	}
+
+	public String getAnnee() {
+		return annee.getText();
 	}
 }

@@ -103,6 +103,8 @@ public class Constantes {
 
 	public static final String MULTIPLE_RESERVATION_LABEL = "Reserver sur une période : ";
 
+	public static final String CONFIRMER_ANNULATION_RESERVATION_LABEL = "Une réservation existe déjà, confirmer la suppression ?";
+
 	/**
 	 * Labels d'information
 	 */
@@ -141,7 +143,9 @@ public class Constantes {
 
 	public static final String AUCUN_FORFAIT_EXISTANT = "Aucun forfait existant";
 
-	public static final String AUCUNE_SALLE_EXISTANTE = "Aucune salle existant";
+	public static final String AUCUNE_SALLE_EXISTANTE = "Aucune salle existante";
+
+	public static final String SALLE_RESEVEE_EXCEPTION = "Salle déjà réservée";
 
 	/**
 	 * Constantes liees au fonctionnement de l'application
