@@ -20,7 +20,7 @@ import exception.UtilisateurNonSelectionneException;
 
 public class AchatForfaitPanel extends JPanel implements ActionListener {
 
-	private Utilisateur utilisateur;
+	EditerInfosClientPanel editerInfosClientPanel;
 
 	private JComboBox jComboBoxForfait;
 
@@ -28,9 +28,9 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 
 	private JButton valider = new JButton(Constantes.VALIDER);
 
-	public AchatForfaitPanel(Utilisateur utilisateur) {
+	public AchatForfaitPanel(EditerInfosClientPanel editerInfosClientPanel) {
 		// TODO Auto-generated constructor stub
-		this.utilisateur = utilisateur;
+		this.editerInfosClientPanel = editerInfosClientPanel;
 
 		creerComboForfait();
 
@@ -50,7 +50,8 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 			System.out.println("gné");
 			try {
 				if (EditerInfosClientMetier.getInstance()
-						.attacherForfaitUtilisateur(utilisateur,
+						.attacherForfaitUtilisateur(
+								editerInfosClientPanel.getCurrentUtilisateur(),
 								(Forfait) jComboBoxForfait.getSelectedItem())) {
 
 				}
