@@ -88,7 +88,7 @@ public class CategorieDAO {
 		List<Categorie> listCategories = new ArrayList<Categorie>();
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select idcategorie nom,tarifUneHeure,tarifDeuxHeures,nbPersonne from categorie");
+					.prepareStatement("select idcategorie,nom,tarifUneHeure,tarifDeuxHeures,nbPersonne from categorie");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				category = new Categorie(rs.getInt(1), rs.getString(2),

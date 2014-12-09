@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import utils.ConnectionDB;
@@ -36,7 +36,8 @@ public class SalleDAO {
 			st.executeUpdate();
 			ResultSet rs = st.getGeneratedKeys();
 			if (rs.next())
-				return new Salle(rs.getInt(1), CategorieDAO.getInstance().rechercher(idCategory), nom, etat);
+				return new Salle(rs.getInt(1), CategorieDAO.getInstance()
+						.rechercher(idCategory), nom, etat);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -52,7 +53,8 @@ public class SalleDAO {
 			st.setInt(1, idSalle);
 			ResultSet rs = st.executeQuery();
 			if (rs.next() != false) {
-				salle = new Salle(idSalle, CategorieDAO.getInstance().rechercher(rs.getInt(1)), rs.getString(2),
+				salle = new Salle(idSalle, CategorieDAO.getInstance()
+						.rechercher(rs.getInt(1)), rs.getString(2),
 						rs.getString(3));
 			}
 
@@ -82,7 +84,19 @@ public class SalleDAO {
 	 * @return
 	 */
 	public List<Salle> lister() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Salle> listSalles = new ArrayList<Salle>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idsallemusique,idcategorie,nom,etat from salledemusique");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				listSalles.add(new Salle(rs.getInt(1), CategorieDAO
+						.getInstance().rechercher(rs.getInt(2)), rs
+						.getString(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listSalles;
 	}
 }

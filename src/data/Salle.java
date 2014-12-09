@@ -55,5 +55,11 @@ public class Salle {
 		this.etat = etat;
 	}
 
+	@Override
+	public String toString() {
+		return " categorie=" + categorie
+				+ ", nom=" + nom + ", etat=" + etat;
+	}
+
 	
 }
