@@ -91,7 +91,7 @@ public class Constantes {
 
 	public static final String AAAA_LABEL = "AAAA";
 
-	public static final String HH_LABEL = "AAAA";
+	public static final String HH_LABEL = "HH";
 
 	public static final String DUREE_LABEL = "durée";
 
