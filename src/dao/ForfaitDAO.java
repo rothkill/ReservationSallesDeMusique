@@ -55,16 +55,12 @@ public class ForfaitDAO {
 
 	public boolean lier(Integer idUtilisateur, Integer idForfait) {
 		Forfait forfait = ForfaitDAO.getInstance().rechercher(idForfait);
-		Date dateAchat = new Date();
-		Date dateFinValidite = ajouterMois(dateAchat,forfait.getValidite());
 		try {
 			PreparedStatement st = con
-					.prepareStatement("insert into carteforfait values(?,?,?,?,?)");
+					.prepareStatement("insert into carteforfait values(?,?,CURRENT_TIMESTAMP,ADD_MONTHS ( CURRENT_TIMESTAMP,"+forfait.getValidite()+"),?)");
 			st.setInt(1,idUtilisateur);
 			st.setInt(2,idForfait);
-			st.setDate(3, (java.sql.Date) dateAchat);
-			st.setDate(4, (java.sql.Date) dateFinValidite);
-			st.setInt(5, forfait.getForfait());
+			st.setInt(3, forfait.getForfait());
 			st.executeUpdate();
 			return true;
 		} catch (SQLException e) {
