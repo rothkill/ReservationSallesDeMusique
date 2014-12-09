@@ -155,6 +155,8 @@ public class ReservationMetier {
 					dateDebutReservation, dateFinReservation);
 		} catch (ParseException e) {
 			throw new DateIncorrecteException();
+		} catch (NumberFormatException exception) {
+			throw new DateIncorrecteException();
 		}
 	}
 
