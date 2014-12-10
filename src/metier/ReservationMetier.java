@@ -9,6 +9,7 @@ import dao.CategorieDAO;
 import dao.ReservationDAO;
 import dao.SalleDAO;
 import data.Categorie;
+import data.Reservation;
 import data.Salle;
 import data.Utilisateur;
 import exception.AucuneSalleSelectionneeException;
@@ -145,22 +146,64 @@ public class ReservationMetier {
 		try {
 			Date dateDebutReservation = sdf.parse(dateDebut);
 			Date dateFinReservation = sdf.parse(dateFin);
+			
+			System.out.println("Date Debut Reservation : "+dateDebutReservation.toString());
+			System.out.println("Date Fin Reservation : "+dateFinReservation.toString());
+
 
 			if (salleReservee(salle, dateDebutReservation)) {
 				throw new SalleReserveeException();
 			}
 
+			float tarif = calculerTarif(salle, heureInt, dureeInt);
+
 			return ReservationDAO.getInstance().reserver(
 					utilisateur.getIdUtilisateur(), salle.getIdSalle(),
-					dateDebutReservation, dateFinReservation);
+					dateDebutReservation, dateFinReservation, tarif);
 		} catch (ParseException e) {
+			throw new DateIncorrecteException();
+		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();
 		}
 	}
 
+	/**
+	 * Calcule le tarif de la reservation. Les heures apres 20H sont majorees de
+	 * 2%.
+	 * 
+	 * @param salle
+	 * @param heureInt
+	 * @param dureeInt
+	 * @return
+	 */
+	private float calculerTarif(Salle salle, int heureInt, int dureeInt) {
+		float result = 0;
+		int heuresApres20H = heureInt + dureeInt - 20;
+		int dureeAvant20H = dureeInt;
+
+		if (heuresApres20H > 0) {
+			dureeAvant20H = dureeInt - heuresApres20H;
+			for (int i = 0; i < dureeAvant20H; i += 2) {
+				result += salle.getCategorie().getTarifDeuxHeures();
+			}
+			if (dureeAvant20H % 2 >= 1) {
+				result += salle.getCategorie().getTarifUneHeure();
+			}
+			result += ((result * 2) / 100);
+		}
+
+		for (int i = 0; i < dureeAvant20H; i += 2) {
+			result += salle.getCategorie().getTarifDeuxHeures();
+		}
+		if (dureeAvant20H % 2 >= 1) {
+			result += salle.getCategorie().getTarifUneHeure();
+		}
+		return result;
+	}
+
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			String jour, String mois, String annee, String duree,
+			String jour, String mois, String annee, String heure, String duree,
 			String nbSemaines) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
@@ -169,10 +212,19 @@ public class ReservationMetier {
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
-		// for (int i = 0; i < nbSemaines; i++) {
-		// reserverSalle(utilisateur, salle, dateReservation,
-		// dateDebutReservation, dateFinReservation);
-		// }
+		for (int i = 0; i < Integer.parseInt(nbSemaines); i++) {
+			try {
+				jour = ""+(Integer.parseInt(jour)+7*1);
+				reserverSalle(utilisateur, salle, jour, mois, annee, heure, duree);
+
+			} catch (DateIncorrecteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SalleReserveeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 
@@ -188,5 +240,14 @@ public class ReservationMetier {
 			throw new AucuneSalleSelectionneeException();
 		}
 		return listSalles;
+	}
+
+	public List<Reservation> getlisteReservationUtilisateur(
+			Utilisateur utilisateur) throws UtilisateurNonSelectionneException {
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		return ReservationDAO.getInstance().listerReservationParUtilisateur(
+				utilisateur.getIdUtilisateur());
 	}
 }

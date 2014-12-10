@@ -19,7 +19,7 @@ public class Reservation {
 	private Date dateDebutReservation;
 
 	private Date dateFinReservation;
-	
+
 	private boolean confirmation;
 
 	private Salle salle;
@@ -107,8 +107,15 @@ public class Reservation {
 		this.tarif = tarif;
 	}
 
-	public int getDuree(){
-		return getDateFinReservation().getHours() - getDateDebutReservation().getHours();
+	public int getDuree() {
+		return getDateFinReservation().getHours()
+				- getDateDebutReservation().getHours();
+	}
+
+	public String toString() {
+		return dateDebutReservation.toString() + " "
+				+ dateReservation.toString();
+		// TODO + " " + salle.getNom();
 	}
 
 }
