@@ -70,7 +70,7 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 			List<Utilisateur> listUtilisateurs = AnnulerReservationMetier
 					.getInstance().listerUtilisateursEtResNonConfirmees();
 
-			center.setLayout(new GridLayout(1, 1));
+			center.setLayout(new GridLayout(0, 1));
 			for (Utilisateur utilisateur : listUtilisateurs) {
 				center.add(new UtilisateurReservationNonConfirmeePanel(
 						utilisateur));
