@@ -178,15 +178,18 @@ public class ReservationDAO {
 	 * @param date
 	 * @return
 	 */
-	public boolean isSalleReservee(Integer idSalle, Date date) {
+	public boolean isSalleReservee(Integer idSalle, Date dateDebutReservation) {
 		try {
+			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+					dateDebutReservation.getTime());
 			PreparedStatement st = con
-					.prepareStatement("select confirmation from reservation where idsalle = ? and date = ?");
+					.prepareStatement("select idreservation from reservation where idsalle = ? and datedebutreservation = ?");
 			st.setInt(1, idSalle);
-			st.setDate(2, (java.sql.Date) date);
+			st.setDate(2, (java.sql.Date) dateDebutReservationSQL);
 			ResultSet rs = st.executeQuery();
-			if (rs.next())
-				return rs.getBoolean(1);
+			if (rs.next()) {
+				return true;
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -204,12 +207,14 @@ public class ReservationDAO {
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
 			Date dateDebutReservation, Date dateFinReservation) {
 		try {
-		    java.sql.Date dateDebutReservationSQL = new java.sql.Date(dateDebutReservation.getTime());
-		    java.sql.Date dateFinReservationSQL = new java.sql.Date(dateFinReservation.getTime());
+			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+					dateDebutReservation.getTime());
+			java.sql.Date dateFinReservationSQL = new java.sql.Date(
+					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle) values(CURRENT_TIMESTAMP,?,?,?,?,?)");
-			st.setDate(1,dateDebutReservationSQL);
-			st.setDate(2,dateFinReservationSQL);
+			st.setDate(1, dateDebutReservationSQL);
+			st.setDate(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);
 			st.setInt(5, idSalle);
@@ -266,8 +271,20 @@ public class ReservationDAO {
 	 */
 	public boolean supprimerReservation(Integer idSalle,
 			Date dateDebutReservation) {
-		// TODO Auto-generated method stub
+		try {
+			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+					dateDebutReservation.getTime());
+			PreparedStatement st = con
+					.prepareStatement("delete from reservation where idsalle = ? and datedebutreservation = ?");
+			st.setInt(1, idSalle);
+			st.setDate(2, (java.sql.Date) dateDebutReservationSQL);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
+		
 	}
 
 }
