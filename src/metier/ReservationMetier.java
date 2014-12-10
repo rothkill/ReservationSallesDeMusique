@@ -9,6 +9,7 @@ import dao.CategorieDAO;
 import dao.ReservationDAO;
 import dao.SalleDAO;
 import data.Categorie;
+import data.Reservation;
 import data.Salle;
 import data.Utilisateur;
 import exception.AucuneSalleSelectionneeException;
@@ -226,5 +227,14 @@ public class ReservationMetier {
 			throw new AucuneSalleSelectionneeException();
 		}
 		return listSalles;
+	}
+
+	public List<Reservation> getlisteReservationUtilisateur(
+			Utilisateur utilisateur) throws UtilisateurNonSelectionneException {
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+		return ReservationDAO.getInstance().listerReservationParUtilisateur(
+				utilisateur.getIdUtilisateur());
 	}
 }

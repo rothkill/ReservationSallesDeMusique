@@ -26,8 +26,8 @@ public class CategorieDAO {
 		return SINGLETON;
 	}
 
-	public Categorie creer(String nom, int tarifUneHeure,
-			int tarifDeuxHeures, int nbPersonne) {
+	public Categorie creer(String nom, int tarifUneHeure, int tarifDeuxHeures,
+			int nbPersonne) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("insert into categorie(nom,tarifuneheure,tarifdeuxheures,nbpersonne) values(?,?,?,?)");
@@ -100,5 +100,10 @@ public class CategorieDAO {
 			System.out.println(e.getMessage());
 		}
 		return listCategories;
+	}
+
+	public Categorie rechercherParSalle(Integer idSalle) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,14 +22,14 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 	private Utilisateur utilisateur;
 	private Reservation reservation;
 
-	private JLabel resevationLabel;
-	private JLabel tarifLabel;
+	private JLabel resevationLabel = new JLabel();
+	private JLabel tarifLabel = new JLabel();
 
 	private JButton confirmer = new JButton(
 			Constantes.CONFIRMER_RESERVATION_BUTTON);
-	private JButton forfait = new JButton(
+	private JCheckBox forfait = new JCheckBox(
 			Constantes.CONFIRMER_RESERVATION_FORFAIT_BUTTON);
-	private JButton fidelite = new JButton(
+	private JCheckBox fidelite = new JCheckBox(
 			Constantes.CONFIRMER_RESERVATION_FIDELITE_BUTTON);
 
 	public LigneReservationPanel(Utilisateur utilisateur,
@@ -51,25 +52,8 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 		fidelite.addActionListener(this);
 		forfait.addActionListener(this);
 
-		verifieButtons(dureeForfait);
-
 		this.setVisible(true);
 
-	}
-
-	/**
-	 * Verifie si la reservation peut etre payee avec un forfait ou des points
-	 * fidelite.
-	 * 
-	 * @param dureeForfait
-	 */
-	private void verifieButtons(int dureeForfait) {
-		if (dureeForfait <= (this.reservation.getDuree())) {
-			forfait.setEnabled(false);
-		}
-		if (utilisateur.getPointFidelite() >= Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE) {
-			fidelite.setEnabled(false);
-		}
 	}
 
 	@Override
@@ -78,23 +62,25 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 			if (actionEvent.getSource() == confirmer) {
 				try {
 					EditerInfosClientMetier.getInstance().reservation(
-							utilisateur, reservation, false);
+							utilisateur, reservation, fidelite.isSelected(),
+							forfait.isSelected());
 				} catch (UtilisateurNonSelectionneException e) {
 					// TODO gerer erreur
 					e.printStackTrace();
 				}
-			} else if (actionEvent.getSource() == fidelite) {
-				try {
-					EditerInfosClientMetier.getInstance().reservation(
-							utilisateur, reservation, true);
-				} catch (UtilisateurNonSelectionneException e) {
-					// TODO gerer erreur
-					e.printStackTrace();
-				}
-			} else if (actionEvent.getSource() == fidelite) {
-				// TODO
-				EditerInfosClientMetier.getInstance().utiliserForfait();
 			}
+			// else if (actionEvent.getSource() == fidelite) {
+			// try {
+			// EditerInfosClientMetier.getInstance().reservation(
+			// utilisateur, reservation, true);
+			// } catch (UtilisateurNonSelectionneException e) {
+			// // TODO gerer erreur
+			// e.printStackTrace();
+			// }
+			// } else if (actionEvent.getSource() == fidelite) {
+			// // TODO
+			// EditerInfosClientMetier.getInstance().utiliserForfait();
+			// }
 		} catch (ReservationNonSelectionneeException e) {
 			// TODO gerer erreur
 			e.printStackTrace();

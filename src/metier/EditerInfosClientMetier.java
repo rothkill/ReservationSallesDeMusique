@@ -3,9 +3,11 @@ package metier;
 import java.util.List;
 
 import utils.Constantes;
+import dao.CategorieDAO;
 import dao.ForfaitDAO;
 import dao.ReservationDAO;
 import dao.UtilisateurDAO;
+import data.Categorie;
 import data.Forfait;
 import data.Reservation;
 import data.Utilisateur;
@@ -72,15 +74,18 @@ public class EditerInfosClientMetier {
 	 * @param utilisateur
 	 * @param reservation
 	 * @param utiliserPointsFidelite
+	 * @param utiliserForfait
 	 * @return
 	 * @throws ReservationNonSelectionneeException
 	 * @throws UtilisateurNonSelectionneException
 	 */
 
 	public boolean reservation(Utilisateur utilisateur,
-			Reservation reservation, boolean utiliserPointsFidelite)
+			Reservation reservation, boolean utiliserPointsFidelite,
+			boolean utiliserForfait)
 			throws ReservationNonSelectionneeException,
 			UtilisateurNonSelectionneException {
+		// TODO forfait
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
@@ -89,13 +94,44 @@ public class EditerInfosClientMetier {
 		}
 
 		if (confirmerReservation(reservation)) {
-			if (utiliserPointsFidelite) {
-				return modifierPointsFidelite(utilisateur,
-						reservation.getDuree());
+			int duree = reservation.getDuree();
+			//
+			if (utiliserForfait) {
+				Categorie categorie = CategorieDAO
+						.getInstance()
+						.rechercherParSalle(reservation.getSalle().getIdSalle());
+				int totalForfait = totalForfait(categorie);
+				if (totalForfait - duree <= 0) {
+					duree -= totalForfait;
+					supprimerTousForfaitCategorie(utilisateur, categorie);
+				} else {
+					modifierForfaits(utilisateur, categorie, duree);
+				}
 			}
-			return ajouterPointsFidelite(utilisateur, reservation.getDuree());
+			//
+			if (utiliserPointsFidelite && duree > 0) {
+				return modifierPointsFidelite(utilisateur, duree);
+			}
+			return ajouterPointsFidelite(utilisateur, duree);
 		}
 		return false;
+	}
+
+	private void modifierForfaits(Utilisateur utilisateur, Categorie categorie,
+			int duree) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void supprimerTousForfaitCategorie(Utilisateur utilisateur,
+			Categorie categorie) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private int totalForfait(Categorie categorie) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	/**
@@ -115,7 +151,7 @@ public class EditerInfosClientMetier {
 		// return le prix restant ?
 		if (utilisateur.getPointFidelite()
 				/ Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE >= duree) {
-			// on retire les points de fidelité necessaires
+			// on retire les points de fidelite necessaires
 			modificateurPointFidelite = duree
 					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE - duree
 					* Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE;
