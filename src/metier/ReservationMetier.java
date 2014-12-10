@@ -150,14 +150,50 @@ public class ReservationMetier {
 				throw new SalleReserveeException();
 			}
 
+			float tarif = calculerTarif(salle, heureInt, dureeInt);
+
 			return ReservationDAO.getInstance().reserver(
 					utilisateur.getIdUtilisateur(), salle.getIdSalle(),
-					dateDebutReservation, dateFinReservation);
+					dateDebutReservation, dateFinReservation, tarif);
 		} catch (ParseException e) {
 			throw new DateIncorrecteException();
 		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();
 		}
+	}
+
+	/**
+	 * Calcule le tarif de la reservation. Les heures apres 20H sont majorees de
+	 * 2%.
+	 * 
+	 * @param salle
+	 * @param heureInt
+	 * @param dureeInt
+	 * @return
+	 */
+	private float calculerTarif(Salle salle, int heureInt, int dureeInt) {
+		float result = 0;
+		int heuresApres20H = heureInt + dureeInt - 20;
+		int dureeAvant20H = dureeInt;
+
+		if (heuresApres20H > 0) {
+			dureeAvant20H = dureeInt - heuresApres20H;
+			for (int i = 0; i < dureeAvant20H; i += 2) {
+				result += salle.getCategorie().getTarifDeuxHeures();
+			}
+			if (dureeAvant20H % 2 >= 1) {
+				result += salle.getCategorie().getTarifUneHeure();
+			}
+			result += ((result * 2) / 100);
+		}
+
+		for (int i = 0; i < dureeAvant20H; i += 2) {
+			result += salle.getCategorie().getTarifDeuxHeures();
+		}
+		if (dureeAvant20H % 2 >= 1) {
+			result += salle.getCategorie().getTarifUneHeure();
+		}
+		return result;
 	}
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation

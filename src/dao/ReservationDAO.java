@@ -29,7 +29,7 @@ public class ReservationDAO {
 	}
 
 	/**
-	 * /** Création d'une réservation de salle
+	 * /** Crï¿½ation d'une rï¿½servation de salle
 	 * 
 	 * @param idReservation
 	 * @param dateReservation
@@ -202,7 +202,7 @@ public class ReservationDAO {
 	 * @return
 	 */
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
-			Date dateDebutReservation, Date dateFinReservation) {
+			Date dateDebutReservation, Date dateFinReservation, float tarif) {
 		try {
 		    java.sql.Date dateDebutReservationSQL = new java.sql.Date(dateDebutReservation.getTime());
 		    java.sql.Date dateFinReservationSQL = new java.sql.Date(dateFinReservation.getTime());
