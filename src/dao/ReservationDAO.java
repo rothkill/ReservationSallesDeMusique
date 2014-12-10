@@ -207,7 +207,7 @@ public class ReservationDAO {
 		    java.sql.Date dateDebutReservationSQL = new java.sql.Date(dateDebutReservation.getTime());
 		    java.sql.Date dateFinReservationSQL = new java.sql.Date(dateFinReservation.getTime());
 			PreparedStatement st = con
-					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif) values(CURRENT_TIMESTAMP,?,?,?,?,?,?)");
+					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
 			st.setDate(1,dateDebutReservationSQL);
 			st.setDate(2,dateFinReservationSQL);
 			st.setBoolean(3, false);
