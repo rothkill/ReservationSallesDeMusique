@@ -106,11 +106,20 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		if (actionEvent.getSource() == valider) {
 			// TODO gerer les dates
 			try {
-				ReservationMetier.getInstance().reserverSalle(
-						(Utilisateur) jComboBoxUtilisateur.getSelectedItem(),
-						(Salle) jComboBoxSalles.getSelectedItem(),
-						jour.getText(), mois.getText(), annee.getText(),
-						heure.getText(), duree.getText());
+				if (plusieursReservations.isSelected()) {
+					ReservationMetier.getInstance().reserverSurDuree((Utilisateur) jComboBoxUtilisateur
+							.getSelectedItem(), (Salle) jComboBoxSalles.getSelectedItem(), jour.getText(), mois.getText(), annee.getText(), heure.getText(), duree.getText(), nombreSemaines.getText());
+				} else {
+					ReservationMetier
+							.getInstance()
+							.reserverSalle(
+									(Utilisateur) jComboBoxUtilisateur
+											.getSelectedItem(),
+									(Salle) jComboBoxSalles.getSelectedItem(),
+									jour.getText(), mois.getText(),
+									annee.getText(), heure.getText(),
+									duree.getText());
+				}
 			} catch (SalleReserveeException exception) {
 				// TODO gerer salleReservee
 				JDialog dialog = new JDialog();

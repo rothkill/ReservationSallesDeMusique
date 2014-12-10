@@ -145,6 +145,10 @@ public class ReservationMetier {
 		try {
 			Date dateDebutReservation = sdf.parse(dateDebut);
 			Date dateFinReservation = sdf.parse(dateFin);
+			
+			System.out.println("Date Debut Reservation : "+dateDebutReservation.toString());
+			System.out.println("Date Fin Reservation : "+dateFinReservation.toString());
+
 
 			if (salleReservee(salle, dateDebutReservation)) {
 				throw new SalleReserveeException();
@@ -198,7 +202,7 @@ public class ReservationMetier {
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			String jour, String mois, String annee, String duree,
+			String jour, String mois, String annee, String heure, String duree,
 			String nbSemaines) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException {
 		if (salle == null) {
@@ -207,10 +211,19 @@ public class ReservationMetier {
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
-		// for (int i = 0; i < nbSemaines; i++) {
-		// reserverSalle(utilisateur, salle, dateReservation,
-		// dateDebutReservation, dateFinReservation);
-		// }
+		for (int i = 0; i < Integer.parseInt(nbSemaines); i++) {
+			try {
+				jour = ""+(Integer.parseInt(jour)+7*1);
+				reserverSalle(utilisateur, salle, jour, mois, annee, heure, duree);
+
+			} catch (DateIncorrecteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SalleReserveeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 
