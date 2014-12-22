@@ -104,6 +104,32 @@ public class ReservationDAO {
 	}
 
 	/**
+	 * Liste les reservations a partir d'une salle;
+	 * 
+	 * @param idSalle
+	 * @return
+	 */
+	public List<Reservation> listerReservationParSalle(Integer idSalle) {
+		List<Reservation> liste = new ArrayList<Reservation>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idreservation,datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,tarif from reservation where idSalle = ?");
+			st.setInt(1, idSalle);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				Reservation r = new Reservation(rs.getInt(1), rs.getDate(2),
+						rs.getDate(3), rs.getDate(4), rs.getBoolean(5), null,
+						UtilisateurDAO.getInstance().rechercher(rs.getInt(6)),
+						rs.getFloat(7));
+				liste.add(r);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return liste;
+	}
+
+	/**
 	 * Supprime toutes les reservations non confirmees dont la date de debut <
 	 * date actuelle
 	 * 
@@ -213,8 +239,8 @@ public class ReservationDAO {
 					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
-			st.setDate(1,dateDebutReservationSQL);
-			st.setDate(2,dateFinReservationSQL);
+			st.setDate(1, dateDebutReservationSQL);
+			st.setDate(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);
 			st.setInt(5, idSalle);
@@ -285,7 +311,7 @@ public class ReservationDAO {
 			System.out.println(e.getMessage());
 		}
 		return false;
-		
+
 	}
 
 }

@@ -1,7 +1,10 @@
 package data;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import dao.ReservationDAO;
 
 /**
  * Classe correspondant a une Salle.
@@ -14,7 +17,8 @@ public class Salle {
 	private Categorie categorie;
 	private String nom;
 	private String etat;
-	
+	private List<Reservation> listeReservation;
+
 	public Salle(Integer idSalle, Categorie categorie, String nom, String etat) {
 		super();
 		this.idSalle = idSalle;
@@ -57,9 +61,19 @@ public class Salle {
 
 	@Override
 	public String toString() {
-		return " categorie=" + categorie
-				+ ", nom=" + nom + ", etat=" + etat;
+		return " categorie=" + categorie + ", nom=" + nom + ", etat=" + etat;
 	}
 
-	
+	public List<Reservation> getListeReservation() {
+		if (listeReservation == null) {
+			listeReservation = ReservationDAO.getInstance()
+					.listerReservationParSalle(idSalle);
+		}
+		return listeReservation;
+	}
+
+	public void setListeReservation(List<Reservation> listeReservation) {
+		this.listeReservation = listeReservation;
+	}
+
 }
