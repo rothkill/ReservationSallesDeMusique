@@ -48,35 +48,14 @@ public class ReservationMetier {
 	 * @throws DateIncorrecteException
 	 * @throws CategorieNonSelectionneeException
 	 */
-	public List<Salle> getListeSalleByCategory(Categorie categorie,
-			String jourString, String moisString, String anneeString)
+	public List<Salle> getListeSalleByCategory(Categorie categorie)
 			throws DateIncorrecteException, CategorieNonSelectionneeException {
 
 		if (categorie == null) {
 			throw new CategorieNonSelectionneeException();
 		}
 
-		// TODO JBG rajouter les intervalles de date
-
-		try {
-			int jour = Integer.parseInt(jourString);
-			int mois = Integer.parseInt(moisString);
-			int annee = Integer.parseInt(anneeString);
-
-			if ((jour <= 1 || jour >= 31) || (mois <= 1 || mois >= 12)) {
-				throw new DateIncorrecteException();
-			}
-
-			Date date = new Date();
-			// TODO JBG
-
-			return ReservationDAO.getInstance()
-					.rechercherReservationParCategorieEtDate(
-							categorie.getIdCategory(), jour, mois, annee);
-
-		} catch (NumberFormatException exception) {
-			throw new DateIncorrecteException();
-		}
+		return SalleDAO.getInstance().lister(categorie.getIdCategory());
 	}
 
 	/**
@@ -146,10 +125,11 @@ public class ReservationMetier {
 		try {
 			Date dateDebutReservation = sdf.parse(dateDebut);
 			Date dateFinReservation = sdf.parse(dateFin);
-			
-			System.out.println("Date Debut Reservation : "+dateDebutReservation.toString());
-			System.out.println("Date Fin Reservation : "+dateFinReservation.toString());
 
+			System.out.println("Date Debut Reservation : "
+					+ dateDebutReservation.toString());
+			System.out.println("Date Fin Reservation : "
+					+ dateFinReservation.toString());
 
 			if (salleReservee(salle, dateDebutReservation)) {
 				throw new SalleReserveeException();
@@ -214,8 +194,9 @@ public class ReservationMetier {
 		}
 		for (int i = 0; i < Integer.parseInt(nbSemaines); i++) {
 			try {
-				jour = ""+(Integer.parseInt(jour)+7*1);
-				reserverSalle(utilisateur, salle, jour, mois, annee, heure, duree);
+				jour = "" + (Integer.parseInt(jour) + 7 * 1);
+				reserverSalle(utilisateur, salle, jour, mois, annee, heure,
+						duree);
 
 			} catch (DateIncorrecteException e) {
 				// TODO Auto-generated catch block

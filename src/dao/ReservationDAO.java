@@ -253,12 +253,6 @@ public class ReservationDAO {
 		return false;
 	}
 
-	public List<Salle> rechercherReservationParCategorieEtDate(int idCategory,
-			int jour, int mois, int annee) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * Retourne la liste des reservations non confirmees pour un utilisateur.
 	 * 

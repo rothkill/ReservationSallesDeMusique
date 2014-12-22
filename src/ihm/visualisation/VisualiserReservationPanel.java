@@ -137,8 +137,7 @@ public class VisualiserReservationPanel extends JPanel implements
 		try {
 			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(
-							(Categorie) jComboBoxCategorie.getSelectedItem(),
-							jour.getText(), mois.getText(), annee.getText());
+							(Categorie) jComboBoxCategorie.getSelectedItem());
 			center.recharger(listSalles);
 		} catch (DateIncorrecteException dateIncorrecteException) {
 			String erreur = Constantes.INFO_ERREUR;

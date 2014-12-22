@@ -99,4 +99,14 @@ public class SalleDAO {
 		}
 		return listSalles;
 	}
+
+	/**
+	 * Retourne la liste de toutes les salles appartenant a une categorie.
+	 * 
+	 * @return
+	 */
+	public List<Salle> lister(Integer idCategorie) {
+		// TODO
+		return null;
+	}
 }
