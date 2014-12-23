@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import utils.Constantes;
 import metier.EditerInfosClientMetier;
+import metier.UtilisateurMetier;
 import data.Forfait;
 import data.Utilisateur;
 import exception.AucunForfaitExistantException;
@@ -31,9 +32,7 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 	public AchatForfaitPanel(EditerInfosClientPanel editerInfosClientPanel) {
 		// TODO Auto-generated constructor stub
 
-
 		this.editerInfosClientPanel = editerInfosClientPanel;
-
 
 		creerComboForfait();
 
@@ -52,10 +51,9 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 		if (actionEvent.getSource() == valider) {
 			System.out.println("gné");
 			try {
-				if (EditerInfosClientMetier.getInstance()
-						.attacherForfaitUtilisateur(
-								editerInfosClientPanel.getCurrentUtilisateur(),
-								(Forfait) jComboBoxForfait.getSelectedItem())) {
+				if (UtilisateurMetier.getInstance().attacherForfaitUtilisateur(
+						editerInfosClientPanel.getCurrentUtilisateur(),
+						(Forfait) jComboBoxForfait.getSelectedItem())) {
 
 				}
 			} catch (UtilisateurNonSelectionneException e) {

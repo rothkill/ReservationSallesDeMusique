@@ -12,11 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import metier.EditerInfosClientMetier;
+import metier.UtilisateurMetier;
+import utils.Constantes;
 import data.Forfait;
 import exception.AucunForfaitExistantException;
 import exception.ForfaitNonSelectionneException;
 import exception.UtilisateurNonSelectionneException;
-import utils.Constantes;
 
 public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 
@@ -69,7 +70,7 @@ public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
 			try {
-				if (EditerInfosClientMetier.getInstance().creerUtilisateur(
+				if (UtilisateurMetier.getInstance().creerUtilisateur(
 						nomTextField.getText(), telTextField.getText(),
 						(Forfait) jComboBoxForfait.getSelectedItem())) {
 					// TODO gerer

@@ -194,56 +194,6 @@ public class EditerInfosClientMetier {
 	}
 
 	/**
-	 * Lie un forfait a un utilisateur.
-	 * 
-	 * @param utilisateur
-	 * @param forfait
-	 * @return
-	 * @throws UtilisateurNonSelectionneException
-	 * @throws ForfaitNonSelectionneException
-	 */
-	public boolean attacherForfaitUtilisateur(Utilisateur utilisateur,
-			Forfait forfait) throws UtilisateurNonSelectionneException,
-			ForfaitNonSelectionneException {
-		if (utilisateur == null) {
-			throw new UtilisateurNonSelectionneException();
-		}
-		if (forfait == null) {
-			throw new ForfaitNonSelectionneException();
-		}
-		return ForfaitDAO.getInstance().lier(utilisateur.getIdUtilisateur(),
-				forfait.getIdForfait());
-	}
-
-	/**
-	 * Creation d'un utilisateur.
-	 * 
-	 * @param nom
-	 * @param telephone
-	 * @param forfait
-	 * @return
-	 * @throws ForfaitNonSelectionneException
-	 * @throws UtilisateurNonSelectionneException
-	 */
-	public boolean creerUtilisateur(String nom, String telephone,
-			Forfait forfait) throws UtilisateurNonSelectionneException,
-			ForfaitNonSelectionneException {
-		// TODO
-
-		Utilisateur utilisateur = UtilisateurDAO.getInstance().creer(nom,
-				telephone, 0);
-
-		if (utilisateur == null) {
-			return false;
-		}
-
-		if (forfait != null) {
-			attacherForfaitUtilisateur(utilisateur, forfait);
-		}
-		return true;
-	}
-
-	/**
 	 * Confirme une reservation en utilisant le forfait de l'utilisateur.
 	 */
 	public void utiliserForfait() {
