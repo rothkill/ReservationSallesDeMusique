@@ -51,8 +51,6 @@ public class UtilisateurMetier {
 	public boolean creerUtilisateur(String nom, String telephone,
 			Forfait forfait) throws UtilisateurNonSelectionneException,
 			ForfaitNonSelectionneException {
-		// TODO
-
 		Utilisateur utilisateur = UtilisateurDAO.getInstance().creer(nom,
 				telephone, 0);
 

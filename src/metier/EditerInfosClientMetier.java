@@ -125,8 +125,8 @@ public class EditerInfosClientMetier {
 
 	private void supprimerTousForfaitCategorie(Utilisateur utilisateur,
 			Categorie categorie) {
-		// TODO Auto-generated method stub
-
+		ForfaitDAO.getInstance().supprimerTousForfaits(
+				utilisateur.getIdUtilisateur(), categorie.getIdCategory());
 	}
 
 	private int totalForfait(Categorie categorie) {
