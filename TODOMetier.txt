@@ -1,0 +1,24 @@
+CU 1:
+A vérifier
+
+CU 2:
+- Verification des disponibilités
+Categorie, Utilisateur, duree, Date, horaire
+
+CU 3:
+A vérifier
+
+CU 4.1:
+- Modification des méthodes pour gérer les forfaits.
+- Vérification de la validité d'un forfait, sinon suppression.
+- Suppression d'un forfait terminé
+
+CU 4.2:
+A vérifier
+
+CU 5:
+- Appel de la méthode du CU 2 sur plusieurs semaines.
+Catégorie, Utilisateur, Date, Horaire, Durée, Nombre de semaines
+
+CU 6:
+A vérifier

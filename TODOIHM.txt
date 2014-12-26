@@ -1,0 +1,20 @@
+CU 1:
+A décider
+
+CU 2:
+A décider
+
+CU 3:
+Refaire en se basant sur le CU1
+
+CU 4.1:
+A vérifier
+
+CU 4.2:
+A vérifier
+
+CU 5:
+A refaire
+
+CU 6:
+A vérifier
