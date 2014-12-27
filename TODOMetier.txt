@@ -17,7 +17,7 @@ CU 4.2:
 A vérifier
 
 CU 5:
-- Appel de la méthode du CU 2 sur plusieurs semaines.
+- Appel de la méthode du CU 2 sur plusieurs semaines. -> modifier ReservationMetier.reserverSurDuree
 Catégorie, Utilisateur, Date, Horaire, Durée, Nombre de semaines
 
 CU 6:

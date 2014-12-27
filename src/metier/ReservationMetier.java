@@ -82,6 +82,19 @@ public class ReservationMetier {
 				date);
 	}
 
+	/**
+	 * Supprime une reservation en fonction de la dateHeure et de la salle.
+	 * 
+	 * @param salle
+	 * @param jour
+	 * @param mois
+	 * @param annee
+	 * @param heure
+	 * @return
+	 * @throws AucuneSalleSelectionneeException
+	 * @throws UtilisateurNonSelectionneException
+	 * @throws DateIncorrecteException
+	 */
 	public boolean supprimerReservationParDateEtSalle(Salle salle, String jour,
 			String mois, String annee, String heure)
 			throws AucuneSalleSelectionneeException,
@@ -223,6 +236,13 @@ public class ReservationMetier {
 		return listSalles;
 	}
 
+	/**
+	 * Liste les reservations pour un utilisateur donne.
+	 * 
+	 * @param utilisateur
+	 * @return
+	 * @throws UtilisateurNonSelectionneException
+	 */
 	public List<Reservation> getlisteReservationUtilisateur(
 			Utilisateur utilisateur) throws UtilisateurNonSelectionneException {
 		if (utilisateur == null) {
@@ -230,5 +250,67 @@ public class ReservationMetier {
 		}
 		return ReservationDAO.getInstance().listerReservationParUtilisateur(
 				utilisateur.getIdUtilisateur());
+	}
+
+	/**
+	 * Reserve automatiquement une salle en fonction de la categorie et de la
+	 * date recherchee.
+	 * 
+	 * @param utilisateur
+	 * @param categorie
+	 * @param jour
+	 * @param mois
+	 * @param annee
+	 * @param heure
+	 * @param duree
+	 * @return
+	 * @throws CategorieNonSelectionneeException
+	 * @throws UtilisateurNonSelectionneException
+	 * @throws DateIncorrecteException
+	 * @throws SalleReserveeException
+	 */
+	public Reservation reservationAutomatique(Utilisateur utilisateur,
+			Categorie categorie, String jour, String mois, String annee,
+			String heure, String duree)
+			throws CategorieNonSelectionneeException,
+			UtilisateurNonSelectionneException, DateIncorrecteException,
+			SalleReserveeException {
+		if (categorie == null) {
+			throw new CategorieNonSelectionneeException();
+		}
+		if (utilisateur == null) {
+			throw new UtilisateurNonSelectionneException();
+		}
+
+		Reservation reservation = null;
+		String dateDebut = jour + mois + annee + heure;
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
+		Date dateDebutReservation = null;
+		try {
+			dateDebutReservation = sdf.parse(dateDebut);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new DateIncorrecteException();
+		}
+
+		List<Salle> listeSalles = SalleDAO.getInstance().lister(
+				categorie.getIdCategory());
+
+		for (Salle salle : listeSalles) {
+			if (ReservationDAO.getInstance().isSalleReservee(
+					salle.getIdSalle(), dateDebutReservation)) {
+				// TODO creation de la reservation
+				// reservation =
+				// ReservationDAO.getInstance().creer(dateReservation,
+				// dateFinReservation, confirmation, idUtilisateur, tarif,
+				// idSalle, dateDebutReservation)
+				break;
+			}
+		}
+
+		// TODO
+
+		return reservation;
 	}
 }
