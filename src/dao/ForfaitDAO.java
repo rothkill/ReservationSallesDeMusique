@@ -96,8 +96,28 @@ public class ForfaitDAO {
 		return null;
 	}
 
+	/**
+	 * Supprime tous les forfaits d'un utilisateur.
+	 * 
+	 * @param idUtilisateur
+	 * @param idCategory
+	 */
 	public void supprimerTousForfaits(Integer idUtilisateur, int idCategory) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * Liste les forfaits non perimes par utilisateur, ordonne par date d'achat
+	 * du forfait.
+	 * 
+	 * @param idUtilisateur
+	 * @param idCategory
+	 * @return
+	 */
+	public List<Forfait> listerForfaitUtilisateur(Integer idUtilisateur,
+			int idCategory) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

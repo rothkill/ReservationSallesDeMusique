@@ -95,12 +95,12 @@ public class EditerInfosClientMetier {
 
 		if (confirmerReservation(reservation)) {
 			int duree = reservation.getDuree();
-			//
+			// Si les forfaits sont utilises
 			if (utiliserForfait) {
 				Categorie categorie = CategorieDAO
 						.getInstance()
 						.rechercherParSalle(reservation.getSalle().getIdSalle());
-				int totalForfait = totalForfait(categorie);
+				int totalForfait = totalForfait(utilisateur, categorie);
 				if (totalForfait - duree <= 0) {
 					duree -= totalForfait;
 					supprimerTousForfaitCategorie(utilisateur, categorie);
@@ -108,7 +108,7 @@ public class EditerInfosClientMetier {
 					modifierForfaits(utilisateur, categorie, duree);
 				}
 			}
-			//
+			// Si les points fidelite sont utilises
 			if (utiliserPointsFidelite && duree > 0) {
 				return modifierPointsFidelite(utilisateur, duree);
 			}
@@ -129,8 +129,17 @@ public class EditerInfosClientMetier {
 				utilisateur.getIdUtilisateur(), categorie.getIdCategory());
 	}
 
-	private int totalForfait(Categorie categorie) {
-		// TODO Auto-generated method stub
+	/**
+	 * Totalise les forfaits
+	 * 
+	 * @param utilisateur
+	 * @param categorie
+	 * @return
+	 */
+	private int totalForfait(Utilisateur utilisateur, Categorie categorie) {
+		utilisateur.setListForfaitsUtilisateur(ForfaitDAO.getInstance()
+				.listerForfaitUtilisateur(utilisateur.getIdUtilisateur(),
+						categorie.getIdCategory()));
 		return 0;
 	}
 
