@@ -23,6 +23,7 @@ import data.Utilisateur;
 import exception.AucunUtilisateurException;
 import exception.AucuneSalleSelectionneeException;
 import exception.DateIncorrecteException;
+import exception.LundiException;
 import exception.SalleReserveeException;
 import exception.UtilisateurNonSelectionneException;
 
@@ -107,8 +108,15 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 			// TODO gerer les dates
 			try {
 				if (plusieursReservations.isSelected()) {
-					ReservationMetier.getInstance().reserverSurDuree((Utilisateur) jComboBoxUtilisateur
-							.getSelectedItem(), (Salle) jComboBoxSalles.getSelectedItem(), jour.getText(), mois.getText(), annee.getText(), heure.getText(), duree.getText(), nombreSemaines.getText());
+					ReservationMetier
+							.getInstance()
+							.reserverSurDuree(
+									(Utilisateur) jComboBoxUtilisateur
+											.getSelectedItem(),
+									(Salle) jComboBoxSalles.getSelectedItem(),
+									jour.getText(), mois.getText(),
+									annee.getText(), heure.getText(),
+									duree.getText(), nombreSemaines.getText());
 				} else {
 					ReservationMetier
 							.getInstance()
@@ -136,6 +144,9 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (UtilisateurNonSelectionneException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LundiException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

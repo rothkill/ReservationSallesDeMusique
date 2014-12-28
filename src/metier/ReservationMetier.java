@@ -2,6 +2,7 @@ package metier;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import data.Utilisateur;
 import exception.AucuneSalleSelectionneeException;
 import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
+import exception.LundiException;
 import exception.SalleReserveeException;
 import exception.UtilisateurNonSelectionneException;
 
@@ -120,7 +122,7 @@ public class ReservationMetier {
 			String jour, String mois, String annee, String heure, String duree)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException,
-			SalleReserveeException {
+			SalleReserveeException, LundiException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
@@ -138,6 +140,9 @@ public class ReservationMetier {
 		try {
 			Date dateDebutReservation = sdf.parse(dateDebut);
 			Date dateFinReservation = sdf.parse(dateFin);
+			if (estUnLundi(dateDebutReservation)) {
+				throw new LundiException();
+			}
 
 			System.out.println("Date Debut Reservation : "
 					+ dateDebutReservation.toString());
@@ -198,7 +203,7 @@ public class ReservationMetier {
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
 			String jour, String mois, String annee, String heure, String duree,
 			String nbSemaines) throws AucuneSalleSelectionneeException,
-			UtilisateurNonSelectionneException {
+			UtilisateurNonSelectionneException, LundiException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
@@ -268,13 +273,14 @@ public class ReservationMetier {
 	 * @throws UtilisateurNonSelectionneException
 	 * @throws DateIncorrecteException
 	 * @throws SalleReserveeException
+	 * @throws LundiException
 	 */
 	public Reservation reservationAutomatique(Utilisateur utilisateur,
 			Categorie categorie, String jour, String mois, String annee,
 			String heure, String duree)
 			throws CategorieNonSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException,
-			SalleReserveeException {
+			SalleReserveeException, LundiException {
 		if (categorie == null) {
 			throw new CategorieNonSelectionneeException();
 		}
@@ -288,6 +294,10 @@ public class ReservationMetier {
 		Date dateDebutReservation = null;
 		try {
 			dateDebutReservation = sdf.parse(dateDebut);
+			if (estUnLundi(dateDebutReservation)) {
+				throw new LundiException();
+			}
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -312,5 +322,17 @@ public class ReservationMetier {
 		// TODO
 
 		return reservation;
+	}
+
+	/**
+	 * Methode verifiant si une date correspond a un lundi.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public boolean estUnLundi(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
 	}
 }

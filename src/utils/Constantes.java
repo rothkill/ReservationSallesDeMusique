@@ -135,6 +135,8 @@ public class Constantes {
 
 	public static final String FORFAIT_NON_SELECTIONNEE_EXCEPTION = "Aucun forfait sélectionnée";
 
+	public static final String LUNDI_EXCEPTION = "La date correspond a un lundi";
+
 	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmées";
 
 	public static final String AUCUN_UTILISATEUR_EXCEPTION = "Aucun client n'est renseigné";
