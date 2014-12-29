@@ -168,8 +168,9 @@ public class EditerInfosClientMetier {
 			// on retire tous les points disponibles
 			modificateurPointFidelite = duree
 					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE
-					+ (utilisateur.getPointFidelite() % Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE);
+					- utilisateur.getPointFidelite();
 		}
+		// TODO methode de retrait
 		return UtilisateurDAO.getInstance().modifierFidelite(
 				utilisateur.getIdUtilisateur(), modificateurPointFidelite);
 	}
@@ -183,6 +184,7 @@ public class EditerInfosClientMetier {
 	 */
 
 	private boolean ajouterPointsFidelite(Utilisateur utilisateur, int duree) {
+		// TODO methode d'ajout
 		return UtilisateurDAO.getInstance().modifierFidelite(
 				utilisateur.getIdUtilisateur(),
 				duree * Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE);
