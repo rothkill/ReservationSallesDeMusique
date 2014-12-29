@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import metier.ReservationMetier;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import utils.Constantes;
 import data.Categorie;
 import data.Salle;
@@ -41,6 +47,11 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JComboBox jComboBoxCategorie;
 	private JComboBox jComboBoxSalle = new JComboBox();
 
+	private UtilDateModel model;
+	private Properties p;
+	private JDatePanelImpl datePanel;
+	private JDatePickerImpl datePicker;
+
 	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
 	private JTextField mois = new JTextField(Constantes.MM_LABEL);
 	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
@@ -65,9 +76,20 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		north.setLayout(new BorderLayout());
 
+		// DatePicker
+		model = new UtilDateModel();
+		p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		datePanel = new JDatePanelImpl(model, p);
+		datePicker = new JDatePickerImpl(datePanel,
+				new DateLabelFormatter());
+
 		creerComboCategorie();
 		northNorth.setLayout(new FlowLayout());
 		northNorth.add(jComboBoxCategorie);
+		northNorth.add(datePicker);
 		northNorth.add(jour);
 		northNorth.add(slash);
 		northNorth.add(mois);
@@ -114,6 +136,8 @@ public class VisualiserReservationPanel extends JPanel implements
 			dialog.dispose();
 		} else if (actionEvent.getSource() == valider) {
 			// TODO JBG
+
+			System.out.println(datePicker.getModel().getValue());
 			rechargerChronologie();
 		} else if (actionEvent.getSource() == jComboBoxCategorie) {
 			// TODO JBG
