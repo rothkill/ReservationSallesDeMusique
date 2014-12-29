@@ -5,7 +5,9 @@ import ihm.visualisation.formulaire.confirmation.ConfirmationReserverSalleDejaRe
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,7 +19,13 @@ import javax.swing.JTextField;
 
 import metier.ReservationMetier;
 import metier.UtilisateurMetier;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import utils.Constantes;
+import utils.DateLabelFormatter;
 import data.Salle;
 import data.Utilisateur;
 import exception.AucunUtilisateurException;
@@ -32,9 +40,14 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JComboBox jComboBoxSalles;
 	private JComboBox jComboBoxUtilisateur;
 
-	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-	private JTextField mois = new JTextField(Constantes.MM_LABEL);
-	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
+	private UtilDateModel model;
+	private Properties p;
+	private JDatePanelImpl datePanel;
+	private JDatePickerImpl datePicker;
+
+	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
+	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
+	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
 	private JTextField heure = new JTextField(Constantes.HH_LABEL);
 	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
 	private JTextField nombreSemaines = new JTextField(
@@ -56,14 +69,24 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		plusieursReservations.addActionListener(this);
 		valider.addActionListener(this);
 
+		// DatePicker
+		model = new UtilDateModel();
+		p = new Properties();
+		p.put("text.today", Constantes.JOUR_PICKER);
+		p.put("text.month", Constantes.MOIS_PICKER);
+		p.put("text.year", Constantes.ANNEE_PICKER);
+		datePanel = new JDatePanelImpl(model, p);
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+
 		this.setLayout(new FlowLayout());
 		this.add(jComboBoxUtilisateur);
 		this.add(jComboBoxSalles);
-		this.add(jour);
-		this.add(slash);
-		this.add(mois);
-		this.add(slash2);
-		this.add(annee);
+		this.add(datePicker);
+		// this.add(jour);
+		// this.add(slash);
+		// this.add(mois);
+		// this.add(slash2);
+		// this.add(annee);
 		this.add(heure);
 		this.add(duree);
 		this.add(reserverSurDuree);
@@ -105,7 +128,8 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
-			// TODO gerer les dates
+			Calendar selectedValue = (Calendar) datePicker.getModel()
+					.getValue();
 			try {
 				if (plusieursReservations.isSelected()) {
 					ReservationMetier
@@ -114,8 +138,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									(Utilisateur) jComboBoxUtilisateur
 											.getSelectedItem(),
 									(Salle) jComboBoxSalles.getSelectedItem(),
-									jour.getText(), mois.getText(),
-									annee.getText(), heure.getText(),
+									selectedValue, heure.getText(),
 									duree.getText(), nombreSemaines.getText());
 				} else {
 					ReservationMetier
@@ -124,8 +147,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									(Utilisateur) jComboBoxUtilisateur
 											.getSelectedItem(),
 									(Salle) jComboBoxSalles.getSelectedItem(),
-									jour.getText(), mois.getText(),
-									annee.getText(), heure.getText(),
+									selectedValue, heure.getText(),
 									duree.getText());
 				}
 			} catch (SalleReserveeException exception) {
@@ -159,19 +181,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public String getJour() {
-		return jour.getText();
-	}
-
 	public String getHeure() {
 		return heure.getText();
-	}
-
-	public String getMois() {
-		return mois.getText();
-	}
-
-	public String getAnnee() {
-		return annee.getText();
 	}
 }

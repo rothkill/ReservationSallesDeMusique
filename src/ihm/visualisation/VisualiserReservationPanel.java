@@ -23,6 +23,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import utils.Constantes;
+import utils.DateLabelFormatter;
 import data.Categorie;
 import data.Salle;
 import exception.CategorieNonSelectionneeException;
@@ -52,9 +53,9 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-//	private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-//	private JTextField mois = new JTextField(Constantes.MM_LABEL);
-//	private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
+	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
+	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
+	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
@@ -70,21 +71,16 @@ public class VisualiserReservationPanel extends JPanel implements
 	public VisualiserReservationPanel(JDialog dialog) {
 		this.dialog = dialog;
 
-		String message = Constantes.INFO_ERREUR;
-		System.out.println(String.format(message.replace("?", "%s"),
-				Constantes.DATE_INCORRECTE_EXCEPTION));
-
 		north.setLayout(new BorderLayout());
 
 		// DatePicker
 		model = new UtilDateModel();
 		p = new Properties();
-		p.put("text.today", "Today");
-		p.put("text.month", "Month");
-		p.put("text.year", "Year");
+		p.put("text.today", Constantes.JOUR_PICKER);
+		p.put("text.month", Constantes.MOIS_PICKER);
+		p.put("text.year", Constantes.ANNEE_PICKER);
 		datePanel = new JDatePanelImpl(model, p);
-		datePicker = new JDatePickerImpl(datePanel,
-				new DateLabelFormatter());
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		creerComboCategorie();
 		northNorth.setLayout(new FlowLayout());
