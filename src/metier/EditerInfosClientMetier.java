@@ -13,7 +13,6 @@ import data.Reservation;
 import data.Utilisateur;
 import exception.AucunForfaitExistantException;
 import exception.AucuneReservationUtilisateurException;
-import exception.ForfaitNonSelectionneException;
 import exception.ReservationNonSelectionneeException;
 import exception.UtilisateurNonSelectionneException;
 
@@ -170,8 +169,7 @@ public class EditerInfosClientMetier {
 					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE
 					- utilisateur.getPointFidelite();
 		}
-		// TODO methode de retrait
-		return UtilisateurDAO.getInstance().modifierFidelite(
+		return UtilisateurDAO.getInstance().retirerFidelite(
 				utilisateur.getIdUtilisateur(), modificateurPointFidelite);
 	}
 
@@ -184,8 +182,7 @@ public class EditerInfosClientMetier {
 	 */
 
 	private boolean ajouterPointsFidelite(Utilisateur utilisateur, int duree) {
-		// TODO methode d'ajout
-		return UtilisateurDAO.getInstance().modifierFidelite(
+		return UtilisateurDAO.getInstance().ajouterFidelite(
 				utilisateur.getIdUtilisateur(),
 				duree * Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE);
 	}

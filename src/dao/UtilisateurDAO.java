@@ -130,14 +130,43 @@ public class UtilisateurDAO {
 	}
 
 	/**
-	 * Modifie les points fidelites d'un utilisateur.
+	 * retire les points fidelites d'un utilisateur.
 	 * 
 	 * @param idUtilisateur
 	 * @param points
 	 * @return
 	 */
-	public boolean modifierFidelite(Integer idUtilisateur, int points) {
-		// TODO Auto-generated method stub
+	public boolean retirerFidelite(Integer idUtilisateur, int points) {
+		try {
+			PreparedStatement st = con
+					.prepareStatement("update from utilisateur set pointsfidelite =  pointsfidelite - ? where idutilisateur = ?");
+			st.setInt(1, points);
+			st.setInt(2, idUtilisateur);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	/**
+	 * Ajoute des points fidelites à un utlisateur
+	 * @param idUtilisateur
+	 * @param points
+	 * @return
+	 */
+	public boolean ajouterFidelite(Integer idUtilisateur, int points) {
+		try {
+			PreparedStatement st = con
+					.prepareStatement("update from utilisateur set pointsfidelite = pointsFidelite + ? where idutilisateur = ?");
+			st.setInt(1, points);
+			st.setInt(2, idUtilisateur);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
 	}
 
