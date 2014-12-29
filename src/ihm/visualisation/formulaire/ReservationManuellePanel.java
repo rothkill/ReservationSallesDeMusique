@@ -5,7 +5,7 @@ import ihm.visualisation.formulaire.confirmation.ConfirmationReserverSalleDejaRe
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -128,8 +128,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
-			Calendar selectedValue = (Calendar) datePicker.getModel()
-					.getValue();
+			Date selectedValue = (Date) datePicker.getModel().getValue();
 			try {
 				if (plusieursReservations.isSelected()) {
 					ReservationMetier
