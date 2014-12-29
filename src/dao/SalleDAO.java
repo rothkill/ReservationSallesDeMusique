@@ -106,7 +106,20 @@ public class SalleDAO {
 	 * @return
 	 */
 	public List<Salle> lister(Integer idCategorie) {
-		// TODO
-		return null;
+		List<Salle> listSalles = new ArrayList<Salle>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idsallemusique,idcategorie,nom,etat from salledemusique where idcategorie = ?");
+			st.setInt(1, idCategorie);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				listSalles.add(new Salle(rs.getInt(1), CategorieDAO
+						.getInstance().rechercher(rs.getInt(2)), rs
+						.getString(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listSalles;
 	}
 }

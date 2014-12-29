@@ -100,10 +100,19 @@ public class ForfaitDAO {
 	 * Supprime tous les forfaits d'un utilisateur.
 	 * 
 	 * @param idUtilisateur
-	 * @param idCategory
+	 * @param idCategorie
 	 */
-	public void supprimerTousForfaits(Integer idUtilisateur, int idCategory) {
-		// TODO Auto-generated method stub
+	public boolean supprimerTousForfaits(Integer idUtilisateur, int idCategorie) {
+		try {
+			PreparedStatement st = con
+					.prepareStatement("delete from carteforfait join forfait on carteforfait.idforfait = forfait.idforfait where idutilisateur = ? and forfait.idCategorie = ?");
+			st.setInt(1, idUtilisateur);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
 
 	}
 
@@ -112,12 +121,27 @@ public class ForfaitDAO {
 	 * du forfait.
 	 * 
 	 * @param idUtilisateur
-	 * @param idCategory
+	 * @param idCategorie
 	 * @return
 	 */
 	public List<Forfait> listerForfaitUtilisateur(Integer idUtilisateur,
-			int idCategory) {
-		// TODO Auto-generated method stub
+			int idCategorie) {
+		List<Forfait> lesForfaits = new ArrayList<Forfait>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idforfait,forfait,validite,idcategorie,prix from forfait join forfait on carteutilisateur.idforfait = forfait.idforfait where carteforfait.idutilisateur = ? and carteforfait.idcategorie = ? join carteforfait on utilisateur.idutilisateur = carteforfait.idutilisateur order by carteforfait.dateachat desc");
+			st.setInt(1, idUtilisateur);
+			st.setInt(2, idCategorie);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				lesForfaits.add(new Forfait(rs.getInt(1), rs.getInt(2),rs.getInt(3),
+						CategorieDAO.getInstance().rechercher(rs.getInt(3)),
+						rs.getInt(4)));
+			}
+	
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 }

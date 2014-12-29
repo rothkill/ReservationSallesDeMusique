@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.ConnectionDB;
-
 import data.Categorie;
 
 public class CategorieDAO {
@@ -81,7 +80,7 @@ public class CategorieDAO {
 	/**
 	 * Liste toutes les categories existantes.
 	 * 
-	 * @return
+	 * @return List<Categorie>
 	 */
 	public List<Categorie> listerCategories() {
 		Categorie category = null;
@@ -102,8 +101,29 @@ public class CategorieDAO {
 		return listCategories;
 	}
 
+	/**
+	 * 
+	 * Retourne la categorie de la salle.
+	 * @param idSalle
+	 * @return Categorie
+	 */
 	public Categorie rechercherParSalle(Integer idSalle) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie category = null;
+		List<Categorie> listCategories = new ArrayList<Categorie>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idcategorie,nom,tarifUneHeure,tarifDeuxHeures,nbPersonne from categorie join salledemusique on categorie.idcategorie = salledemusique.idcategorie where salledemusique.idsallemusique = ?");
+			st.setInt(1,idSalle);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				category = new Categorie(rs.getInt(1), rs.getString(2),
+						rs.getInt(3), rs.getInt(4), rs.getInt(5));
+				listCategories.add(category);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return category;
 	}
 }
