@@ -133,15 +133,34 @@ public class ForfaitDAO {
 			st.setInt(1, idUtilisateur);
 			st.setInt(2, idCategorie);
 			ResultSet rs = st.executeQuery();
-			while(rs.next()){
-				lesForfaits.add(new Forfait(rs.getInt(1), rs.getInt(2),rs.getInt(3),
-						CategorieDAO.getInstance().rechercher(rs.getInt(3)),
-						rs.getInt(4)));
+			while (rs.next()) {
+				lesForfaits.add(new Forfait(rs.getInt(1), rs.getInt(2), rs
+						.getInt(3), CategorieDAO.getInstance().rechercher(
+						rs.getInt(3)), rs.getInt(4)));
 			}
-	
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+
+	/**
+	 * Supprime un lien forfait-utilisateur
+	 * 
+	 * @param idForfait
+	 * @return
+	 */
+	public boolean supprimer(Integer idForfait) {
+		try {
+			PreparedStatement st = con
+					.prepareStatement("delete from carteforfait join forfait on carteforfait.idforfait = forfait.idforfait where forfait.idforfait = ?");
+			st.setInt(1, idForfait);
+			st.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
 	}
 }
