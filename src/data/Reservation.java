@@ -114,8 +114,7 @@ public class Reservation {
 
 	public String toString() {
 		return dateDebutReservation.toString() + " "
-				+ dateReservation.toString();
-		// TODO + " " + salle.getNom();
+				+ dateReservation.toString() + " " + salle.getNom();
 	}
 
 }
