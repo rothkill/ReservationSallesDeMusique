@@ -27,17 +27,14 @@ public class ChronologieSallePanel extends JPanel {
 	private static final long serialVersionUID = 2261051581037359748L;
 
 	protected Salle salle;
-	protected List<Reservation> listeReservations;
 
 	/**
 	 * @param salle
 	 * @param La
 	 *            liste des réservations de la journée;
 	 */
-	public ChronologieSallePanel(Salle salle,
-			List<Reservation> listeReservations) {
+	public ChronologieSallePanel(Salle salle) {
 		this.salle = salle;
-		this.listeReservations = listeReservations;
 		// TODO
 		this.setSize(new Dimension(300, 800));
 	}
@@ -58,7 +55,7 @@ public class ChronologieSallePanel extends JPanel {
 		g2.drawString(salle.getNom(), 0, 20);
 		g2.setColor(new Color(0, 155, 155));
 
-		for (Reservation reservation : listeReservations) {
+		for (Reservation reservation : salle.getListeReservation()) {
 			String format1 = new SimpleDateFormat("HH").format(reservation
 					.getDateDebutReservation());
 			int debut = Integer.parseInt(format1);
