@@ -21,9 +21,8 @@ public class ChronologieSallePanelReservation extends ChronologieSallePanel
 	private int x;
 	private int y;
 
-	public ChronologieSallePanelReservation(Salle salle,
-			List<Reservation> listeReservations, Utilisateur utilisateur) {
-		super(salle, listeReservations);
+	public ChronologieSallePanelReservation(Salle salle, Utilisateur utilisateur) {
+		super(salle);
 		this.utilisateur = utilisateur;
 		this.addMouseListener(this);
 	}
@@ -52,7 +51,7 @@ public class ChronologieSallePanelReservation extends ChronologieSallePanel
 			return;
 		}
 
-		for (Reservation reservation : listeReservations) {
+		for (Reservation reservation : salle.getListeReservation()) {
 			String format1 = new SimpleDateFormat("HH").format(reservation
 					.getDateDebutReservation());
 			int debut = Integer.parseInt(format1);
@@ -89,7 +88,7 @@ public class ChronologieSallePanelReservation extends ChronologieSallePanel
 				return;
 			}
 
-			for (Reservation reservation : listeReservations) {
+			for (Reservation reservation : salle.getListeReservation()) {
 				String format1 = new SimpleDateFormat("HH").format(reservation
 						.getDateDebutReservation());
 				int debut = Integer.parseInt(format1);

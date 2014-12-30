@@ -119,7 +119,7 @@ public class ReservationMetier {
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	// gerer jours feries et week-ends
 	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
-			String jour, String mois, String annee, String heure, String duree)
+			Date date, String heure, String duree)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException,
 			SalleReserveeException, LundiException {
@@ -133,13 +133,15 @@ public class ReservationMetier {
 		int heureInt = Integer.parseInt(heure);
 		int dureeInt = Integer.parseInt(duree);
 
-		String dateDebut = jour + mois + annee + heure;
-		String dateFin = jour + mois + annee + (heureInt + dureeInt);
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR, heureInt);
+		calendar.set(Calendar.MINUTE, 0);
 
 		try {
-			Date dateDebutReservation = sdf.parse(dateDebut);
-			Date dateFinReservation = sdf.parse(dateFin);
+			Date dateDebutReservation = new Date(calendar.getTimeInMillis());
+			calendar.set(Calendar.HOUR, heureInt + dureeInt);
+			Date dateFinReservation = new Date(calendar.getTimeInMillis());
 			if (estUnLundi(dateDebutReservation)) {
 				throw new LundiException();
 			}
@@ -158,8 +160,6 @@ public class ReservationMetier {
 			return ReservationDAO.getInstance().reserver(
 					utilisateur.getIdUtilisateur(), salle.getIdSalle(),
 					dateDebutReservation, dateFinReservation, tarif);
-		} catch (ParseException e) {
-			throw new DateIncorrecteException();
 		} catch (NumberFormatException exception) {
 			throw new DateIncorrecteException();
 		}
@@ -201,8 +201,8 @@ public class ReservationMetier {
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			String jour, String mois, String annee, String heure, String duree,
-			String nbSemaines) throws AucuneSalleSelectionneeException,
+			Date date, String heure, String duree, String nbSemaines)
+			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, LundiException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
@@ -210,11 +210,13 @@ public class ReservationMetier {
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
 		for (int i = 0; i < Integer.parseInt(nbSemaines); i++) {
 			try {
-				jour = "" + (Integer.parseInt(jour) + 7 * 1);
-				reserverSalle(utilisateur, salle, jour, mois, annee, heure,
-						duree);
+				calendar.add(Calendar.WEEK_OF_YEAR, 1);
+				reserverSalle(utilisateur, salle,
+						new Date(calendar.getTimeInMillis()), heure, duree);
 
 			} catch (DateIncorrecteException e) {
 				// TODO Auto-generated catch block

@@ -1,5 +1,6 @@
 package metier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import utils.Constantes;
@@ -13,7 +14,6 @@ import data.Reservation;
 import data.Utilisateur;
 import exception.AucunForfaitExistantException;
 import exception.AucuneReservationUtilisateurException;
-import exception.ForfaitNonSelectionneException;
 import exception.ReservationNonSelectionneeException;
 import exception.UtilisateurNonSelectionneException;
 
@@ -95,18 +95,20 @@ public class EditerInfosClientMetier {
 
 		if (confirmerReservation(reservation)) {
 			int duree = reservation.getDuree();
+
 			// Si les forfaits sont utilises
 			if (utiliserForfait) {
 				Categorie categorie = CategorieDAO
 						.getInstance()
 						.rechercherParSalle(reservation.getSalle().getIdSalle());
-				int totalForfait = totalForfait(utilisateur, categorie);
-				if (totalForfait - duree <= 0) {
-					duree -= totalForfait;
-					supprimerTousForfaitCategorie(utilisateur, categorie);
-				} else {
-					modifierForfaits(utilisateur, categorie, duree);
-				}
+				duree = utiliserForfait(utilisateur, categorie, duree);
+				// int totalForfait = totalForfait(utilisateur, categorie);
+				// if (totalForfait - duree <= 0) {
+				// duree -= totalForfait;
+				// supprimerTousForfaitCategorie(utilisateur, categorie);
+				// } else {
+				// modifierForfaits(utilisateur, categorie, duree);
+				// }
 			}
 			// Si les points fidelite sont utilises
 			if (utiliserPointsFidelite && duree > 0) {
@@ -115,6 +117,38 @@ public class EditerInfosClientMetier {
 			return ajouterPointsFidelite(utilisateur, duree);
 		}
 		return false;
+	}
+
+	/**
+	 * Utilise les forfaits puis supprime les forfaits perimes ou vides.
+	 * 
+	 * @param utilisateur
+	 * @param categorie
+	 * @return
+	 */
+	private int utiliserForfait(Utilisateur utilisateur, Categorie categorie,
+			int duree) {
+		List<Forfait> listeForfait = ForfaitDAO.getInstance()
+				.listerForfaitUtilisateur(utilisateur.getIdUtilisateur(),
+						categorie.getIdCategory());
+		List<Forfait> listeForfaitASupprimer = new ArrayList<Forfait>();
+
+		for (Forfait forfait : listeForfait) {
+			// TODO if FORFAIT PERIME
+
+		}
+
+		if (listeForfaitASupprimer.size() > 0) {
+			supprimerForfaits(listeForfaitASupprimer);
+		}
+
+		return duree;
+	}
+
+	private void supprimerForfaits(List<Forfait> listeForfaits) {
+		for (Forfait forfait : listeForfaits) {
+			ForfaitDAO.getInstance().supprimer(forfait.getIdForfait());
+		}
 	}
 
 	private void modifierForfaits(Utilisateur utilisateur, Categorie categorie,
@@ -168,7 +202,7 @@ public class EditerInfosClientMetier {
 			// on retire tous les points disponibles
 			modificateurPointFidelite = duree
 					* Constantes.CORRESPONDANCE_HEURE_POINTS_FIDELITE
-					+ (utilisateur.getPointFidelite() % Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE);
+					- utilisateur.getPointFidelite();
 		}
 		return UtilisateurDAO.getInstance().retirerFidelite(
 				utilisateur.getIdUtilisateur(), modificateurPointFidelite);

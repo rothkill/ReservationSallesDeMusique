@@ -53,23 +53,24 @@ public class ConfirmationReserverSalleDejaReserveePanel extends JPanel
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
-			try {
-				ReservationMetier.getInstance()
-						.supprimerReservationParDateEtSalle(salle,
-								reservationManuellePanel.getJour(),
-								reservationManuellePanel.getMois(),
-								reservationManuellePanel.getAnnee(),
-								reservationManuellePanel.getHeure());
-			} catch (AucuneSalleSelectionneeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UtilisateurNonSelectionneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (DateIncorrecteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// try {
+			// TODO JBG
+			// ReservationMetier.getInstance()
+			// .supprimerReservationParDateEtSalle(salle,
+			// reservationManuellePanel.getJour(),
+			// reservationManuellePanel.getMois(),
+			// reservationManuellePanel.getAnnee(),
+			// reservationManuellePanel.getHeure());
+			// } catch (AucuneSalleSelectionneeException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (UtilisateurNonSelectionneException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (DateIncorrecteException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 		} else if (actionEvent.getSource() == annuler) {
 			dialog.dispose();
 		}

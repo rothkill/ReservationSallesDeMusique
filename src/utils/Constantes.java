@@ -157,4 +157,14 @@ public class Constantes {
 
 	public static final int CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE = 75;
 
+	/**
+	 * Labels de DatePicker
+	 */
+
+	public static final String MOIS_PICKER = "Mois";
+
+	public static final String ANNEE_PICKER = "Année";
+
+	public static final String JOUR_PICKER = "Aujourd'hui";
+
 }

@@ -1,5 +1,6 @@
 package ihm.visualisation;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -16,12 +17,17 @@ import data.Salle;
  */
 public class ChronologiePanel extends JPanel implements ActionListener {
 
+	List<Salle> listeSalles;
+
 	public ChronologiePanel() {
 		super();
 	}
 
-	public ChronologiePanel(List<Salle> listSalles) {
+	public ChronologiePanel(List<Salle> listeSalles) {
 		super();
+		this.listeSalles = listeSalles;
+		this.setLayout(new GridLayout(0, 1));
+
 		// TODO JBG
 	}
 
@@ -32,11 +38,9 @@ public class ChronologiePanel extends JPanel implements ActionListener {
 	}
 
 	public void recharger(List<Salle> listSalles) {
-		// TODO Auto-generated method stub
-
+		this.removeAll();
+		for (Salle salle : listSalles) {
+			this.add(new ChronologieSallePanel(salle));
+		}
 	}
-
-	// public void paint (Graphics g){
-	// g.setColor(Color.RED);
-	// }
 }

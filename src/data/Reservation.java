@@ -1,8 +1,7 @@
 package data;
 
 import java.util.Date;
-
-import javax.swing.JLabel;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Classe correspondant a la reservation d'une salle.
@@ -108,8 +107,10 @@ public class Reservation {
 	}
 
 	public int getDuree() {
-		return getDateFinReservation().getHours()
-				- getDateDebutReservation().getHours();
+		TimeUnit timeUnit = TimeUnit.HOURS;
+		long diffInMillies = dateFinReservation.getTime()
+				- dateDebutReservation.getTime();
+		return (int) timeUnit.convert(diffInMillies, TimeUnit.HOURS);
 	}
 
 	public String toString() {
