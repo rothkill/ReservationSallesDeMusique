@@ -1,4 +1,4 @@
-package ihm.visualisation;
+package ihm.editerclient;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
