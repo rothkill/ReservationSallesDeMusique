@@ -62,7 +62,8 @@ public class ChronologieSallePanel extends JPanel {
 		}
 
 		g2.drawString(salle.getNom(), 0, 20);
-		g2.setColor(new Color(0, 155, 155));
+		g2.setColor(new Color((int) (Math.random() * (255)), (int) (Math
+				.random() * (255)), (int) (Math.random() * (255)), 128));
 
 		for (Reservation reservation : salle.getListeReservation()) {
 			String format1 = new SimpleDateFormat("HH").format(reservation

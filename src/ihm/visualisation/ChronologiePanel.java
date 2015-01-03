@@ -31,6 +31,7 @@ public class ChronologiePanel extends JPanel {
 		super();
 		this.listeSalles = listeSalles;
 		this.setLayout(new GridLayout(1, 0));
+		this.setVisible(true);
 	}
 
 	/**

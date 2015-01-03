@@ -4,6 +4,7 @@ import ihm.visualisation.formulaire.ReservationManuellePanel;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -152,9 +153,14 @@ public class VisualiserReservationPanel extends JPanel implements
 			// TODO faire une classe pour la frame ?
 			center.recharger(listSalles);
 			JFrame frame = new JFrame("Planning");
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(1, 0));
+			for (Salle salle : listSalles) {
+				panel.add(new ChronologieSallePanel(salle));
+			}
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);
-			frame.getContentPane().add(center);
+			frame.getContentPane().add(panel);
 			frame.setLocationRelativeTo(null);
 			frame.pack();
 
