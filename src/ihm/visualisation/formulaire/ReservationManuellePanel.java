@@ -1,5 +1,6 @@
 package ihm.visualisation.formulaire;
 
+import ihm.alert.AlertPopup;
 import ihm.visualisation.formulaire.confirmation.ConfirmationReserverSalleDejaReserveePanel;
 
 import java.awt.FlowLayout;
@@ -14,6 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -99,7 +101,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				jComboBoxSalles.addItem(salle);
 			}
 		} catch (AucuneSalleSelectionneeException e) {
-			// TODO gerer exception
+			new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -113,7 +115,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				jComboBoxUtilisateur.addItem(utilisateur);
 			}
 		} catch (AucunUtilisateurException e) {
-			// TODO gerer exception
+			new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -142,7 +144,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									duree.getText());
 				}
 			} catch (SalleReserveeException exception) {
-				// TODO gerer salleReservee
+				// TODO
 				JDialog dialog = new JDialog();
 				dialog.getContentPane().add(
 						new ConfirmationReserverSalleDejaReserveePanel(
@@ -151,17 +153,13 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				dialog.setLocationRelativeTo(null);
 				dialog.setVisible(true);
 			} catch (DateIncorrecteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (AucuneSalleSelectionneeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (UtilisateurNonSelectionneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (LundiException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (actionEvent.getSource() == plusieursReservations) {
 			if (plusieursReservations.isSelected()) {

@@ -1,5 +1,6 @@
 package ihm.visualisation;
 
+import ihm.alert.AlertPopup;
 import ihm.visualisation.formulaire.ReservationManuellePanel;
 
 import java.awt.BorderLayout;
@@ -15,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import metier.ReservationMetier;
@@ -39,10 +41,14 @@ import exception.DateIncorrecteException;
 public class VisualiserReservationPanel extends JPanel implements
 		ActionListener {
 
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -8085934538899530099L;
+
 	private JPanel northNorth = new JPanel();
 	private JPanel northSouth = new JPanel();
 	private JPanel north = new JPanel();
-	private ChronologiePanel center = new ChronologiePanel();
 	private JDialog dialog;
 	private JDialog dialogReservation = new JDialog();
 
@@ -54,7 +60,6 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
 	private JLabel slash2 = new JLabel(Constantes.SLASH_LABEL);
 
@@ -95,7 +100,6 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		this.setLayout(new BorderLayout());
 		this.add(north, BorderLayout.NORTH);
-		this.add(informationLabel, BorderLayout.SOUTH);
 
 		retourMenu.addActionListener(this);
 		valider.addActionListener(this);
@@ -151,7 +155,6 @@ public class VisualiserReservationPanel extends JPanel implements
 							(Categorie) jComboBoxCategorie.getSelectedItem());
 
 			// TODO faire une classe pour la frame ?
-			center.recharger(listSalles);
 			JFrame frame = new JFrame("Planning");
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -165,17 +168,11 @@ public class VisualiserReservationPanel extends JPanel implements
 			frame.pack();
 
 		} catch (DateIncorrecteException dateIncorrecteException) {
-			String erreur = Constantes.INFO_ERREUR;
-			erreur = String.format(erreur.replace("?", "%s"),
-					dateIncorrecteException.getMessage());
-			informationLabel.setText(erreur);
+			new AlertPopup(dateIncorrecteException.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
 		} catch (CategorieNonSelectionneeException categorieNonSelectionneeException) {
-			String erreur = Constantes.INFO_ERREUR;
-			erreur = String.format(erreur.replace("?", "%s"),
-					categorieNonSelectionneeException.getMessage());
-			informationLabel.setText(erreur);
+			new AlertPopup(categorieNonSelectionneeException.getMessage(),
+					JOptionPane.ERROR_MESSAGE);
 		}
-
-		this.add(center, BorderLayout.CENTER);
 	}
 }
