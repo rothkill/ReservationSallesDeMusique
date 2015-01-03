@@ -15,9 +15,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-import javax.swing.text.DateFormatter;
-
 import metier.ReservationMetier;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -25,6 +22,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import utils.Constantes;
+import utils.DateLabelFormatter;
 import data.Categorie;
 import data.Salle;
 import exception.CategorieNonSelectionneeException;
@@ -81,7 +79,7 @@ public class VisualiserReservationPanel extends JPanel implements
 		p.put("text.month", Constantes.MOIS_PICKER);
 		p.put("text.year", Constantes.ANNEE_PICKER);
 		datePanel = new JDatePanelImpl(model, p);
-		datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		creerComboCategorie();
 		northNorth.setLayout(new FlowLayout());
