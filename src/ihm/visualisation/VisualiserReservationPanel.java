@@ -52,10 +52,6 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
-	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
-
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
 	private JLabel slash2 = new JLabel(Constantes.SLASH_LABEL);
@@ -85,11 +81,6 @@ public class VisualiserReservationPanel extends JPanel implements
 		northNorth.setLayout(new FlowLayout());
 		northNorth.add(jComboBoxCategorie);
 		northNorth.add(datePicker);
-		// northNorth.add(jour);
-		// northNorth.add(slash);
-		// northNorth.add(mois);
-		// northNorth.add(slash2);
-		// northNorth.add(annee);
 		northNorth.add(valider);
 		northNorth.add(retourMenu);
 

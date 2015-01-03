@@ -1,13 +1,10 @@
 package metier;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import dao.ReservationDAO;
 import dao.UtilisateurDAO;
 import data.Reservation;
-import data.Salle;
 import data.Utilisateur;
 import exception.AucuneReservationNonConfirmeeException;
 import exception.ReservationNonSelectionneeException;
@@ -39,21 +36,11 @@ public class AnnulerReservationMetier {
 	 */
 	public List<Utilisateur> listerUtilisateursEtResNonConfirmees()
 			throws AucuneReservationNonConfirmeeException {
-		// TODO JBG retirer les tests
 		List<Utilisateur> listUtilisateurs = UtilisateurDAO.getInstance()
 				.listerUtilisateursEtResNonConfirmees();
 		if (listUtilisateurs == null || listUtilisateurs.size() <= 0) {
 			throw new AucuneReservationNonConfirmeeException();
 		}
-
-		// Test
-//		List<Utilisateur> listUtilisateurs = new ArrayList<Utilisateur>();
-//		Utilisateur utilisateur = new Utilisateur(1, "util", "tel", 3);
-//		Reservation reservation = new Reservation(1, new Date(), new Date(), 3,
-//				false, new Salle(1, 1, "salle", "etat"), utilisateur);
-//		utilisateur.getListReservationsUtilisateur().add(reservation);
-//		listUtilisateurs.add(utilisateur);
-		//
 		return listUtilisateurs;
 	}
 

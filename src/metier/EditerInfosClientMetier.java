@@ -85,7 +85,6 @@ public class EditerInfosClientMetier {
 			boolean utiliserForfait)
 			throws ReservationNonSelectionneeException,
 			UtilisateurNonSelectionneException {
-		// TODO forfait
 		if (utilisateur == null) {
 			throw new UtilisateurNonSelectionneException();
 		}
@@ -102,13 +101,6 @@ public class EditerInfosClientMetier {
 						.getInstance()
 						.rechercherParSalle(reservation.getSalle().getIdSalle());
 				duree = utiliserForfait(utilisateur, categorie, duree);
-				// int totalForfait = totalForfait(utilisateur, categorie);
-				// if (totalForfait - duree <= 0) {
-				// duree -= totalForfait;
-				// supprimerTousForfaitCategorie(utilisateur, categorie);
-				// } else {
-				// modifierForfaits(utilisateur, categorie, duree);
-				// }
 			}
 			// Si les points fidelite sont utilises
 			if (utiliserPointsFidelite && duree > 0) {
@@ -135,6 +127,10 @@ public class EditerInfosClientMetier {
 
 		for (Forfait forfait : listeForfait) {
 			// TODO if FORFAIT PERIME
+			// recuperer duree du forfai
+			// comparer
+			// utiliser modifierForfaits si le forfait > duree
+			// sinon supprimer forfait et diminuer duree
 
 		}
 
@@ -186,12 +182,7 @@ public class EditerInfosClientMetier {
 	 * @return
 	 */
 	private boolean modifierPointsFidelite(Utilisateur utilisateur, int duree) {
-
 		int modificateurPointFidelite;
-
-		// TODO modifier pour utiliser un modulo sur les pf en fonction de la
-		// duree et des pf
-		// return le prix restant ?
 		if (utilisateur.getPointFidelite()
 				/ Constantes.CORRESPONDANCE_HEURE_GRATUITE_POINTS_FIDELITE >= duree) {
 			// on retire les points de fidelite necessaires
@@ -234,12 +225,5 @@ public class EditerInfosClientMetier {
 			throw new AucunForfaitExistantException();
 		}
 		return listForfaits;
-	}
-
-	/**
-	 * Confirme une reservation en utilisant le forfait de l'utilisateur.
-	 */
-	public void utiliserForfait() {
-		// TODO Auto-generated method stub
 	}
 }

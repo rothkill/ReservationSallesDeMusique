@@ -17,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
-
 import metier.ReservationMetier;
 import metier.UtilisateurMetier;
 
@@ -47,9 +45,6 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
-	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
 	private JTextField heure = new JTextField(Constantes.HH_LABEL);
 	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
 	private JTextField nombreSemaines = new JTextField(
@@ -84,11 +79,6 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		this.add(jComboBoxUtilisateur);
 		this.add(jComboBoxSalles);
 		this.add(datePicker);
-		// this.add(jour);
-		// this.add(slash);
-		// this.add(mois);
-		// this.add(slash2);
-		// this.add(annee);
 		this.add(heure);
 		this.add(duree);
 		this.add(reserverSurDuree);

@@ -72,7 +72,6 @@ public class MainTest {
 		// } catch (ParseException e) {
 		// e.printStackTrace();
 		// } catch (java.text.ParseException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// System.out.println("DateFinReservation  ");
@@ -84,7 +83,6 @@ public class MainTest {
 		// } catch (ParseException e) {
 		// e.printStackTrace();
 		// } catch (java.text.ParseException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// System.out.println("idUtilisateur :  ");
@@ -165,7 +163,6 @@ public class MainTest {
 		// } catch (ParseException e) {
 		// e.printStackTrace();
 		// } catch (java.text.ParseException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// System.out.println("DateFinReservation  ");
@@ -177,7 +174,6 @@ public class MainTest {
 		// } catch (ParseException e) {
 		// e.printStackTrace();
 		// } catch (java.text.ParseException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// System.out.println("idUtilisateur :  ");
