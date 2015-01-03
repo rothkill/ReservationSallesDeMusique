@@ -31,12 +31,14 @@ public class ChronologieSallePanel extends JPanel {
 	/**
 	 * @param salle
 	 * @param La
-	 *            liste des réservations de la journée;
+	 *            liste des réservations de la journée
 	 */
 	public ChronologieSallePanel(Salle salle) {
 		this.salle = salle;
 		// TODO
 		this.setSize(new Dimension(300, 800));
+		this.setVisible(true);
+		this.repaint();
 	}
 
 	@Override
