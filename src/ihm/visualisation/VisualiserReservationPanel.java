@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -93,7 +94,6 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		this.setLayout(new BorderLayout());
 		this.add(north, BorderLayout.NORTH);
-		this.add(center, BorderLayout.CENTER);
 		this.add(informationLabel, BorderLayout.SOUTH);
 
 		retourMenu.addActionListener(this);
@@ -148,7 +148,16 @@ public class VisualiserReservationPanel extends JPanel implements
 			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(
 							(Categorie) jComboBoxCategorie.getSelectedItem());
+
+			// TODO faire une classe pour la frame ?
 			center.recharger(listSalles);
+			JFrame frame = new JFrame("Planning");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setVisible(true);
+			frame.getContentPane().add(center);
+			frame.setLocationRelativeTo(null);
+			frame.pack();
+
 		} catch (DateIncorrecteException dateIncorrecteException) {
 			String erreur = Constantes.INFO_ERREUR;
 			erreur = String.format(erreur.replace("?", "%s"),

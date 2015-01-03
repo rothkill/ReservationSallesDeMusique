@@ -1,11 +1,10 @@
 package ihm.visualisation;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import data.Salle;
 
@@ -15,7 +14,12 @@ import data.Salle;
  * @author grimonprez
  * 
  */
-public class ChronologiePanel extends JPanel implements ActionListener {
+public class ChronologiePanel extends JPanel {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -2789381418305747266L;
 
 	List<Salle> listeSalles;
 
@@ -26,19 +30,17 @@ public class ChronologiePanel extends JPanel implements ActionListener {
 	public ChronologiePanel(List<Salle> listeSalles) {
 		super();
 		this.listeSalles = listeSalles;
-		this.setLayout(new GridLayout(0, 1));
-
-		// TODO JBG
+		this.setLayout(new GridLayout(1, 0));
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO JBG
-
-	}
-
+	/**
+	 * Recharge le planning
+	 * 
+	 * @param listSalles
+	 */
 	public void recharger(List<Salle> listSalles) {
 		this.removeAll();
+		this.listeSalles = listSalles;
 		for (Salle salle : listSalles) {
 			this.add(new ChronologieSallePanel(salle));
 		}

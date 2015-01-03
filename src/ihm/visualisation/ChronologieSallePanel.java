@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,6 +82,8 @@ public class ChronologieSallePanel extends JPanel {
 
 	public static void main(String[] args) {
 		// TODO retirer ce main
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1, 0));
 		JFrame frame = new JFrame();
 		frame.setSize(600, 600);
 		Salle s = new Salle(1, new Categorie(1, "name", 1, 1, 1), "Salle",
@@ -97,8 +100,10 @@ public class ChronologieSallePanel extends JPanel {
 
 		liste.add(r);
 
+		panel.add(new ChronologieSallePanel(s));
+		panel.add(new ChronologieSallePanel(s));
 		s.setListeReservation(liste);
-		frame.getContentPane().add(new ChronologieSallePanel(s));
+		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 	}
 }
