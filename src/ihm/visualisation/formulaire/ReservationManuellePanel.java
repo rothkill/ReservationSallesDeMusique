@@ -16,7 +16,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.DateFormatter;
 
 import metier.ReservationMetier;
 import metier.UtilisateurMetier;
@@ -26,6 +25,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import utils.Constantes;
+import utils.DateLabelFormatter;
 import data.Salle;
 import data.Utilisateur;
 import exception.AucunUtilisateurException;
@@ -45,9 +45,6 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
-	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
 	private JTextField heure = new JTextField(Constantes.HH_LABEL);
 	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
 	private JTextField nombreSemaines = new JTextField(
@@ -76,17 +73,12 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		p.put("text.month", Constantes.MOIS_PICKER);
 		p.put("text.year", Constantes.ANNEE_PICKER);
 		datePanel = new JDatePanelImpl(model, p);
-		datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		this.setLayout(new FlowLayout());
 		this.add(jComboBoxUtilisateur);
 		this.add(jComboBoxSalles);
 		this.add(datePicker);
-		// this.add(jour);
-		// this.add(slash);
-		// this.add(mois);
-		// this.add(slash2);
-		// this.add(annee);
 		this.add(heure);
 		this.add(duree);
 		this.add(reserverSurDuree);

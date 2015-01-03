@@ -14,7 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.text.DateFormatter;
 
 import metier.ReservationMetier;
 
@@ -23,6 +22,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import utils.Constantes;
+import utils.DateLabelFormatter;
 import data.Categorie;
 import data.Salle;
 import exception.CategorieNonSelectionneeException;
@@ -52,10 +52,6 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	// private JTextField jour = new JTextField(Constantes.JJ_LABEL);
-	// private JTextField mois = new JTextField(Constantes.MM_LABEL);
-	// private JTextField annee = new JTextField(Constantes.AAAA_LABEL);
-
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 	private JLabel slash = new JLabel(Constantes.SLASH_LABEL);
 	private JLabel slash2 = new JLabel(Constantes.SLASH_LABEL);
@@ -79,17 +75,12 @@ public class VisualiserReservationPanel extends JPanel implements
 		p.put("text.month", Constantes.MOIS_PICKER);
 		p.put("text.year", Constantes.ANNEE_PICKER);
 		datePanel = new JDatePanelImpl(model, p);
-		datePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		creerComboCategorie();
 		northNorth.setLayout(new FlowLayout());
 		northNorth.add(jComboBoxCategorie);
 		northNorth.add(datePicker);
-		// northNorth.add(jour);
-		// northNorth.add(slash);
-		// northNorth.add(mois);
-		// northNorth.add(slash2);
-		// northNorth.add(annee);
 		northNorth.add(valider);
 		northNorth.add(retourMenu);
 

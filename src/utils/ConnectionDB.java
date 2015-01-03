@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+/**
+ * Classe de connection.
+ *
+ */
 public class ConnectionDB {
 
 	private static ConnectionDB singleton;
@@ -24,14 +27,14 @@ public class ConnectionDB {
 	public void connection() {
 		try {
 			Class.forName(Constantes.DRIVER);
-			con = DriverManager.getConnection(
-					Constantes.CONNECTION, Constantes.LOGIN, Constantes.PASSWORD);
+			con = DriverManager.getConnection(Constantes.CONNECTION,
+					Constantes.LOGIN, Constantes.PASSWORD);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 
@@ -46,8 +49,8 @@ public class ConnectionDB {
 		try {
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 
