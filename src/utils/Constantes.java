@@ -106,8 +106,10 @@ public class Constantes {
 	public static final String CONFIRMER_ANNULATION_RESERVATION_LABEL = "Une réservation existe déjà, confirmer la suppression ?";
 
 	/**
-	 * Labels d'information
+	 * Labels d'information de la popup d'alerte
 	 */
+	public static final String TITRE_POPUP = "Alerte";
+
 	public static final String INFO_LABEL = "Information";
 
 	public static final String INFO_RESERVATION_ANNULEE = "<html><font color='red'>Reservation annulée</font></html>";
