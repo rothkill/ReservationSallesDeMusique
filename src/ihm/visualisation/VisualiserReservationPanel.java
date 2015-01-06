@@ -145,11 +145,6 @@ public class VisualiserReservationPanel extends JPanel implements
 			dialogReservation.setVisible(true);
 
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
-<<<<<<< HEAD
-			// TODO JBG
-=======
-			dialogReservation = new JDialog();
->>>>>>> 9eae90bf7ed80f1751cc09e00a5b0ae3b2a2349e
 			dialogReservation.getContentPane().add(
 					new FormulaireReservationAutoPanel(
 							(Categorie) jComboBoxCategorie.getSelectedItem()));

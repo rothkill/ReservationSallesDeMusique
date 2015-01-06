@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -259,14 +260,14 @@ public class ReservationDAO {
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
 			Date dateDebutReservation, Date dateFinReservation, float tarif) {
 		try {
-			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+			Time dateDebutReservationSQL = new java.sql.Time(
 					dateDebutReservation.getTime());
-			java.sql.Date dateFinReservationSQL = new java.sql.Date(
+			Time dateFinReservationSQL = new java.sql.Time(
 					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
-			st.setDate(1, dateDebutReservationSQL);
-			st.setDate(2, dateFinReservationSQL);
+			st.setTime(1, dateDebutReservationSQL);
+			st.setTime(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);
 			st.setInt(5, idSalle);
