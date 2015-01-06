@@ -155,8 +155,8 @@ public class VisualiserReservationPanel extends JPanel implements
 					.getListeSalleByCategory(
 							categorie);
 			// TODO gérer l'affichage des reservations par salle
-			//List<Reservation> lesReservations = ReservationMetier.getInstance().getListReservation(9, (Date)datePicker.getModel().getValue());
-			System.out.println(lesReservations);
+			List<Reservation> lesReservations = ReservationMetier.getInstance().getListReservation(9, (Date)datePicker.getModel().getValue());
+			//System.out.println(lesReservations);
 			// TODO faire une classe pour la frame ?
 			JFrame frame = new JFrame("Planning");
 			JPanel panel = new JPanel();
