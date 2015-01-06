@@ -289,9 +289,11 @@ public class ReservationMetier {
 			throw new UtilisateurNonSelectionneException();
 		}
 
+		int heureInt = Integer.parseInt(heure);
+		int dureeInt = Integer.parseInt(duree);
+
 		Reservation reservation = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
-		Date dateDebutReservation = null;
 		if (estUnLundi(date)) {
 			throw new LundiException();
 		}
@@ -299,9 +301,22 @@ public class ReservationMetier {
 		List<Salle> listeSalles = SalleDAO.getInstance().lister(
 				categorie.getIdCategory());
 
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR, heureInt);
+		calendar.set(Calendar.MINUTE, 0);
+
+		Date dateDebutReservation = new Date(calendar.getTimeInMillis());
+		calendar.set(Calendar.HOUR, heureInt + dureeInt);
+		Date dateFinReservation = new Date(calendar.getTimeInMillis());
+
 		for (Salle salle : listeSalles) {
 			if (ReservationDAO.getInstance().isSalleReservee(
 					salle.getIdSalle(), dateDebutReservation)) {
+				float tarif = calculerTarif(salle, heureInt, dureeInt);
+				ReservationDAO.getInstance().reserver(
+						utilisateur.getIdUtilisateur(), salle.getIdSalle(),
+						dateDebutReservation, dateFinReservation, tarif);
 				// TODO creation de la reservation
 				// reservation =
 				// ReservationDAO.getInstance().creer(dateReservation,
