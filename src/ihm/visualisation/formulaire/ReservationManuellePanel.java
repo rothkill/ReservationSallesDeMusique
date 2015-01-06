@@ -114,6 +114,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		south.add(plusieursReservations);
 		south.add(nombreSemaines);
 		south.add(valider);
+		// TODO
 
 		this.setLayout(new BorderLayout());
 		this.add(north, BorderLayout.NORTH);
@@ -181,6 +182,7 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									(int) duree.getSelectedItem());
 				}
 			} catch (SalleReserveeException exception) {
+				// TODO
 				JDialog dialog = new JDialog();
 				dialog.getContentPane().add(
 						new ConfirmationReserverSalleDejaReserveePanel(

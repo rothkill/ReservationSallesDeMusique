@@ -141,8 +141,7 @@ public class EditerInfosClientMetier {
 				continue;
 			} else {
 				CarteForfaitDAO.getInstance().modifierCarteForfait(
-						forfait.getForfait().getForfait(),
-						forfait.getUtilisateur().getIdUtilisateur(),
+						forfait.getForfait().getForfait(),forfait.getUtilisateur().getIdUtilisateur(),
 						forfait.getDureeRestante() - duree);
 			}
 		}
@@ -156,10 +155,15 @@ public class EditerInfosClientMetier {
 
 	private void supprimerForfaits(List<CarteForfait> listeForfaits) {
 		for (CarteForfait carteForfait : listeForfaits) {
-			CarteForfaitDAO.getInstance().supprimer(
-					carteForfait.getForfait().getIdForfait(),
-					carteForfait.getUtilisateur().getIdUtilisateur());
+			CarteForfaitDAO.getInstance()
+					.supprimer(carteForfait.getForfait().getIdForfait(),carteForfait.getUtilisateur().getIdUtilisateur());
 		}
+	}
+
+	private void modifierForfaits(Utilisateur utilisateur, Categorie categorie,
+			int duree) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void supprimerTousForfaitCategorie(Utilisateur utilisateur,
