@@ -337,4 +337,8 @@ public class ReservationMetier {
 		calendar.setTime(date);
 		return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
 	}
+
+	public List<Reservation> getListReservation(int idSalle, Date date) {
+		return ReservationDAO.getInstance().listerReservationParDateEtSalle(idSalle, date);
+	}
 }

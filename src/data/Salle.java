@@ -71,7 +71,7 @@ public class Salle {
 		}
 		return listeReservation;
 	}
-
+	
 	public void setListeReservation(List<Reservation> listeReservation) {
 		this.listeReservation = listeReservation;
 	}

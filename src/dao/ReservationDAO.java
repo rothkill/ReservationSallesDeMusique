@@ -128,6 +128,32 @@ public class ReservationDAO {
 		}
 		return liste;
 	}
+	
+	/**
+	 * Liste les reservations a partir d'une salle;
+	 * 
+	 * @param idSalle
+	 * @return
+	 */
+	public List<Reservation> listerReservationParCategorie(Integer idCategorie) {
+		List<Reservation> liste = new ArrayList<Reservation>();
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idreservation,datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,tarif from reservation join salledemusique on salledemusique.idsallemusique = reservation.idsalle where idCategorie = ?");
+			st.setInt(1, idCategorie);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				Reservation r = new Reservation(rs.getInt(1), rs.getDate(2),
+						rs.getDate(3), rs.getDate(4), rs.getBoolean(5), null,
+						UtilisateurDAO.getInstance().rechercher(rs.getInt(6)),
+						rs.getFloat(7));
+				liste.add(r);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return liste;
+	}
 
 	/**
 	 * Supprime toutes les reservations non confirmees dont la date de debut <
@@ -306,6 +332,31 @@ public class ReservationDAO {
 		}
 		return false;
 
+	}
+
+	public List<Reservation> listerReservationParDateEtSalle(int idSalle, Date date) {
+		List<Reservation> listReservations = new ArrayList<Reservation>();
+		java.sql.Date dateRes = new java.sql.Date(
+				date.getTime());
+		System.out.println(dateRes);
+		try {
+			PreparedStatement st = con
+					.prepareStatement("select idreservation,datedebutreservation,datefinreservation,confirmation,idUtilisateur,tarif,datereservation from reservation where idsalle = ? and to_char(datedebutreservation,'DD/MM/YY') <= to_char(?,'DD/MM/YY') and to_char(datefinreservation,'DD/MM/YY') >= to_char(?,'DD/MM/YY')");
+			st.setInt(1, idSalle);
+			st.setDate(2, dateRes);
+			st.setDate(3, dateRes);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				listReservations.add(new Reservation(rs.getInt(1), rs
+						.getDate(7), rs.getDate(2), rs.getDate(3), rs
+						.getBoolean(4), SalleDAO.getInstance().rechercher(
+						idSalle), UtilisateurDAO.getInstance().rechercher(
+						rs.getInt(5)), rs.getFloat(6)));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listReservations;
 	}
 
 }

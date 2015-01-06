@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -28,6 +29,7 @@ import org.jdatepicker.impl.UtilDateModel;
 import utils.Constantes;
 import utils.DateLabelFormatter;
 import data.Categorie;
+import data.Reservation;
 import data.Salle;
 import exception.CategorieNonSelectionneeException;
 import exception.DateIncorrecteException;
@@ -121,13 +123,11 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		// TODO JBG
 
 		if (actionEvent.getSource() == retourMenu) {
 			dialog.dispose();
 		} else if (actionEvent.getSource() == valider) {
 			// TODO JBG
-
 			System.out.println(datePicker.getModel().getValue());
 			rechargerChronologie();
 		} else if (actionEvent.getSource() == jComboBoxCategorie) {
@@ -149,11 +149,14 @@ public class VisualiserReservationPanel extends JPanel implements
 
 	private void rechargerChronologie() {
 		// TODO JBG
+		Categorie categorie = (Categorie) jComboBoxCategorie.getSelectedItem();
 		try {
 			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(
-							(Categorie) jComboBoxCategorie.getSelectedItem());
-
+							categorie);
+			// TODO gérer l'affichage des reservations par salle
+			//List<Reservation> lesReservations = ReservationMetier.getInstance().getListReservation(9, (Date)datePicker.getModel().getValue());
+			System.out.println(lesReservations);
 			// TODO faire une classe pour la frame ?
 			JFrame frame = new JFrame("Planning");
 			JPanel panel = new JPanel();
