@@ -137,6 +137,7 @@ public class VisualiserReservationPanel extends JPanel implements
 			System.out.println(jComboBoxCategorie.getSelectedItem());
 
 		} else if (actionEvent.getSource() == reserverManuellement) {
+			dialogReservation = new JDialog();
 			dialogReservation.getContentPane().add(
 					new ReservationManuellePanel());
 			dialogReservation.pack();
@@ -144,8 +145,7 @@ public class VisualiserReservationPanel extends JPanel implements
 			dialogReservation.setVisible(true);
 
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
-			// TODO JBG
-			System.out.println("gné ?");
+			dialogReservation = new JDialog();
 			dialogReservation.getContentPane().add(
 					new FormulaireReservationAutoPanel(
 							(Categorie) jComboBoxCategorie.getSelectedItem()));
