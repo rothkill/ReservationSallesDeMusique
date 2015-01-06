@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import utils.Constantes;
@@ -82,6 +83,7 @@ public class EditerInfosClientMetier {
 	 * @throws UtilisateurNonSelectionneException
 	 */
 
+	// TODO renvoyer le prix restant a payer au lieu d'un boolean
 	public boolean reservation(Utilisateur utilisateur,
 			Reservation reservation, boolean utiliserPointsFidelite,
 			boolean utiliserForfait)
@@ -128,12 +130,20 @@ public class EditerInfosClientMetier {
 		List<CarteForfait> listeForfaitASupprimer = new ArrayList<CarteForfait>();
 
 		for (CarteForfait forfait : listeForfait) {
-			// TODO if FORFAIT PERIME
-			// recuperer duree du forfai
-			// comparer
-			// utiliser modifierForfaits si le forfait > duree
-			// sinon supprimer forfait et diminuer duree
-
+			// if FORFAIT PERIME
+			if (new Date().compareTo(forfait.getDateFinValidite()) >= 0) {
+				listeForfaitASupprimer.add(forfait);
+				continue;
+			}
+			if (forfait.getDureeRestante() <= duree) {
+				duree -= forfait.getDureeRestante();
+				listeForfaitASupprimer.add(forfait);
+				continue;
+			} else {
+				CarteForfaitDAO.getInstance().modifierCarteForfait(
+						forfait.getIdCarteForfait(),
+						forfait.getDureeRestante() - duree);
+			}
 		}
 
 		if (listeForfaitASupprimer.size() > 0) {
