@@ -3,6 +3,7 @@ package ihm.visualisation.formulaire;
 import ihm.alert.AlertPopup;
 import ihm.visualisation.formulaire.confirmation.ConfirmationReserverSalleDejaReserveePanel;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +39,13 @@ import exception.SalleReserveeException;
 import exception.UtilisateurNonSelectionneException;
 
 public class ReservationManuellePanel extends JPanel implements ActionListener {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 7257789881155476241L;
 
+	private JPanel north = new JPanel();
+	private JPanel south = new JPanel();
 	private JComboBox jComboBoxSalles;
 	private JComboBox jComboBoxUtilisateur;
 
@@ -95,19 +102,23 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		datePanel = new JDatePanelImpl(model, p);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
-		this.setLayout(new FlowLayout());
-		this.add(jComboBoxUtilisateur);
-		this.add(jComboBoxSalles);
-		this.add(datePicker);
-		this.add(horaire);
-		this.add(nombreSemaines);
-		this.add(duree);
-		this.add(reserverSurDuree);
-		this.add(plusieursReservations);
-		this.add(nombreSemaines);
-		this.add(valider);
+		north.setLayout(new FlowLayout());
+		south.setLayout(new FlowLayout());
+
+		north.add(jComboBoxUtilisateur);
+		north.add(jComboBoxSalles);
+		north.add(datePicker);
+		south.add(horaire);
+		south.add(duree);
+		south.add(reserverSurDuree);
+		south.add(plusieursReservations);
+		south.add(nombreSemaines);
+		south.add(valider);
 		// TODO
 
+		this.setLayout(new BorderLayout());
+		this.add(north, BorderLayout.NORTH);
+		this.add(south, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
 
