@@ -47,8 +47,9 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	private JTextField heure = new JTextField(Constantes.HH_LABEL);
-	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
+	private JComboBox horaire = new JComboBox();
+	private JComboBox duree = new JComboBox();
+
 	private JTextField nombreSemaines = new JTextField(
 			Constantes.SEMAINES_LABEL);
 
@@ -64,6 +65,23 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		creerComboSalle();
 		creerComboUtilisateur();
 		nombreSemaines.setEnabled(false);
+
+		horaire.addItem(9);
+		horaire.addItem(10);
+		horaire.addItem(11);
+		horaire.addItem(12);
+		horaire.addItem(13);
+		horaire.addItem(14);
+		horaire.addItem(15);
+		horaire.addItem(16);
+		horaire.addItem(17);
+		horaire.addItem(18);
+		horaire.addItem(19);
+		horaire.addItem(20);
+		horaire.addItem(21);
+		horaire.addItem(22);
+		horaire.addItem(23);
+		horaire.addActionListener(this);
 
 		plusieursReservations.addActionListener(this);
 		valider.addActionListener(this);
@@ -81,7 +99,8 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 		this.add(jComboBoxUtilisateur);
 		this.add(jComboBoxSalles);
 		this.add(datePicker);
-		this.add(heure);
+		this.add(horaire);
+		this.add(nombreSemaines);
 		this.add(duree);
 		this.add(reserverSurDuree);
 		this.add(plusieursReservations);
@@ -121,7 +140,12 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if (actionEvent.getSource() == valider) {
+		if (actionEvent.getSource() == horaire) {
+			duree.removeAllItems();
+			for (int i = 1; i <= (24 - (int) horaire.getSelectedItem()); i++) {
+				duree.addItem(i);
+			}
+		} else if (actionEvent.getSource() == valider) {
 			Date selectedValue = (Date) datePicker.getModel().getValue();
 			try {
 				if (plusieursReservations.isSelected()) {
@@ -131,8 +155,10 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									(Utilisateur) jComboBoxUtilisateur
 											.getSelectedItem(),
 									(Salle) jComboBoxSalles.getSelectedItem(),
-									selectedValue, heure.getText(),
-									duree.getText(), nombreSemaines.getText());
+									selectedValue,
+									(int) horaire.getSelectedItem(),
+									(int) duree.getSelectedItem(),
+									nombreSemaines.getText());
 				} else {
 					ReservationMetier
 							.getInstance()
@@ -140,8 +166,9 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 									(Utilisateur) jComboBoxUtilisateur
 											.getSelectedItem(),
 									(Salle) jComboBoxSalles.getSelectedItem(),
-									selectedValue, heure.getText(),
-									duree.getText());
+									selectedValue,
+									(int) horaire.getSelectedItem(),
+									(int) duree.getSelectedItem());
 				}
 			} catch (SalleReserveeException exception) {
 				// TODO
@@ -168,9 +195,5 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 				nombreSemaines.setEnabled(false);
 			}
 		}
-	}
-
-	public String getHeure() {
-		return heure.getText();
 	}
 }

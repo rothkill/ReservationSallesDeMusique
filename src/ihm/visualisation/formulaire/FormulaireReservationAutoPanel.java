@@ -45,7 +45,7 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 	private JComboBox jComboBoxUtilisateur = new JComboBox();
 	private JComboBox trancheHoraire = new JComboBox();
 
-	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
+	private JComboBox duree = new JComboBox();
 
 	private JLabel dureeLabel = new JLabel(Constantes.DUREE_LABEL);
 	private JLabel heureLabel = new JLabel(Constantes.TRANCHE_HORAIRE_LABEL);
@@ -62,6 +62,10 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 		trancheHoraire.addItem("9");
 		trancheHoraire.addItem("13");
 		trancheHoraire.addItem("20");
+
+		duree.addItem("1");
+		duree.addItem("2");
+		duree.addItem("3");
 
 		// DatePicker
 		model = new UtilDateModel();
@@ -91,7 +95,7 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 						(Utilisateur) jComboBoxUtilisateur.getSelectedItem(),
 						categorie, (Date) datePicker.getModel().getValue(),
 						(String) trancheHoraire.getSelectedItem(),
-						duree.getText());
+						(String) duree.getSelectedItem());
 			} catch (CategorieNonSelectionneeException e) {
 				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (UtilisateurNonSelectionneException e) {

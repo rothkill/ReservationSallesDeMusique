@@ -119,7 +119,7 @@ public class ReservationMetier {
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	// gerer jours feries et week-ends
 	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
-			Date date, String heure, String duree)
+			Date date, int heure, int duree)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException,
 			SalleReserveeException, LundiException {
@@ -130,17 +130,14 @@ public class ReservationMetier {
 			throw new UtilisateurNonSelectionneException();
 		}
 
-		int heureInt = Integer.parseInt(heure);
-		int dureeInt = Integer.parseInt(duree);
-
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.set(Calendar.HOUR, heureInt);
+		calendar.set(Calendar.HOUR, heure);
 		calendar.set(Calendar.MINUTE, 0);
 
 		try {
 			Date dateDebutReservation = new Date(calendar.getTimeInMillis());
-			calendar.set(Calendar.HOUR, heureInt + dureeInt);
+			calendar.set(Calendar.HOUR, heure + duree);
 			Date dateFinReservation = new Date(calendar.getTimeInMillis());
 			if (estUnLundi(dateDebutReservation)) {
 				throw new LundiException();
@@ -155,7 +152,7 @@ public class ReservationMetier {
 				throw new SalleReserveeException();
 			}
 
-			float tarif = calculerTarif(salle, heureInt, dureeInt);
+			float tarif = calculerTarif(salle, heure, duree);
 
 			return ReservationDAO.getInstance().reserver(
 					utilisateur.getIdUtilisateur(), salle.getIdSalle(),
@@ -201,7 +198,7 @@ public class ReservationMetier {
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
-			Date date, String heure, String duree, String nbSemaines)
+			Date date, int heure, int duree, String nbSemaines)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, LundiException {
 		if (salle == null) {
