@@ -59,9 +59,9 @@ public class ChronologieSallePanel extends JPanel {
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 		graphics.setColor(Color.BLACK);
 
-		for (int i = 50; i <= 750; i += 50) {
+		for (int i = 50; i <= 800; i += 50) {
 			graphics.drawLine(0, i, 300, i);
-			g2.drawString("" + ((i / 50) + 8), 0, i - 10);
+			g2.drawString("" + ((i / 50) + 7), 0, i - 10);
 		}
 
 		g2.drawString(salle.getNom(), 0, 20);
@@ -81,7 +81,8 @@ public class ChronologieSallePanel extends JPanel {
 
 			if (new Date().compareTo(reservation.getDateReservation()) >= 0) {
 				// TODO verifier si reservation non confirmee
-				graphics.drawString("X", 0, (debut - 8) * 50);
+				graphics.setColor(Color.BLACK);
+				graphics.drawLine(0, (debut - 8) * 50, 300, ((fin - 8) * 50));
 			}
 
 		}
