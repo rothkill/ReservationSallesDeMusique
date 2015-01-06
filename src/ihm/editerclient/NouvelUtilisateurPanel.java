@@ -1,5 +1,7 @@
 package ihm.editerclient;
 
+import ihm.alert.AlertPopup;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -33,7 +36,6 @@ public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 	private JComboBox jComboBoxForfait;
 
 	public NouvelUtilisateurPanel() {
-		// TODO Auto-generated constructor stub
 
 		creerComboForfait();
 
@@ -62,7 +64,7 @@ public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 				jComboBoxForfait.addItem(forfait);
 			}
 		} catch (AucunForfaitExistantException exception) {
-			// TODO gererErreur
+			new AlertPopup(exception.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -73,16 +75,16 @@ public class NouvelUtilisateurPanel extends JPanel implements ActionListener {
 				if (UtilisateurMetier.getInstance().creerUtilisateur(
 						nomTextField.getText(), telTextField.getText(),
 						(Forfait) jComboBoxForfait.getSelectedItem())) {
-					// TODO gerer
+					new AlertPopup(Constantes.UTILISATEUR_CREE,
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					// TODO gerer
+					new AlertPopup(Constantes.UTILISATEUR_NON_CREE,
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (UtilisateurNonSelectionneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (ForfaitNonSelectionneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

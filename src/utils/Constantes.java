@@ -153,6 +153,10 @@ public class Constantes {
 
 	public static final String SALLE_RESEVEE_EXCEPTION = "Salle déjà réservée";
 
+	public static final String UTILISATEUR_CREE = "Utilisateur crée";
+	
+	public static final String UTILISATEUR_NON_CREE = "Utilisateur non crée";
+	
 	/**
 	 * Constantes liees au fonctionnement de l'application
 	 */

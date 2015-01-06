@@ -85,7 +85,6 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		// TODO JBG
 		if (actionEvent.getSource() == retourMenu) {
 			frame.getContentPane().removeAll();
 			frame.getContentPane().add(new MenuPanel(frame));

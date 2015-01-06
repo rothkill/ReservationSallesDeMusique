@@ -45,7 +45,6 @@ public class ChronologieSallePanel extends JPanel {
 	public ChronologieSallePanel(Salle salle, List<Reservation> lesReservations) {
 		this.salle = salle;
 		this.lesReservations = lesReservations;
-		// TODO
 		this.setSize(new Dimension(300, 800));
 		this.setVisible(true);
 		this.repaint();
@@ -80,7 +79,6 @@ public class ChronologieSallePanel extends JPanel {
 					(((fin - 8) * 50) - (debut - 8) * 50));
 
 			if (new Date().compareTo(reservation.getDateReservation()) >= 0) {
-				// TODO verifier si reservation non confirmee
 				graphics.setColor(Color.BLACK);
 				graphics.drawLine(0, (debut - 8) * 50, 300, ((fin - 8) * 50));
 			}

@@ -1,5 +1,7 @@
 package ihm.editerclient;
 
+import ihm.alert.AlertPopup;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import utils.Constantes;
@@ -30,8 +33,6 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 	private JButton valider = new JButton(Constantes.VALIDER);
 
 	public AchatForfaitPanel(EditerInfosClientPanel editerInfosClientPanel) {
-		// TODO Auto-generated constructor stub
-
 		this.editerInfosClientPanel = editerInfosClientPanel;
 
 		creerComboForfait();
@@ -49,7 +50,6 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == valider) {
-			System.out.println("gné");
 			try {
 				if (UtilisateurMetier.getInstance().attacherForfaitUtilisateur(
 						editerInfosClientPanel.getCurrentUtilisateur(),
@@ -57,11 +57,9 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 
 				}
 			} catch (UtilisateurNonSelectionneException e) {
-				// TODO gerer exception
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (ForfaitNonSelectionneException e) {
-				// TODO gerer exception
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -76,7 +74,7 @@ public class AchatForfaitPanel extends JPanel implements ActionListener {
 				jComboBoxForfait.addItem(forfait);
 			}
 		} catch (AucunForfaitExistantException exception) {
-			// TODO gererErreur
+			new AlertPopup(exception.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

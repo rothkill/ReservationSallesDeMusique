@@ -1,5 +1,7 @@
 package ihm.editerclient;
 
+import ihm.alert.AlertPopup;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import metier.EditerInfosClientMetier;
@@ -65,25 +68,11 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 							utilisateur, reservation, fidelite.isSelected(),
 							forfait.isSelected());
 				} catch (UtilisateurNonSelectionneException e) {
-					// TODO gerer erreur
-					e.printStackTrace();
+					new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			// else if (actionEvent.getSource() == fidelite) {
-			// try {
-			// EditerInfosClientMetier.getInstance().reservation(
-			// utilisateur, reservation, true);
-			// } catch (UtilisateurNonSelectionneException e) {
-			// // TODO gerer erreur
-			// e.printStackTrace();
-			// }
-			// } else if (actionEvent.getSource() == fidelite) {
-			// // TODO
-			// EditerInfosClientMetier.getInstance().utiliserForfait();
-			// }
 		} catch (ReservationNonSelectionneeException e) {
-			// TODO gerer erreur
-			e.printStackTrace();
+			new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
