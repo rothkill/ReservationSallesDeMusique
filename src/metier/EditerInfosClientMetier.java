@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.Constantes;
+import dao.CarteForfaitDAO;
 import dao.CategorieDAO;
 import dao.ForfaitDAO;
 import dao.ReservationDAO;
 import dao.UtilisateurDAO;
+import data.CarteForfait;
 import data.Categorie;
 import data.Forfait;
 import data.Reservation;
@@ -120,12 +122,12 @@ public class EditerInfosClientMetier {
 	 */
 	private int utiliserForfait(Utilisateur utilisateur, Categorie categorie,
 			int duree) {
-		List<Forfait> listeForfait = ForfaitDAO.getInstance()
-				.listerForfaitUtilisateur(utilisateur.getIdUtilisateur(),
+		List<CarteForfait> listeForfait = CarteForfaitDAO.getInstance()
+				.listerParUtilisateurCategorie(utilisateur.getIdUtilisateur(),
 						categorie.getIdCategory());
-		List<Forfait> listeForfaitASupprimer = new ArrayList<Forfait>();
+		List<CarteForfait> listeForfaitASupprimer = new ArrayList<CarteForfait>();
 
-		for (Forfait forfait : listeForfait) {
+		for (CarteForfait forfait : listeForfait) {
 			// TODO if FORFAIT PERIME
 			// recuperer duree du forfai
 			// comparer
@@ -141,9 +143,10 @@ public class EditerInfosClientMetier {
 		return duree;
 	}
 
-	private void supprimerForfaits(List<Forfait> listeForfaits) {
-		for (Forfait forfait : listeForfaits) {
-			ForfaitDAO.getInstance().supprimer(forfait.getIdForfait());
+	private void supprimerForfaits(List<CarteForfait> listeForfaits) {
+		for (CarteForfait forfait : listeForfaits) {
+			CarteForfaitDAO.getInstance()
+					.supprimer(forfait.getIdCarteForfait());
 		}
 	}
 
