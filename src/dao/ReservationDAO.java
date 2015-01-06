@@ -260,14 +260,14 @@ public class ReservationDAO {
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
 			Date dateDebutReservation, Date dateFinReservation, float tarif) {
 		try {
-			Time dateDebutReservationSQL = new java.sql.Time(
+			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
 					dateDebutReservation.getTime());
-			Time dateFinReservationSQL = new java.sql.Time(
+			java.sql.Date dateFinReservationSQL = new java.sql.Date(
 					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
-			st.setTime(1, dateDebutReservationSQL);
-			st.setTime(2, dateFinReservationSQL);
+			st.setDate(1, dateDebutReservationSQL);
+			st.setDate(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);
 			st.setInt(5, idSalle);
