@@ -141,7 +141,7 @@ public class EditerInfosClientMetier {
 				continue;
 			} else {
 				CarteForfaitDAO.getInstance().modifierCarteForfait(
-						forfait.getIdCarteForfait(),
+						forfait.getForfait().getForfait(),forfait.getUtilisateur().getIdUtilisateur(),
 						forfait.getDureeRestante() - duree);
 			}
 		}
