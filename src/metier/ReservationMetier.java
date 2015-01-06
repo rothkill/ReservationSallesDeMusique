@@ -278,8 +278,7 @@ public class ReservationMetier {
 	 * @throws LundiException
 	 */
 	public Reservation reservationAutomatique(Utilisateur utilisateur,
-			Categorie categorie, String jour, String mois, String annee,
-			String heure, String duree)
+			Categorie categorie, Date date, String heure, String duree)
 			throws CategorieNonSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException,
 			SalleReserveeException, LundiException {
@@ -291,19 +290,10 @@ public class ReservationMetier {
 		}
 
 		Reservation reservation = null;
-		String dateDebut = jour + mois + annee + heure;
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
 		Date dateDebutReservation = null;
-		try {
-			dateDebutReservation = sdf.parse(dateDebut);
-			if (estUnLundi(dateDebutReservation)) {
-				throw new LundiException();
-			}
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DateIncorrecteException();
+		if (estUnLundi(date)) {
+			throw new LundiException();
 		}
 
 		List<Salle> listeSalles = SalleDAO.getInstance().lister(
@@ -339,6 +329,7 @@ public class ReservationMetier {
 	}
 
 	public List<Reservation> getListReservation(int idSalle, Date date) {
-		return ReservationDAO.getInstance().listerReservationParDateEtSalle(idSalle, date);
+		return ReservationDAO.getInstance().listerReservationParDateEtSalle(
+				idSalle, date);
 	}
 }

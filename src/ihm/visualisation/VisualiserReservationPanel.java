@@ -1,6 +1,7 @@
 package ihm.visualisation;
 
 import ihm.alert.AlertPopup;
+import ihm.visualisation.formulaire.FormulaireReservationAutoPanel;
 import ihm.visualisation.formulaire.ReservationManuellePanel;
 
 import java.awt.BorderLayout;
@@ -143,7 +144,13 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
 			// TODO JBG
-
+			System.out.println("gné ?");
+			dialogReservation.getContentPane().add(
+					new FormulaireReservationAutoPanel(
+							(Categorie) jComboBoxCategorie.getSelectedItem()));
+			dialogReservation.pack();
+			dialogReservation.setLocationRelativeTo(null);
+			dialogReservation.setVisible(true);
 		}
 	}
 
@@ -152,11 +159,12 @@ public class VisualiserReservationPanel extends JPanel implements
 		Categorie categorie = (Categorie) jComboBoxCategorie.getSelectedItem();
 		try {
 			List<Salle> listSalles = ReservationMetier.getInstance()
-					.getListeSalleByCategory(
-							categorie);
+					.getListeSalleByCategory(categorie);
 			// TODO gérer l'affichage des reservations par salle
-			List<Reservation> lesReservations = ReservationMetier.getInstance().getListReservation(9, (Date)datePicker.getModel().getValue());
-			//System.out.println(lesReservations);
+			List<Reservation> lesReservations = ReservationMetier.getInstance()
+					.getListReservation(9,
+							(Date) datePicker.getModel().getValue());
+			// System.out.println(lesReservations);
 			// TODO faire une classe pour la frame ?
 			JFrame frame = new JFrame("Planning");
 			JPanel panel = new JPanel();
