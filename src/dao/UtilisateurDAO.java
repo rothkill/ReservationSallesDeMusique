@@ -87,7 +87,7 @@ public class UtilisateurDAO {
 
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select distinct idutilisateur from reservation where confirmation = ?");
+					.prepareStatement("select idutilisateur from reservation where confirmation = ?");
 			st.setBoolean(1, false);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
