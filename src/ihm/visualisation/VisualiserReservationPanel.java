@@ -171,7 +171,6 @@ public class VisualiserReservationPanel extends JPanel implements
 				lesReservations = ReservationMetier.getInstance()
 						.getListReservation(salle.getIdSalle(),
 								(Date) datePicker.getModel().getValue());
-				System.out.println(salle.getIdSalle());
 				panel.add(new ChronologieSallePanel(salle));
 			}
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -179,7 +178,7 @@ public class VisualiserReservationPanel extends JPanel implements
 			frame.getContentPane().add(panel);
 			frame.setLocationRelativeTo(null);
 			frame.pack();
-
+			
 		} catch (DateIncorrecteException dateIncorrecteException) {
 			new AlertPopup(dateIncorrecteException.getMessage(),
 					JOptionPane.ERROR_MESSAGE);
