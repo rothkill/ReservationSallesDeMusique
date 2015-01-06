@@ -4,6 +4,7 @@ import ihm.alert.AlertPopup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -42,12 +43,12 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 	private JDatePickerImpl datePicker;
 
 	private JComboBox jComboBoxUtilisateur = new JComboBox();
+	private JComboBox trancheHoraire = new JComboBox();
 
 	private JTextField duree = new JTextField(Constantes.DUREE_LABEL);
-	private JTextField heure = new JTextField(Constantes.HH_LABEL);
 
 	private JLabel dureeLabel = new JLabel(Constantes.DUREE_LABEL);
-	private JLabel heureLabel = new JLabel(Constantes.HH_LABEL);
+	private JLabel heureLabel = new JLabel(Constantes.TRANCHE_HORAIRE_LABEL);
 
 	private JButton valider = new JButton(Constantes.VALIDER);
 
@@ -57,6 +58,10 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 		this.categorie = categorie;
 
 		creerComboUtilisateur();
+
+		trancheHoraire.addItem("9");
+		trancheHoraire.addItem("13");
+		trancheHoraire.addItem("20");
 
 		// DatePicker
 		model = new UtilDateModel();
@@ -73,7 +78,7 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 		this.add(dureeLabel);
 		this.add(duree);
 		this.add(heureLabel);
-		this.add(heure);
+		this.add(trancheHoraire);
 
 		this.add(valider);
 	}
@@ -85,7 +90,8 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 				ReservationMetier.getInstance().reservationAutomatique(
 						(Utilisateur) jComboBoxUtilisateur.getSelectedItem(),
 						categorie, (Date) datePicker.getModel().getValue(),
-						heure.getText(), duree.getText());
+						(String) trancheHoraire.getSelectedItem(),
+						duree.getText());
 			} catch (CategorieNonSelectionneeException e) {
 				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (UtilisateurNonSelectionneException e) {

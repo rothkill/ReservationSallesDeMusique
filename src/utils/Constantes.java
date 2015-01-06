@@ -94,6 +94,8 @@ public class Constantes {
 	public static final String HH_LABEL = "HH";
 
 	public static final String DUREE_LABEL = "durée";
+	
+	public static final String TRANCHE_HORAIRE_LABEL = "tranche horaire : ";
 
 	public static final String SEMAINES_LABEL = "nb semaines";
 
