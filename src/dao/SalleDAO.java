@@ -49,7 +49,7 @@ public class SalleDAO {
 		Salle salle = null;
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select idcategorie,nom,etat from salle where idsalle = ?");
+					.prepareStatement("select idcategorie,nom,etat from salledemusique where idsallemusique = ?");
 			st.setInt(1, idSalle);
 			ResultSet rs = st.executeQuery();
 			if (rs.next() != false) {
@@ -57,7 +57,6 @@ public class SalleDAO {
 						.rechercher(rs.getInt(1)), rs.getString(2),
 						rs.getString(3));
 			}
-
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}

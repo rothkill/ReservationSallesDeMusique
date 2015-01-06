@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -160,16 +161,17 @@ public class VisualiserReservationPanel extends JPanel implements
 		try {
 			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(categorie);
+			List<Reservation> lesReservations = new ArrayList<Reservation>();
 			// TODO gérer l'affichage des reservations par salle
-			List<Reservation> lesReservations = ReservationMetier.getInstance()
-					.getListReservation(9,
-							(Date) datePicker.getModel().getValue());
-			// System.out.println(lesReservations);
 			// TODO faire une classe pour la frame ?
 			JFrame frame = new JFrame("Planning");
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
 			for (Salle salle : listSalles) {
+				lesReservations = ReservationMetier.getInstance()
+						.getListReservation(salle.getIdSalle(),
+								(Date) datePicker.getModel().getValue());
+				System.out.println(salle.getIdSalle());
 				panel.add(new ChronologieSallePanel(salle));
 			}
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

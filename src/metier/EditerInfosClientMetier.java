@@ -144,9 +144,9 @@ public class EditerInfosClientMetier {
 	}
 
 	private void supprimerForfaits(List<CarteForfait> listeForfaits) {
-		for (CarteForfait forfait : listeForfaits) {
+		for (CarteForfait carteForfait : listeForfaits) {
 			CarteForfaitDAO.getInstance()
-					.supprimer(forfait.getIdCarteForfait());
+					.supprimer(carteForfait.getForfait().getIdForfait(),carteForfait.getUtilisateur().getIdUtilisateur());
 		}
 	}
 

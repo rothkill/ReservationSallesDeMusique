@@ -10,7 +10,6 @@ import java.util.Date;
  */
 public class CarteForfait {
 
-	private int idCarteForfait;
 	private Date dateAchat;
 	private Date dateFinValidite;
 	private int dureeRestante;
@@ -21,20 +20,11 @@ public class CarteForfait {
 			Date dateFinValidite, int dureeRestante, Forfait forfait,
 			Utilisateur utilisateur) {
 		super();
-		this.idCarteForfait = idCarteForfait;
 		this.dateAchat = dateAchat;
 		this.dateFinValidite = dateFinValidite;
 		this.dureeRestante = dureeRestante;
 		this.forfait = forfait;
 		this.utilisateur = utilisateur;
-	}
-
-	public int getIdCarteForfait() {
-		return idCarteForfait;
-	}
-
-	public void setIdCarteForfait(int idCarteForfait) {
-		this.idCarteForfait = idCarteForfait;
 	}
 
 	public Date getDateAchat() {

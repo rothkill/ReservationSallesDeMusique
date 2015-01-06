@@ -79,7 +79,7 @@ public class ForfaitDAO {
 		return cal.getTime();
 	}
 
-	private Forfait rechercher(Integer idForfait) {
+	public Forfait rechercher(Integer idForfait) {
 		try {
 			PreparedStatement st = con
 					.prepareStatement("select forfait,validite,idcategorie,prix from forfait where idforfait = ?");
