@@ -172,7 +172,7 @@ public class VisualiserReservationPanel extends JPanel implements
 						.getListReservation(salle.getIdSalle(),
 								(Date) datePicker.getModel().getValue());
 				System.out.println(salle.getIdSalle());
-				panel.add(new ChronologieSallePanel(salle));
+				panel.add(new ChronologieSallePanel(salle, lesReservations));
 			}
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);

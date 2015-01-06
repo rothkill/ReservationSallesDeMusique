@@ -35,13 +35,16 @@ public class ChronologieSallePanel extends JPanel {
 
 	protected Salle salle;
 
+	protected List<Reservation> lesReservations;
+
 	/**
 	 * @param salle
 	 * @param La
 	 *            liste des réservations de la journée
 	 */
-	public ChronologieSallePanel(Salle salle) {
+	public ChronologieSallePanel(Salle salle, List<Reservation> lesReservations) {
 		this.salle = salle;
+		this.lesReservations = lesReservations;
 		// TODO
 		this.setSize(new Dimension(300, 800));
 		this.setVisible(true);
@@ -64,7 +67,7 @@ public class ChronologieSallePanel extends JPanel {
 		g2.drawString(salle.getNom(), 0, 20);
 		g2.setColor(new Color((int) (Math.random() * (255)), (int) (Math
 				.random() * (255)), (int) (Math.random() * (255)), 128));
-		for (Reservation reservation : salle.getListeReservation()) {
+		for (Reservation reservation : lesReservations) {
 			String format1 = new SimpleDateFormat("HH").format(reservation
 					.getDateDebutReservation());
 			int debut = Integer.parseInt(format1);
@@ -76,34 +79,12 @@ public class ChronologieSallePanel extends JPanel {
 			g2.fillRect(0, ((debut - 8) * 50), 300,
 					(((fin - 8) * 50) - (debut - 8) * 50));
 
+			if (new Date().compareTo(reservation.getDateReservation()) >= 0) {
+				// TODO verifier si reservation non confirmee
+				graphics.drawString("X", 0, (debut - 8) * 50);
+			}
+
 		}
 
-	}
-
-	public static void main(String[] args) {
-		// TODO retirer ce main
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 0));
-		JFrame frame = new JFrame();
-		frame.setSize(600, 600);
-		Salle s = new Salle(1, new Categorie(1, "name", 1, 1, 1), "Salle",
-				"Sale");
-		List<Reservation> liste = new ArrayList<Reservation>();
-
-		Calendar cal = Calendar.getInstance(); // creates calendar
-		cal.setTime(new Date()); // sets calendar time/date
-		cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-		cal.getTime(); // returns new date object, one hour in the future
-
-		Reservation r = new Reservation(1, new Date(), new Date(),
-				cal.getTime(), true, s, new Utilisateur(1, "name", "tel", 0), 0);
-
-		liste.add(r);
-
-		panel.add(new ChronologieSallePanel(s));
-		panel.add(new ChronologieSallePanel(s));
-		s.setListeReservation(liste);
-		frame.getContentPane().add(panel);
-		frame.setVisible(true);
 	}
 }
