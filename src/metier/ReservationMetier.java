@@ -6,9 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import utils.Constantes;
 import dao.CategorieDAO;
 import dao.ReservationDAO;
 import dao.SalleDAO;
+import dao.UtilisateurDAO;
 import data.Categorie;
 import data.Reservation;
 import data.Salle;
@@ -222,6 +224,11 @@ public class ReservationMetier {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+
+		if (Integer.parseInt(nbSemaines) >= 4) {
+			UtilisateurDAO.getInstance().ajouterFidelite(
+					utilisateur.getIdUtilisateur(), 30);
 		}
 		return true;
 	}
