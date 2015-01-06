@@ -145,7 +145,6 @@ public class VisualiserReservationPanel extends JPanel implements
 
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
 			// TODO JBG
-			System.out.println("gné ?");
 			dialogReservation.getContentPane().add(
 					new FormulaireReservationAutoPanel(
 							(Categorie) jComboBoxCategorie.getSelectedItem()));
