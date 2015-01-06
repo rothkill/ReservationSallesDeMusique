@@ -347,7 +347,7 @@ public class ReservationDAO {
 			st.setDate(3, dateRes);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				listReservations.add(new Reservation(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getDate(4),rs.getBoolean(5),SalleDAO.getInstance().rechercher(idSalle),UtilisateurDAO.getInstance().rechercher(rs.getInt(6)),rs.getFloat(7)));
+				listReservations.add(new Reservation(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getBoolean(5),SalleDAO.getInstance().rechercher(idSalle),UtilisateurDAO.getInstance().rechercher(rs.getInt(6)),rs.getFloat(7)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
