@@ -58,26 +58,25 @@ public class MenuPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getSource() == visualiserReservationsEtReserver) {
-			dialog.getContentPane().removeAll();
-			dialog.getContentPane().add(new VisualiserReservationPanel(dialog));
-			dialog.setLocationRelativeTo(null);
-			dialog.setTitle(Constantes.VISUALISER_RESERVATION);
-			dialog.pack();
-			dialog.setVisible(true);
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(
+					new VisualiserReservationPanel(dialog, frame));
+			frame.setTitle(Constantes.VISUALISER_RESERVATION);
+			frame.pack();
+			frame.setVisible(true);
 		} else if (actionEvent.getSource() == editerClient) {
-			dialog.getContentPane().removeAll();
-			dialog.getContentPane().add(new EditerInfosClientPanel(dialog));
-			dialog.setLocationRelativeTo(null);
-			dialog.setTitle(Constantes.EDITER_INFO_CLIENT);
-			dialog.pack();
-			dialog.setVisible(true);
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new EditerInfosClientPanel(dialog, frame));
+			frame.setTitle(Constantes.EDITER_INFO_CLIENT);
+			frame.pack();
+			frame.setVisible(true);
 		} else if (actionEvent.getSource() == annulationReservation) {
-			dialog.getContentPane().removeAll();
-			dialog.getContentPane().add(new AnnulerReservationPanel(dialog));
-			dialog.setLocationRelativeTo(null);
-			dialog.setTitle(Constantes.ANNULATION_RESERVATION);
-			dialog.pack();
-			dialog.setVisible(true);
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(
+					new AnnulerReservationPanel(dialog, frame));
+			frame.setTitle(Constantes.ANNULATION_RESERVATION);
+			frame.pack();
+			frame.setVisible(true);
 		}
 
 	}

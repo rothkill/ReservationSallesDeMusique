@@ -1,5 +1,7 @@
 package ihm.editerclient;
 
+import ihm.MenuPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,6 +27,8 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 
 	private JDialog dialog;
 
+	private JFrame frame;
+
 	private JPanel north = new JPanel();
 
 	private JComboBox jComboBoxUtilisateur = new JComboBox();
@@ -36,8 +41,9 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
-	public EditerInfosClientPanel(JDialog dialog) {
+	public EditerInfosClientPanel(JDialog dialog, JFrame frame) {
 		this.dialog = dialog;
+		this.frame = frame;
 
 		creerComboUtilisateur();
 
@@ -81,7 +87,11 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		// TODO JBG
 		if (actionEvent.getSource() == retourMenu) {
-			this.dialog.dispose();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new MenuPanel(frame));
+			frame.setTitle(Constantes.ANNULATION_RESERVATION);
+			frame.pack();
+			frame.setVisible(true);
 		} else if (actionEvent.getSource() == acheterForfait) {
 			rafraichissement();
 			this.add(new AchatForfaitPanel(this), BorderLayout.CENTER);
