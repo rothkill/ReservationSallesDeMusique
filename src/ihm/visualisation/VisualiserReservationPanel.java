@@ -1,5 +1,6 @@
 package ihm.visualisation;
 
+import ihm.MenuPanel;
 import ihm.alert.AlertPopup;
 import ihm.visualisation.formulaire.FormulaireReservationAutoPanel;
 import ihm.visualisation.formulaire.ReservationManuellePanel;
@@ -50,6 +51,8 @@ public class VisualiserReservationPanel extends JPanel implements
 	 */
 	private static final long serialVersionUID = -8085934538899530099L;
 
+	private JFrame frame;
+
 	private JPanel northNorth = new JPanel();
 	private JPanel northSouth = new JPanel();
 	private JPanel north = new JPanel();
@@ -74,8 +77,9 @@ public class VisualiserReservationPanel extends JPanel implements
 	private JButton reserverAutomatiquement = new JButton(
 			Constantes.RESERVER_AUTOMATIQUEMENT);
 
-	public VisualiserReservationPanel(JDialog dialog) {
+	public VisualiserReservationPanel(JDialog dialog, JFrame frame) {
 		this.dialog = dialog;
+		this.frame = frame;
 
 		north.setLayout(new BorderLayout());
 
@@ -127,7 +131,11 @@ public class VisualiserReservationPanel extends JPanel implements
 	public void actionPerformed(ActionEvent actionEvent) {
 
 		if (actionEvent.getSource() == retourMenu) {
-			dialog.dispose();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new MenuPanel(frame));
+			frame.setTitle(Constantes.ANNULATION_RESERVATION);
+			frame.pack();
+			frame.setVisible(true);
 		} else if (actionEvent.getSource() == valider) {
 			// TODO JBG
 			System.out.println(datePicker.getModel().getValue());
@@ -137,20 +145,25 @@ public class VisualiserReservationPanel extends JPanel implements
 			System.out.println(jComboBoxCategorie.getSelectedItem());
 
 		} else if (actionEvent.getSource() == reserverManuellement) {
-			dialogReservation = new JDialog();
-			dialogReservation.getContentPane().add(
-					new ReservationManuellePanel());
-			dialogReservation.pack();
-			dialogReservation.setLocationRelativeTo(null);
-			dialogReservation.setVisible(true);
-
+			this.removeAll();
+			this.add(north, BorderLayout.NORTH);
+			this.add(new ReservationManuellePanel());
+			frame.pack();
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
+
 			dialogReservation.getContentPane().add(
 					new FormulaireReservationAutoPanel(
 							(Categorie) jComboBoxCategorie.getSelectedItem()));
 			dialogReservation.pack();
 			dialogReservation.setLocationRelativeTo(null);
 			dialogReservation.setVisible(true);
+
+			this.removeAll();
+			this.add(north, BorderLayout.NORTH);
+			this.add(new FormulaireReservationAutoPanel(
+					(Categorie) jComboBoxCategorie.getSelectedItem()));
+			frame.pack();
+
 		}
 	}
 

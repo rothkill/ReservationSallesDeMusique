@@ -1,5 +1,7 @@
 package ihm.annulation;
 
+import ihm.MenuPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,6 +34,8 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = -6499200575552265318L;
 
+	private JFrame frame;
+
 	private JDialog dialog;
 
 	private JPanel center = new JPanel();
@@ -44,8 +49,10 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
-	public AnnulerReservationPanel(JDialog dialog) {
+	public AnnulerReservationPanel(JDialog dialog, final JFrame frame) {
 		// TODO JBG
+
+		this.frame = frame;
 
 		this.dialog = dialog;
 
@@ -93,7 +100,11 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 				this.repaint();
 			}
 		} else if (actionEvent.getSource() == retourMenu) {
-			dialog.dispose();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new MenuPanel(frame));
+			frame.setTitle(Constantes.ANNULATION_RESERVATION);
+			frame.pack();
+			frame.setVisible(true);
 		}
 
 		// TODO JBG messages erreur/reussite
