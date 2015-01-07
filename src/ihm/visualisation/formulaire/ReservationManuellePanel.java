@@ -205,4 +205,12 @@ public class ReservationManuellePanel extends JPanel implements ActionListener {
 			}
 		}
 	}
+
+	public Date getDate() {
+		return (Date) datePicker.getModel().getValue();
+	}
+
+	public int getHeure() {
+		return (int) horaire.getSelectedItem();
+	}
 }

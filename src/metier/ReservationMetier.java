@@ -99,8 +99,7 @@ public class ReservationMetier {
 	 * @throws UtilisateurNonSelectionneException
 	 * @throws DateIncorrecteException
 	 */
-	public boolean supprimerReservationParDateEtSalle(Salle salle, String jour,
-			String mois, String annee, String heure)
+	public boolean supprimerReservationParDateEtSalle(Salle salle, Date date, int heure)
 			throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException {
 		if (salle == null) {
