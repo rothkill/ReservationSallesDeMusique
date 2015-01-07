@@ -115,7 +115,6 @@ public class ReservationMetier {
 				salle.getIdSalle(), dateDebutReservation);
 	}
 
-	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	// gerer jours feries et week-ends
 	public boolean reserverSalle(Utilisateur utilisateur, Salle salle,
 			Date date, int heure, int duree)
@@ -195,11 +194,11 @@ public class ReservationMetier {
 		return result;
 	}
 
-	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
 			Date date, int heure, int duree, String nbSemaines)
 			throws AucuneSalleSelectionneeException,
-			UtilisateurNonSelectionneException, LundiException {
+			UtilisateurNonSelectionneException, LundiException,
+			DateIncorrecteException, SalleReserveeException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
@@ -209,18 +208,9 @@ public class ReservationMetier {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		for (int i = 0; i < Integer.parseInt(nbSemaines); i++) {
-			try {
-				calendar.add(Calendar.WEEK_OF_YEAR, 1);
-				reserverSalle(utilisateur, salle,
-						new Date(calendar.getTimeInMillis()), heure, duree);
-
-			} catch (DateIncorrecteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SalleReserveeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			calendar.add(Calendar.WEEK_OF_YEAR, 1);
+			reserverSalle(utilisateur, salle,
+					new Date(calendar.getTimeInMillis()), heure, duree);
 		}
 
 		if (Integer.parseInt(nbSemaines) >= 4) {
@@ -318,16 +308,9 @@ public class ReservationMetier {
 				ReservationDAO.getInstance().reserver(
 						utilisateur.getIdUtilisateur(), salle.getIdSalle(),
 						dateDebutReservation, dateFinReservation, tarif);
-				// TODO creation de la reservation
-				// reservation =
-				// ReservationDAO.getInstance().creer(dateReservation,
-				// dateFinReservation, confirmation, idUtilisateur, tarif,
-				// idSalle, dateDebutReservation)
 				break;
 			}
 		}
-
-		// TODO
 
 		return reservation;
 	}

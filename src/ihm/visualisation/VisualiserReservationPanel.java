@@ -137,14 +137,8 @@ public class VisualiserReservationPanel extends JPanel implements
 			frame.pack();
 			frame.setVisible(true);
 		} else if (actionEvent.getSource() == valider) {
-			// TODO JBG
-			System.out.println(datePicker.getModel().getValue());
 			rechargerChronologie();
-		} else if (actionEvent.getSource() == jComboBoxCategorie) {
-			// TODO JBG
-			System.out.println(jComboBoxCategorie.getSelectedItem());
-
-		} else if (actionEvent.getSource() == reserverManuellement) {
+		}else if (actionEvent.getSource() == reserverManuellement) {
 			this.removeAll();
 			this.add(north, BorderLayout.NORTH);
 			this.add(new ReservationManuellePanel());
@@ -168,15 +162,13 @@ public class VisualiserReservationPanel extends JPanel implements
 	}
 
 	private void rechargerChronologie() {
-		// TODO JBG
 		Categorie categorie = (Categorie) jComboBoxCategorie.getSelectedItem();
 		try {
 			List<Salle> listSalles = ReservationMetier.getInstance()
 					.getListeSalleByCategory(categorie);
 			List<Reservation> lesReservations = new ArrayList<Reservation>();
-			// TODO gérer l'affichage des reservations par salle
-			// TODO faire une classe pour la frame ?
 			JFrame frame = new JFrame("Planning");
+			frame.setSize(1000, 1000);
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
 			for (Salle salle : listSalles) {

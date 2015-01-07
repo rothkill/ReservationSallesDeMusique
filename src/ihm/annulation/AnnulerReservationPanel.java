@@ -1,6 +1,7 @@
 package ihm.annulation;
 
 import ihm.MenuPanel;
+import ihm.alert.AlertPopup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -50,8 +52,6 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
 	public AnnulerReservationPanel(JDialog dialog, final JFrame frame) {
-		// TODO JBG
-
 		this.frame = frame;
 
 		this.dialog = dialog;
@@ -98,6 +98,8 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 					.annulerToutesReservationsNonConfirmeesDebutees()) {
 				this.remove(jScrollPane);
 				this.repaint();
+				new AlertPopup(Constantes.TT_RES_AN,
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else if (actionEvent.getSource() == retourMenu) {
 			frame.getContentPane().removeAll();
@@ -106,8 +108,6 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 			frame.pack();
 			frame.setVisible(true);
 		}
-
-		// TODO JBG messages erreur/reussite
 	}
 
 }

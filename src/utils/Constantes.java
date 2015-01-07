@@ -94,7 +94,7 @@ public class Constantes {
 	public static final String HH_LABEL = "HH";
 
 	public static final String DUREE_LABEL = "durée";
-	
+
 	public static final String TRANCHE_HORAIRE_LABEL = "tranche horaire : ";
 
 	public static final String SEMAINES_LABEL = "nb semaines";
@@ -152,6 +152,12 @@ public class Constantes {
 	public static final String AUCUNE_SALLE_EXISTANTE = "Aucune salle existante";
 
 	public static final String SALLE_RESEVEE_EXCEPTION = "Salle déjà réservée";
+
+	public static final String UTILISATEUR_CREE = "Utilisateur créé";
+
+	public static final String UTILISATEUR_NON_CREE = "Utilisateur non créé";
+	
+	public static final String TT_RES_AN = "Toutes les réservations débutée et non confirmées annulées";
 
 	/**
 	 * Constantes liees au fonctionnement de l'application

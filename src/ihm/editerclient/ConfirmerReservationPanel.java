@@ -1,19 +1,26 @@
 package ihm.editerclient;
 
+import ihm.alert.AlertPopup;
+
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import metier.ReservationMetier;
-
 import utils.Constantes;
 import data.Reservation;
 import data.Utilisateur;
 import exception.UtilisateurNonSelectionneException;
 
 public class ConfirmerReservationPanel extends JPanel {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -3297631284112050823L;
 
 	private JScrollPane jScroll;
 	private EditerInfosClientPanel editerInfosClientPanel;
@@ -34,15 +41,13 @@ public class ConfirmerReservationPanel extends JPanel {
 			this.setLayout(new GridLayout(0, 1));
 
 			for (Reservation reservation : listeReservationUtilisateur) {
-				// TODO gerer la duree forfait
 				if (reservation != null) {
 					this.add(new LigneReservationPanel(utilisateur,
 							reservation, 0));
 				}
 			}
 		} catch (UtilisateurNonSelectionneException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 
 		this.setVisible(true);

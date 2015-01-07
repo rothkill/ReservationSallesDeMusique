@@ -160,12 +160,6 @@ public class EditerInfosClientMetier {
 		}
 	}
 
-	private void modifierForfaits(Utilisateur utilisateur, Categorie categorie,
-			int duree) {
-		// TODO Auto-generated method stub
-
-	}
-
 	private void supprimerTousForfaitCategorie(Utilisateur utilisateur,
 			Categorie categorie) {
 		ForfaitDAO.getInstance().supprimerTousForfaits(

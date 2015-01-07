@@ -1,5 +1,6 @@
 package ihm.visualisation.formulaire.confirmation;
 
+import ihm.alert.AlertPopup;
 import ihm.visualisation.formulaire.ReservationManuellePanel;
 
 import java.awt.BorderLayout;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import metier.ReservationMetier;
@@ -59,14 +61,11 @@ public class ConfirmationReserverSalleDejaReserveePanel extends JPanel
 								reservationManuellePanel.getDate(),
 								reservationManuellePanel.getHeure());
 			} catch (AucuneSalleSelectionneeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (UtilisateurNonSelectionneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			} catch (DateIncorrecteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (actionEvent.getSource() == annuler) {
 			dialog.dispose();
