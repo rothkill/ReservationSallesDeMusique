@@ -5,7 +5,6 @@ import ihm.alert.AlertPopup;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -21,6 +20,11 @@ import exception.ReservationNonSelectionneeException;
 import exception.UtilisateurNonSelectionneException;
 
 public class LigneReservationPanel extends JPanel implements ActionListener {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 3467246877857172445L;
 
 	private Utilisateur utilisateur;
 	private Reservation reservation;
@@ -68,8 +72,7 @@ public class LigneReservationPanel extends JPanel implements ActionListener {
 							utilisateur, reservation, fidelite.isSelected(),
 							forfait.isSelected());
 				} catch (UtilisateurNonSelectionneException e) {
-					// TODO gerer erreur
-					e.printStackTrace();
+					new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		} catch (ReservationNonSelectionneeException e) {
