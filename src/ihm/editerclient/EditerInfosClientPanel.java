@@ -96,18 +96,18 @@ public class EditerInfosClientPanel extends JPanel implements ActionListener {
 			rafraichissement();
 			this.add(new AchatForfaitPanel(this), BorderLayout.CENTER);
 			this.repaint();
-			dialog.pack();
+			frame.pack();
 		} else if (actionEvent.getSource() == nouveau) {
 			rafraichissement();
 			this.add(new NouvelUtilisateurPanel());
 			this.repaint();
-			dialog.pack();
+			frame.pack();
 		} else if (actionEvent.getSource() == confirmerReservation) {
 			rafraichissement();
 			this.add(new ConfirmerReservationPanel(this,
 					(Utilisateur) jComboBoxUtilisateur.getSelectedItem()));
 			this.repaint();
-			dialog.pack();
+			frame.pack();
 		}
 	}
 
