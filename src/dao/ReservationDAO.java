@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -260,13 +261,13 @@ public class ReservationDAO {
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
 			Date dateDebutReservation, Date dateFinReservation, float tarif) {
 		try {
-			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+			Timestamp dateDebutReservationSQL = new Timestamp(
 					dateDebutReservation.getTime());
 			java.sql.Date dateFinReservationSQL = new java.sql.Date(
 					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
-			st.setDate(1, dateDebutReservationSQL);
+			st.setTimestamp(1, dateDebutReservationSQL);
 			st.setDate(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);

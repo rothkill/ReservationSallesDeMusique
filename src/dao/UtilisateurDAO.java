@@ -139,7 +139,7 @@ public class UtilisateurDAO {
 	public boolean retirerFidelite(Integer idUtilisateur, int points) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("update from utilisateur set pointsfidelite =  pointsfidelite - ? where idutilisateur = ?");
+					.prepareStatement("update utilisateur set pointsfidelite =  pointsfidelite - ? where idutilisateur = ?");
 			st.setInt(1, points);
 			st.setInt(2, idUtilisateur);
 			st.executeUpdate();
@@ -159,7 +159,7 @@ public class UtilisateurDAO {
 	public boolean ajouterFidelite(Integer idUtilisateur, int points) {
 		try {
 			PreparedStatement st = con
-					.prepareStatement("update from utilisateur set pointsfidelite = pointsFidelite + ? where idutilisateur = ?");
+					.prepareStatement("update utilisateur set pointsfidelite = pointsFidelite + ? where idutilisateur = ?");
 			st.setInt(1, points);
 			st.setInt(2, idUtilisateur);
 			st.executeUpdate();
