@@ -138,20 +138,12 @@ public class VisualiserReservationPanel extends JPanel implements
 			frame.setVisible(true);
 		} else if (actionEvent.getSource() == valider) {
 			rechargerChronologie();
-		}else if (actionEvent.getSource() == reserverManuellement) {
+		} else if (actionEvent.getSource() == reserverManuellement) {
 			this.removeAll();
 			this.add(north, BorderLayout.NORTH);
 			this.add(new ReservationManuellePanel());
 			frame.pack();
 		} else if (actionEvent.getSource() == reserverAutomatiquement) {
-
-			dialogReservation.getContentPane().add(
-					new FormulaireReservationAutoPanel(
-							(Categorie) jComboBoxCategorie.getSelectedItem()));
-			dialogReservation.pack();
-			dialogReservation.setLocationRelativeTo(null);
-			dialogReservation.setVisible(true);
-
 			this.removeAll();
 			this.add(north, BorderLayout.NORTH);
 			this.add(new FormulaireReservationAutoPanel(

@@ -76,6 +76,8 @@ public class FormulaireReservationAutoPanel extends JPanel implements
 		datePanel = new JDatePanelImpl(model, p);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
+		valider.addActionListener(this);
+
 		this.add(jComboBoxUtilisateur);
 		this.add(datePicker);
 
