@@ -61,7 +61,7 @@ public class Salle {
 
 	@Override
 	public String toString() {
-		return " categorie=" + categorie + ", nom=" + nom + ", etat=" + etat;
+		return nom;
 	}
 
 	public List<Reservation> getListeReservation() {
