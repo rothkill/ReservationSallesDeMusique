@@ -50,6 +50,7 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 	private JLabel informationLabel = new JLabel(Constantes.INFO_LABEL);
 
 	public AnnulerReservationPanel(JDialog dialog, final JFrame frame) {
+		// TODO JBG
 
 		this.frame = frame;
 
@@ -106,6 +107,7 @@ public class AnnulerReservationPanel extends JPanel implements ActionListener {
 			frame.setVisible(true);
 		}
 
+		// TODO JBG messages erreur/reussite
 	}
 
 }

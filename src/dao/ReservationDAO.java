@@ -129,7 +129,7 @@ public class ReservationDAO {
 		}
 		return liste;
 	}
-
+	
 	/**
 	 * Liste les reservations a partir d'une salle;
 	 * 
@@ -260,14 +260,14 @@ public class ReservationDAO {
 	public boolean reserver(Integer idUtilisateur, Integer idSalle,
 			Date dateDebutReservation, Date dateFinReservation, float tarif) {
 		try {
-			Time dateDebutReservationSQL = new java.sql.Time(
+			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
 					dateDebutReservation.getTime());
-			Time dateFinReservationSQL = new java.sql.Time(
+			java.sql.Date dateFinReservationSQL = new java.sql.Date(
 					dateFinReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("insert into reservation(datereservation,datedebutreservation,datefinreservation,confirmation,idutilisateur,idsalle,tarif,datelimitereservation) values(CURRENT_TIMESTAMP,?,?,?,?,?,?, DATEADD ( 'day', 7, CURRENT_TIMESTAMP))");
-			st.setTime(1, dateDebutReservationSQL);
-			st.setTime(2, dateFinReservationSQL);
+			st.setDate(1, dateDebutReservationSQL);
+			st.setDate(2, dateFinReservationSQL);
 			st.setBoolean(3, false);
 			st.setInt(4, idUtilisateur);
 			st.setInt(5, idSalle);
@@ -335,10 +335,11 @@ public class ReservationDAO {
 
 	}
 
-	public List<Reservation> listerReservationParDateEtSalle(int idSalle,
-			Date date) {
+	public List<Reservation> listerReservationParDateEtSalle(int idSalle, Date date) {
 		List<Reservation> listReservations = new ArrayList<Reservation>();
-		java.sql.Date dateRes = new java.sql.Date(date.getTime());
+		java.sql.Date dateRes = new java.sql.Date(
+				date.getTime());
+		System.out.println(dateRes);
 		try {
 			PreparedStatement st = con
 					.prepareStatement("select idreservation,datereservation,datedebutreservation,datefinreservation,confirmation,idUtilisateur,tarif from reservation where idsalle = ? and to_char(datedebutreservation,'DD/MM/YY') <= to_char(?,'DD/MM/YY') and to_char(datefinreservation,'DD/MM/YY') >= to_char(?,'DD/MM/YY')");
@@ -347,17 +348,12 @@ public class ReservationDAO {
 			st.setDate(3, dateRes);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				listReservations
-						.add(new Reservation(rs.getInt(1), rs.getTimestamp(2),
-								rs.getTimestamp(3), rs.getTimestamp(4), rs
-										.getBoolean(5), SalleDAO.getInstance()
-										.rechercher(idSalle),
-								UtilisateurDAO.getInstance().rechercher(
-										rs.getInt(6)), rs.getFloat(7)));
+				listReservations.add(new Reservation(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getBoolean(5),SalleDAO.getInstance().rechercher(idSalle),UtilisateurDAO.getInstance().rechercher(rs.getInt(6)),rs.getFloat(7)));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println("liste : " + listReservations);
 		return listReservations;
 	}
 }

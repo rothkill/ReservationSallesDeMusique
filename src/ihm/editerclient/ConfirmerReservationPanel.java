@@ -1,15 +1,13 @@
 package ihm.editerclient;
 
-import ihm.alert.AlertPopup;
-
 import java.awt.GridLayout;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import metier.ReservationMetier;
+
 import utils.Constantes;
 import data.Reservation;
 import data.Utilisateur;
@@ -36,13 +34,15 @@ public class ConfirmerReservationPanel extends JPanel {
 			this.setLayout(new GridLayout(0, 1));
 
 			for (Reservation reservation : listeReservationUtilisateur) {
+				// TODO gerer la duree forfait
 				if (reservation != null) {
 					this.add(new LigneReservationPanel(utilisateur,
 							reservation, 0));
 				}
 			}
 		} catch (UtilisateurNonSelectionneException e) {
-			new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		this.setVisible(true);
