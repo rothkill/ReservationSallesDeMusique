@@ -141,6 +141,12 @@ public class ReservationMetier {
 			if (estUnLundi(dateDebutReservation)) {
 				throw new LundiException();
 			}
+
+			System.out.println("Date Debut Reservation : "
+					+ dateDebutReservation.toString());
+			System.out.println("Date Fin Reservation : "
+					+ dateFinReservation.toString());
+
 			if (salleReservee(salle, dateDebutReservation)) {
 				throw new SalleReserveeException();
 			}
@@ -189,6 +195,7 @@ public class ReservationMetier {
 		return result;
 	}
 
+	// TODO : Ajout des gestions de dateReservation et dateFinReservation
 	public boolean reserverSurDuree(Utilisateur utilisateur, Salle salle,
 			Date date, int heure, int duree, String nbSemaines)
 			throws AucuneSalleSelectionneeException,
@@ -208,8 +215,10 @@ public class ReservationMetier {
 						new Date(calendar.getTimeInMillis()), heure, duree);
 
 			} catch (DateIncorrecteException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SalleReserveeException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -309,9 +318,17 @@ public class ReservationMetier {
 				ReservationDAO.getInstance().reserver(
 						utilisateur.getIdUtilisateur(), salle.getIdSalle(),
 						dateDebutReservation, dateFinReservation, tarif);
+				// TODO creation de la reservation
+				// reservation =
+				// ReservationDAO.getInstance().creer(dateReservation,
+				// dateFinReservation, confirmation, idUtilisateur, tarif,
+				// idSalle, dateDebutReservation)
 				break;
 			}
 		}
+
+		// TODO
+
 		return reservation;
 	}
 
