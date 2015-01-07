@@ -141,8 +141,11 @@ public class EditerInfosClientMetier {
 				continue;
 			} else {
 				CarteForfaitDAO.getInstance().modifierCarteForfait(
-						forfait.getForfait().getForfait(),forfait.getUtilisateur().getIdUtilisateur(),
+						forfait.getForfait().getForfait(),
+						forfait.getUtilisateur().getIdUtilisateur(),
 						forfait.getDureeRestante() - duree);
+				duree = 0;
+				break;
 			}
 		}
 
@@ -155,8 +158,9 @@ public class EditerInfosClientMetier {
 
 	private void supprimerForfaits(List<CarteForfait> listeForfaits) {
 		for (CarteForfait carteForfait : listeForfaits) {
-			CarteForfaitDAO.getInstance()
-					.supprimer(carteForfait.getForfait().getIdForfait(),carteForfait.getUtilisateur().getIdUtilisateur());
+			CarteForfaitDAO.getInstance().supprimer(
+					carteForfait.getForfait().getIdForfait(),
+					carteForfait.getUtilisateur().getIdUtilisateur());
 		}
 	}
 
