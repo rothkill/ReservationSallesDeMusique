@@ -99,23 +99,20 @@ public class ReservationMetier {
 	 * @throws UtilisateurNonSelectionneException
 	 * @throws DateIncorrecteException
 	 */
-	public boolean supprimerReservationParDateEtSalle(Salle salle, String jour,
-			String mois, String annee, String heure)
-			throws AucuneSalleSelectionneeException,
+	public boolean supprimerReservationParDateEtSalle(Salle salle, Date date,
+			int heure) throws AucuneSalleSelectionneeException,
 			UtilisateurNonSelectionneException, DateIncorrecteException {
 		if (salle == null) {
 			throw new AucuneSalleSelectionneeException();
 		}
-		try {
-			String dateDebut = jour + mois + annee + heure;
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
-			Date dateDebutReservation = sdf.parse(dateDebut);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR, heure);
+		calendar.set(Calendar.MINUTE, 0);
+		Date dateDebutReservation = new Date(calendar.getTimeInMillis());
 
-			return ReservationDAO.getInstance().supprimerReservation(
-					salle.getIdSalle(), dateDebutReservation);
-		} catch (ParseException e) {
-			throw new DateIncorrecteException();
-		}
+		return ReservationDAO.getInstance().supprimerReservation(
+				salle.getIdSalle(), dateDebutReservation);
 	}
 
 	// TODO : Ajout des gestions de dateReservation et dateFinReservation
