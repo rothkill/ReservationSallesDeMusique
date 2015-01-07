@@ -139,7 +139,7 @@ public class Constantes {
 
 	public static final String FORFAIT_NON_SELECTIONNEE_EXCEPTION = "Aucun forfait sélectionnée";
 
-	public static final String LUNDI_EXCEPTION = "La date correspond a un lundi";
+	public static final String LUNDI_EXCEPTION = "La date correspond à un lundi";
 
 	public static final String AUCUNE_RESERVATION_NON_CONFIRMEE_EXCEPTION = "Toutes les reservations sont confirmées";
 
@@ -156,9 +156,9 @@ public class Constantes {
 	public static final String UTILISATEUR_CREE = "Utilisateur créé";
 
 	public static final String UTILISATEUR_NON_CREE = "Utilisateur non créé";
-	
+
 	public static final String TT_RES_AN = "Toutes les réservations débutée et non confirmées annulées";
-	
+
 	public static final String RES_AN = "Réservation annulée";
 
 	/**
