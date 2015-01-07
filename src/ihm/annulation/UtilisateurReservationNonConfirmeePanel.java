@@ -69,6 +69,8 @@ public class UtilisateurReservationNonConfirmeePanel extends JPanel implements
 										.getSelectedItem())) {
 					jComboBoxReservations.removeItemAt(jComboBoxReservations
 							.getSelectedIndex());
+					new AlertPopup(Constantes.RES_AN,
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (ReservationNonSelectionneeException e) {
 				new AlertPopup(e.getMessage(), JOptionPane.ERROR_MESSAGE);

@@ -158,6 +158,8 @@ public class Constantes {
 	public static final String UTILISATEUR_NON_CREE = "Utilisateur non créé";
 	
 	public static final String TT_RES_AN = "Toutes les réservations débutée et non confirmées annulées";
+	
+	public static final String RES_AN = "Réservation annulée";
 
 	/**
 	 * Constantes liees au fonctionnement de l'application
