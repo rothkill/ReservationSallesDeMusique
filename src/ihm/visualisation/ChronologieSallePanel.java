@@ -78,7 +78,7 @@ public class ChronologieSallePanel extends JPanel {
 			g2.fillRect(0, ((debut - 8) * 50), 300,
 					(((fin - 8) * 50) - (debut - 8) * 50));
 
-			if (new Date().compareTo(reservation.getDateReservation()) >= 0) {
+			if (new Date().compareTo(reservation.getDateReservation()) > 0) {
 				graphics.setColor(Color.BLACK);
 				graphics.drawLine(0, (debut - 8) * 50, 300, ((fin - 8) * 50));
 			}

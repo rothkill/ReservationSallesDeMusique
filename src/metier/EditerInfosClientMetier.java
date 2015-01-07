@@ -131,7 +131,7 @@ public class EditerInfosClientMetier {
 
 		for (CarteForfait forfait : listeForfait) {
 			// if FORFAIT PERIME
-			if (new Date().compareTo(forfait.getDateFinValidite()) >= 0) {
+			if (new Date().compareTo(forfait.getDateFinValidite()) > 0) {
 				listeForfaitASupprimer.add(forfait);
 				continue;
 			}
