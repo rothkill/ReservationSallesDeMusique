@@ -302,7 +302,7 @@ public class ReservationMetier {
 		Date dateFinReservation = new Date(calendar.getTimeInMillis());
 
 		for (Salle salle : listeSalles) {
-			if (ReservationDAO.getInstance().isSalleReservee(
+			if (!ReservationDAO.getInstance().isSalleReservee(
 					salle.getIdSalle(), dateDebutReservation)) {
 				float tarif = calculerTarif(salle, heureInt, dureeInt);
 				ReservationDAO.getInstance().reserver(

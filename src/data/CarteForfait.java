@@ -16,7 +16,7 @@ public class CarteForfait {
 	private Forfait forfait;
 	private Utilisateur utilisateur;
 
-	public CarteForfait(int idCarteForfait, Date dateAchat,
+	public CarteForfait(Date dateAchat,
 			Date dateFinValidite, int dureeRestante, Forfait forfait,
 			Utilisateur utilisateur) {
 		super();

@@ -33,12 +33,12 @@ public class CarteForfaitDAO {
 		List<CarteForfait> listCarteForfait = new ArrayList<CarteForfait>();
 		try {
 			PreparedStatement st = con
-					.prepareStatement("select dateachat,datefin,tempsrestant,idforfait from carteforfait join forfait on forfait.idforfait = carteforfait.idforfait where carteforfait.idforfait = ? and forfait.idcategorie = ?");
+					.prepareStatement("select dateachat,datefin,tempsrestant,idforfait from carteforfait join forfait on forfait.idforfait = carteforfait.idforfait where carteforfait.idutilisateur = ? and forfait.idcategorie = ?");
 			st.setInt(1, idUtilisateur);
 			st.setInt(2, idCategorie);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				listCarteForfait.add(new CarteForfait(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getInt(4),ForfaitDAO.getInstance().rechercher(rs.getInt(5)),UtilisateurDAO.getInstance().rechercher(idUtilisateur)));
+				listCarteForfait.add(new CarteForfait(rs.getDate(1),rs.getDate(2),rs.getInt(3),ForfaitDAO.getInstance().rechercher(rs.getInt(4)),UtilisateurDAO.getInstance().rechercher(idUtilisateur)));
 			}
 
 		} catch (SQLException e) {

@@ -234,12 +234,12 @@ public class ReservationDAO {
 	 */
 	public boolean isSalleReservee(Integer idSalle, Date dateDebutReservation) {
 		try {
-			java.sql.Date dateDebutReservationSQL = new java.sql.Date(
+			java.sql.Timestamp dateDebutReservationSQL = new java.sql.Timestamp(
 					dateDebutReservation.getTime());
 			PreparedStatement st = con
 					.prepareStatement("select idreservation from reservation where idsalle = ? and datedebutreservation = ?");
 			st.setInt(1, idSalle);
-			st.setDate(2, (java.sql.Date) dateDebutReservationSQL);
+			st.setTimestamp(2, (Timestamp) dateDebutReservationSQL);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
 				return true;
